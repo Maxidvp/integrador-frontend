@@ -1,0 +1,17 @@
+import { Component, Input, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-proyecto',
+  templateUrl: './proyecto.component.html',
+  styleUrls: ['./proyecto.component.scss']
+})
+export class ProyectoComponent implements OnInit {
+
+  constructor() { }
+
+  @Input() proyecto:any;
+
+  ngOnInit(): void {
+  }
+
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConexionService } from 'src/app/servicios/conexion.service';
 
 @Component({
   selector: 'app-habilidades',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HabilidadesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private conexion:ConexionService) { }
+
+  habilidades:any;
 
   ngOnInit(): void {
+    this.conexion.getHabilidades().subscribe((resp)=>this.habilidades=resp.habilidades);
   }
 
+
 }
+

@@ -1,1 +1,7 @@
-<p>experiencias works!</p>
+<div class="experiencias">
+    <ng-container *ngFor="let experiencia of experiencias">
+        <div>
+            <app-experiencia [experiencia]="experiencia"></app-experiencia> 
+        </div> 
+    </ng-container>
+</div>

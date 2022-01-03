@@ -1,0 +1,11 @@
+.experiencias{
+    background-color: rgb(238, 232, 144);
+    padding: 10px;
+    div{
+        margin-top: 10px;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+}

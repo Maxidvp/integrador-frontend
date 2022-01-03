@@ -1,0 +1,38 @@
+.resumen{
+    display: grid;
+	grid-gap: 0px;
+    grid-template-columns: 15% 85%;
+    grid-template-rows: auto auto;
+    background-color: rgba(34, 190, 13, 0.5);
+}
+.fotoPerfil{
+    grid-row: 1/span 2;
+    grid-column: 1;
+    background-color: white;
+    border: solid 2px red;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+    img{
+        width: 100px;
+        height: 100px; 
+    }
+}
+.nombre{
+    grid-row: 1;
+    grid-column: 2;
+    font-size: 2em;
+    span{
+        font-size: 0.6em;
+        &:first-child {
+            font-size: 1em;
+            font-weight: bold;
+        }
+    }
+}
+.datos1{
+    grid-row: 2;
+    grid-column: 2;
+}

@@ -1,0 +1,19 @@
+.proyecto{
+    display: flex;
+}
+.galeriaFotoMin{
+    width: 100px;
+    height: 100px;
+    background-color: lightgreen;
+}
+p{
+    margin: 0;
+    line-height: 1.4em;
+    &:first-child {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+    &:nth-child(2) {
+        margin-bottom: 0.5em;
+    }
+}

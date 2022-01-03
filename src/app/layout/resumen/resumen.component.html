@@ -1,1 +1,18 @@
-<p>resumen works!</p>
+<div class="resumen" *ngIf="listo">
+    <div class="fotoPerfil">
+        <img [src]="resumen.perfilUrl" alt="">
+    
+    </div>
+    <div class="nombre">
+        <span>{{resumen.apellido}}</span> {{resumen.nombre}}
+        <br>
+        <span>Full Stack Developer Jr</span>
+    </div>
+    <div class="datos">
+        {{resumen.direccion}}
+        {{resumen.telefono}}
+        {{resumen.mail}}
+        {{resumen.edad}}
+    </div>
+</div>
+

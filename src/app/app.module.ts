@@ -10,7 +10,11 @@ import { EducacionComponent } from './layout/educacion/educacion.component';
 import { HabilidadesComponent } from './layout/habilidades/habilidades.component';
 import { ProyectosComponent } from './layout/proyectos/proyectos.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TablaComponent } from './componente/tabla/tabla.component';
+import { TablaComponent } from './componentes/tabla/tabla.component';
+import { EncabezadoComponent } from './layout/encabezado/encabezado.component';
+import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
+import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
+import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { TablaComponent } from './componente/tabla/tabla.component';
     EducacionComponent,
     HabilidadesComponent,
     ProyectosComponent,
-    TablaComponent
+    TablaComponent,
+    EncabezadoComponent,
+    ExperienciaComponent,
+    HabilidadComponent,
+    ProyectoComponent
   ],
   imports: [
     BrowserModule,

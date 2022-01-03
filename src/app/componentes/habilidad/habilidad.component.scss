@@ -1,0 +1,117 @@
+svg{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+.st1{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+1){
+                fill:green;
+    }
+    
+}
+.st2{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+2){
+                fill:green;
+    }
+    
+}
+.st3{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+3){
+                fill:green;
+    }
+    
+}
+.st4{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+4){
+                fill:green;
+    }
+    
+}
+.st5{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+5){
+                fill:green;
+    }
+    
+}
+.st6{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+6){
+                fill:green;
+    }
+    
+}
+.st7{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+7){
+                fill:green;
+    }
+    
+}
+.st8{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+8){
+                fill:green;
+    }
+    
+}
+.st9{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+9){
+                fill:green;
+    }
+    
+}
+.st10{
+    stroke:none;
+    stroke-miterlimit:10;
+    fill:#bbb;
+    path:nth-child(-n+10){
+                fill:green;
+    }
+    
+}
+#porcent{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: #444;
+
+}
+.habilidad{
+    background-color: orange;
+    min-height: 100px;
+    width: 100px;
+    padding: 5px;
+}
+.posicion{
+    margin-top: 10px;
+    background-color: yellow;
+    text-align: center;
+}
