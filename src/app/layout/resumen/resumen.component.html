@@ -1,7 +1,6 @@
-<div class="resumen" *ngIf="listo">
+<div class="resumen">
     <div class="fotoPerfil">
-        <img [src]="resumen.perfilUrl" alt="">
-    
+        <img [src]="resumen.src" alt="">
     </div>
     <div class="nombre">
         <span>{{resumen.apellido}}</span> {{resumen.nombre}}
@@ -9,10 +8,22 @@
         <span>Full Stack Developer Jr</span>
     </div>
     <div class="datos">
-        {{resumen.direccion}}
-        {{resumen.telefono}}
-        {{resumen.mail}}
-        {{resumen.edad}}
+        <!--div></div>
+        <div></div>
+        <div></div>
+        <div></div-->
+        <ul>
+            <li>Dureccion: {{resumen.direccion}}</li>
+        </ul>
+        <ul>
+            <li>Telefono: {{resumen.telefono}}</li>
+        </ul>
+        <ul>
+            <li>email: {{resumen.mail}}</li>
+        </ul>
+        <ul>
+            <li>Edad: {{resumen.edad}}</li>
+        </ul>
     </div>
 </div>
 

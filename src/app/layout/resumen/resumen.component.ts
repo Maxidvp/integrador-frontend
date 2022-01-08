@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ConexionService } from 'src/app/servicios/conexion.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-resumen',
@@ -8,13 +7,13 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class ResumenComponent implements OnInit {
 
-  constructor(private conexion:ConexionService) { }
+  constructor() { }
+
+  @Input() resumen:any;
+
   listo:boolean=false;
-  resumen:any;
+
   ngOnInit(): void {
-      this.conexion.getResumen().subscribe((resp)=>{
-        this.resumen=resp.resumen;
-        this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-      })
+      this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
   }
 }

@@ -1,0 +1,9 @@
+.proyectos{
+    padding: 10px;
+}
+div{
+    margin-top: 10px;
+    &:first-child {
+        margin-top: 0;
+    }
+}

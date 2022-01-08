@@ -1,8 +1,10 @@
 <div class="trabajo">
-    <div class="logoTrabajo"></div>
+    <div class="logoTrabajo">
+        <img [src]="experiencia.src" alt="">
+    </div>
     <div class="datosTrabajo">
-        Lugar
-        Periodo: {{experiencia.periodo}}
-        Actividades
+        <p><span>Lugar: </span> {{experiencia.lugar}}</p> 
+        <p>Periodo: {{experiencia.periodo}}</p>
+        {{experiencia.actividades}}
     </div>
 </div>

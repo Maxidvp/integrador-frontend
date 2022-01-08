@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ConexionService } from 'src/app/servicios/conexion.service';
 
 @Component({
@@ -8,11 +8,9 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class EducacionComponent implements OnInit {
 
-  constructor(private conexion:ConexionService) { }
+  constructor() { }
 
-  educacion:any;
+  @Input() educaciones:any;
 
-  ngOnInit(): void {
-    this.conexion.getEducacion().subscribe((resp)=>this.educacion=resp.educacion);
-  }
+  ngOnInit(): void {  }
 }

@@ -1,15 +1,18 @@
 <div class="contenedor">
   <!--app-header></app-header-->
   <app-encabezado></app-encabezado>
-  <app-resumen></app-resumen>
-  <div class="division"></div>
-  <app-experiencias></app-experiencias>
-  <div class="division"></div>
-  <app-educacion></app-educacion>
-  <div class="division"></div>
-  <app-habilidades></app-habilidades>
-  <div class="division"></div>
-  <app-proyectos></app-proyectos>
+
+  <ng-container *ngIf="listo">
+    <app-resumen [resumen]="persona"></app-resumen>
+    <div class="division"></div>
+    <app-experiencias [experiencias]="persona.experiencias"></app-experiencias>
+    <div class="division"></div>
+    <app-educacion [educaciones]="persona.educaciones"></app-educacion>
+    <div class="division"></div>
+    <app-habilidades [habilidades]="persona.habilidades"></app-habilidades>
+    <div class="division"></div>
+    <app-proyectos  [proyectos]="persona.proyectos"></app-proyectos>
+  </ng-container>
 </div>
 
 <router-outlet></router-outlet>

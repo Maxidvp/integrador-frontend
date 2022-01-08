@@ -1,4 +1,8 @@
-PROYECTOS
-<ng-container *ngFor="let proyecto of proyectos">
-    <app-proyecto [proyecto]="proyecto"></app-proyecto>
-</ng-container>
+<div class="proyectos">
+    <h1>Proyectos</h1> 
+    <ng-container *ngFor="let proyecto of proyectos">
+        <div> 
+            <app-proyecto [proyecto]="proyecto"></app-proyecto>
+        </div>
+    </ng-container>
+</div>

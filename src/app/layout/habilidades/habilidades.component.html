@@ -1,3 +1,9 @@
-<ng-container *ngFor="let habilidad of habilidades">
-    <app-habilidad [habilidad]="habilidad"></app-habilidad>
-</ng-container>
+<h1>Habilidades</h1> 
+<div class="habilidades">
+    <ng-container *ngFor="let habilidad of habilidades">
+        <div class="hab">
+            <app-habilidad [habilidad]="habilidad"></app-habilidad>
+        </div>
+    </ng-container>
+</div>
+

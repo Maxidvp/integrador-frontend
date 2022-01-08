@@ -31,4 +31,7 @@ export class ConexionService {
   getProyectos(): Observable<any>{
     return this.http.get<any>(this.backEndUrl);
   }
+  getPersona(): Observable<any>{
+    return this.http.get<any>('http://localhost:8080/personas/buscar/1');
+  }
 }

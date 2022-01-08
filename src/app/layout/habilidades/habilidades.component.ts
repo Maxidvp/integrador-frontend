@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ConexionService } from 'src/app/servicios/conexion.service';
 
 @Component({
@@ -8,14 +8,10 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class HabilidadesComponent implements OnInit {
 
-  constructor(private conexion:ConexionService) { }
+  constructor() { }
 
-  habilidades:any;
+  @Input() habilidades:any;
 
-  ngOnInit(): void {
-    this.conexion.getHabilidades().subscribe((resp)=>this.habilidades=resp.habilidades);
-  }
-
-
+  ngOnInit(): void { }
 }
 

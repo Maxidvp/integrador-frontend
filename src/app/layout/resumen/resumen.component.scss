@@ -3,7 +3,7 @@
 	grid-gap: 0px;
     grid-template-columns: 15% 85%;
     grid-template-rows: auto auto;
-    background-color: rgba(34, 190, 13, 0.5);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 .fotoPerfil{
     grid-row: 1/span 2;
@@ -32,7 +32,13 @@
         }
     }
 }
-.datos1{
+.datos{
     grid-row: 2;
     grid-column: 2;
+    display: flex;
+    div{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+    }
 }
