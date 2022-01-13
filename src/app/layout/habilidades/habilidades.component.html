@@ -1,9 +1,16 @@
-<h1>Habilidades</h1> 
-<div class="habilidades">
-    <ng-container *ngFor="let habilidad of habilidades">
-        <div class="hab">
-            <app-habilidad [habilidad]="habilidad"></app-habilidad>
-        </div>
-    </ng-container>
+<div class="seccion">
+    <div class="tituloSeccion">
+        <h1>Habilidades</h1>
+        <app-edicion></app-edicion>
+    </div>
+    
+    <div class="habilidades">
+        <ng-container *ngFor="let habilidad of habilidades">
+            <div class="hab">
+                <app-habilidad [habilidad]="habilidad"  [mostarIconos]="true"></app-habilidad>
+            </div>
+        </ng-container>
+    </div>
 </div>
+
 

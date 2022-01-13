@@ -6,6 +6,10 @@
     height: 100px;
     background-color: lightgreen;
     margin-right: 10px;
+    flex-shrink: 0;
+}
+.contenido{
+    width: 100%;
 }
 p{
     margin: 0;

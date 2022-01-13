@@ -11,9 +11,5 @@ export class ResumenComponent implements OnInit {
 
   @Input() resumen:any;
 
-  listo:boolean=false;
-
-  ngOnInit(): void {
-      this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-  }
+  ngOnInit(): void {  }
 }

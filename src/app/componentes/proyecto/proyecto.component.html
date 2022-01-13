@@ -1,9 +1,25 @@
+<form *ngIf="accion=='editar'">
+    <label for="lugar">Titulo:</label>
+    <input type="text" name="lugar"><br><br>
+    
+    <label for="periodo">Periodo:</label>
+    <input type="text" name="periodo"><br><br>
+    
+    <label for="titulo">Descripcion:</label>
+    <input type="text" name="titulo"><br><br>
+    
+    <label for="img">Imagen URL:</label>
+    <input type="text" name="img"><br><br>
+</form> 
 <div class="proyecto">
     <div class="galeriaFotoMin">
         galeria de imagenes
     </div>
-    <div>
-        <p>{{proyecto.titulo}}</p>
+    <div class="contenido">
+        <div class="tituloSeccion">
+            <p>{{proyecto.titulo}}</p>
+            <app-edicion [tipo]="'proyectos'" [id]="proyecto.id" *ngIf="mostarIconos"></app-edicion>
+        </div>
         <p>{{proyecto.inicio}} - {{proyecto.fin}}</p>
         <p>{{proyecto.descripcion}}</p>
         <a href="">link de la evidencia</a> 

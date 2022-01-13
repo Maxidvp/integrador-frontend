@@ -10,6 +10,8 @@ export class HabilidadComponent implements OnInit {
   constructor() { }
 
   @Input() habilidad:any;
+  @Input() mostarIconos: any;
+  @Input() accion: any;
 
   ngOnInit(): void {
     detectarChildSVG();

@@ -1,3 +1,4 @@
+<app-modal></app-modal>
 <div class="contenedor">
   <!--app-header></app-header-->
   <app-encabezado></app-encabezado>
@@ -7,12 +8,14 @@
     <div class="division"></div>
     <app-experiencias [experiencias]="persona.experiencias"></app-experiencias>
     <div class="division"></div>
-    <app-educacion [educaciones]="persona.educaciones"></app-educacion>
+    <app-educaciones [educaciones]="persona.educaciones"></app-educaciones>
     <div class="division"></div>
     <app-habilidades [habilidades]="persona.habilidades"></app-habilidades>
     <div class="division"></div>
     <app-proyectos  [proyectos]="persona.proyectos"></app-proyectos>
   </ng-container>
 </div>
+
+<div class="oscuro">Oscuro</div>
 
 <router-outlet></router-outlet>

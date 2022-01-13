@@ -1,8 +1,10 @@
-<div class="experiencias">
-    <h1>Experiencias</h1> 
+<div class="seccion">
+    <div class="tituloSeccion">
+        <h1>Experiencias</h1>
+    </div>
     <ng-container *ngFor="let experiencia of experiencias">
         <div>
-            <app-experiencia [experiencia]="experiencia"></app-experiencia> 
+            <app-experiencia [experiencia]="experiencia"  [mostarIconos]="true"></app-experiencia> 
         </div> 
     </ng-container>
 </div>

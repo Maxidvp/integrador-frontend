@@ -14,4 +14,6 @@ export class ExperienciaComponent implements OnInit {
   }
   
   @Input() experiencia: any;
+  @Input() mostarIconos: any;
+  @Input() accion: any;
 }

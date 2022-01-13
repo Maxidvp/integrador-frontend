@@ -1,9 +1,25 @@
+<form *ngIf="accion=='editar'">
+    <label for="lugar">Lugar:</label>
+    <input type="text" id="expLugar" name="lugar"><br><br>
+    
+    <label for="periodo">Periodo:</label>
+    <input type="text" id="expPeriodo" name="periodo"><br><br>
+    
+    <label for="titulo">Actividades:</label>
+    <textarea name="" id="expActividades" cols="30" rows="5"></textarea><br><br>
+    
+    <label for="img">Imagen URL:</label>
+    <input type="text" id="expImagen" name="img"><br><br>
+</form> 
 <div class="trabajo">
     <div class="logoTrabajo">
         <img [src]="experiencia.src" alt="">
     </div>
     <div class="datosTrabajo">
-        <p><span>Lugar: </span> {{experiencia.lugar}}</p> 
+        <div class="tituloSeccion">
+            <p><span>Lugar: </span> {{experiencia.lugar}}</p> 
+            <app-edicion [tipo]="'experiencias'" [id]="experiencia.id" *ngIf="mostarIconos"></app-edicion>
+        </div>
         <p>Periodo: {{experiencia.periodo}}</p>
         {{experiencia.actividades}}
     </div>

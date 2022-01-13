@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { ResumenComponent } from './layout/resumen/resumen.component';
 import { ExperienciasComponent } from './layout/experiencias/experiencias.component';
-import { EducacionComponent } from './layout/educacion/educacion.component';
+import { EducacionComponent } from './componentes/educacion/educacion.component';
 import { HabilidadesComponent } from './layout/habilidades/habilidades.component';
 import { ProyectosComponent } from './layout/proyectos/proyectos.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,6 +15,9 @@ import { EncabezadoComponent } from './layout/encabezado/encabezado.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
 import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
+import { EdicionComponent } from './componentes/edicion/edicion.component';
+import { ModalComponent } from './layout/modal/modal.component';
+import { EducacionesComponent } from './layout/educaciones/educaciones.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
     EncabezadoComponent,
     ExperienciaComponent,
     HabilidadComponent,
-    ProyectoComponent
+    ProyectoComponent,
+    EdicionComponent,
+    ModalComponent,
+    EducacionesComponent
   ],
   imports: [
     BrowserModule,

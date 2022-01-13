@@ -10,6 +10,8 @@ export class ProyectoComponent implements OnInit {
   constructor() { }
 
   @Input() proyecto:any;
+  @Input() mostarIconos: any;
+  @Input() accion: any;
 
   ngOnInit(): void {
   }

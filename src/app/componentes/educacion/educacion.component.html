@@ -1,0 +1,26 @@
+<form *ngIf="accion=='editar'">
+    <label for="lugar">Lugar:</label>
+    <input type="text" id="eduLugar" name="lugar"><br><br>
+    
+    <label for="periodo">Periodo:</label>
+    <input type="text" id="eduPeriodo" name="periodo"><br><br>
+    
+    <label for="titulo">Titulo:</label>
+    <input type="text" id="eduTitulo" name="titulo"><br><br>
+    
+    <label for="img">Imagen URL:</label>
+    <input type="textarea" id="eduImagen" name="img"><br><br>
+</form> 
+<div class="trabajo">
+    <div class="logoTrabajo">
+        <img [src]="educacion.src" alt="">
+    </div>
+    <div class="datosTrabajo">
+        <div class="tituloSeccion">
+            <p><span>Lugar: </span> {{educacion.lugar}}</p> 
+            <app-edicion [tipo]="'educaciones'" [id]="educacion.id" *ngIf="mostarIconos"></app-edicion>
+        </div>
+        <p>Periodo: {{educacion.periodo}}</p>
+        {{educacion.actividades}}
+    </div>
+</div>
