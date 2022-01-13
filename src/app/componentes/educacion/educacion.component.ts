@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConexionService } from 'src/app/servicios/conexion.service';
 
 @Component({
   selector: 'app-educacion',
@@ -10,7 +9,12 @@ export class EducacionComponent implements OnInit {
 
   constructor() { }
 
-  @Input() educaciones:any;
-
   ngOnInit(): void {  }
+
+  @Input() educacion: any;
+  @Input() mostarIconos: any;
+  @Input() accion: any;
 }
+
+
+//elemText.setAttribute('contenteditable', true);

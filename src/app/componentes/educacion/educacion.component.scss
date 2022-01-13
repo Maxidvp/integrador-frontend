@@ -1,0 +1,27 @@
+.trabajo{
+    display: flex;
+    //background-color: orange;
+}
+.logoTrabajo{
+    width: 100px;
+    height: 100px;
+}
+.datosTrabajo{
+    background-color: rgb(255, 255, 255, 0.05);
+    width: 100%;
+    padding-left: 10px;
+}
+p{
+    margin: 0;
+    margin-bottom: 0.5em;
+    &:first-child{
+        font-weight: bold;
+    }
+    span{
+        font-weight: normal;
+    }
+}
+img{
+    width: 100px;
+    height: 100px;
+}

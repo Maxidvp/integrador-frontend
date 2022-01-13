@@ -1,0 +1,10 @@
+<div class="seccion">
+    <div class="tituloSeccion">
+        <h1>Educación</h1>
+    </div>
+    <ng-container *ngFor="let educacion of educaciones">
+        <div>
+            <app-educacion [educacion]="educacion"  [mostarIconos]="true"></app-educacion>
+        </div>     
+    </ng-container>
+</div>

@@ -8,3 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Versión 0.2.0
 	Se agregaron componentes al layout para obtener la estructura del porfolio
+
+# Versión 0.2.1
+    Implementación de la funcionalidad editar contenido existente
+    Agregada la funcionalidad para conmutar entre modo claro y oscuro sin ser implementada completamente

@@ -9,6 +9,8 @@ export class ConexionService {
 
   constructor(private http: HttpClient) { }
 
+  persona:any;
+
   getHeader(){
     console.log('Vamos a iniciar la conexion');
   }
@@ -32,6 +34,10 @@ export class ConexionService {
     return this.http.get<any>(this.backEndUrl);
   }
   getPersona(): Observable<any>{
-    return this.http.get<any>('http://localhost:8080/personas/buscar/1');
+    return this.http.get<any>('http://192.168.0.5:8080/personas/buscar/1');
   }
+  actualizarDB(): Observable<any>{
+    return this.http.put<any>('http://192.168.0.5:8080/personas/editar/1', this.persona);//Fijate si podes crear un Persona tal que put<Persona>
+  }
+
 }

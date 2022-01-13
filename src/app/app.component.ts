@@ -17,8 +17,9 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.conexion.getPersona().subscribe((resp)=>{
+      this.conexion.persona=resp;
       this.persona=resp;
-      console.log(resp);
+      //console.log(resp);
       this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
     })
   }

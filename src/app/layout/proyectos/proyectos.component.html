@@ -1,8 +1,11 @@
-<div class="proyectos">
-    <h1>Proyectos</h1> 
+<div class="seccion">
+    <div class="tituloSeccion">
+        <h1>Proyectos</h1> 
+    </div>
+
     <ng-container *ngFor="let proyecto of proyectos">
         <div> 
-            <app-proyecto [proyecto]="proyecto"></app-proyecto>
+            <app-proyecto [proyecto]="proyecto"  [mostarIconos]="true"></app-proyecto>
         </div>
     </ng-container>
 </div>
