@@ -14,22 +14,47 @@ export class HabilidadComponent implements OnInit {
   @Input() accion: any;
 
   ngOnInit(): void {
-    detectarChildSVG();
+    console.log(this.habilidad);
+    this.detectarChildSVG();
   }
 
+  detectarChildSVG(){
+    if(this.accion=='editar' || this.accion=='crear'){
+      let image1=document.getElementById('svg1')!;
+      image1.addEventListener("click",fijarPorcentaje);
+      let paths=image1.getElementsByTagName('path');
+      for(let i=0; i<paths.length; i++){
+        paths[i].addEventListener("mouseenter", function(event){
+          setPorcentaje(i);
+          for(let j=0; j<paths.length; j++){
+            paths[j].style.fill=(j<=i)?'green':'grey';
+          }
+        }, false);
+      }
+    }
+  }
 }
 
-
-function detectarChildSVG(){
+function fijarPorcentaje(evt:any){
+  const origin = evt.target.closest("path");
   let image1=document.getElementById('svg1')!;
   let paths=image1.getElementsByTagName('path');
+  porcentSet=false
   for(let i=0; i<paths.length; i++){
-    paths[i].addEventListener("mouseenter", function(event){
-      let tex=document.getElementById('porcent')!;
-      tex.innerHTML=((i*10)+10)+' %';
-      for(let j=0; j<paths.length; j++){
-        paths[j].style.fill=(j<=i)?'green':'grey';
-      }
-    }, false);
+    if (paths[i]==origin) {
+      setPorcentaje(i);
+    }
+  }
+  porcentSet=true;
+}
+
+let porcentSet:boolean=false;
+function setPorcentaje(porcentaje:number){
+  if (!porcentSet) {
+    let tex=document.getElementById('habilidadPorcent')!;
+    let temp:number=((porcentaje*10)+10);
+    tex.innerHTML=temp+' %';
+    (<HTMLInputElement>document.getElementById('habValor')).value=temp.toString();
   }
 }
+

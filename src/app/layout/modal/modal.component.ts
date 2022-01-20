@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ModalService } from '../../servicios/modal.service';
 import { ConexionService } from '../../servicios/conexion.service';
+import { Personas } from 'src/app/Personas';
 
 @Component({
   selector: 'app-modal',
@@ -12,12 +13,12 @@ export class ModalComponent implements OnInit {
 
   constructor(private data: ModalService, private conexion: ConexionService) { }
 
-  subscripcion!: Subscription;
   datos={
     'tipo':'ninguno',
     'id':0,
-    'accion':'ninguno'//'editar' 'eliminar'
+    'accion':'ninguno'//'editar' 'eliminar' 'agregar'
   };
+  subscripcion!: Subscription;
   modal:boolean=false;
   tipo:string='ninguno';
   accion:any;
@@ -27,34 +28,34 @@ export class ModalComponent implements OnInit {
     //Se ejecuta cuando se clickea algun boton de edicion
     this.subscripcion = this.data.puenteModal.subscribe(datos => {
       if(datos.tipo!='ninguno'){
-        this.contenido=(this.conexion.persona[datos.tipo].filter((elem: { id: number; })=>elem.id==datos.id))[0];//Obtiene el contenido
+        if(datos.accion=='editar' || datos.accion=='eliminar'){
+          this.contenido=(this.conexion.persona[datos.tipo].filter((elem: { id: number; })=>elem.id==datos.id))[0];//Obtiene el contenido
+        }else if(datos.accion=='crear'){
+          //alert(datos.tipo);
+          this.contenido=this.json[datos.tipo as keyof  Personas];//se usa un contendio base para editar this.tipo as keyof  Personas
+        }          
+        this.accion=datos.accion;//metodo a aplicar
         this.tipo=datos.tipo;//Habilita el componente correspondiente al contenido
         this.modal=true;//Activa el modal
-        this.accion=datos.accion;
       }
     })
   }
 
-
+  modalMensaje:string='';
   eliminar(){
-    console.log(this.conexion.persona);
-    alert('El elemento se elimino correctamente');
+    this.conexion.persona[this.tipo] = this.conexion.persona[this.tipo].filter((obj: { id: number }) => obj.id != this.contenido.id);
+    this.conexion.actualizarDB().subscribe((resp)=>{
+      console.log(resp);
+      this.modalMensaje='El elemento se elimino correctamente';
+      setTimeout(this.cerrar.bind(this),1000);
+    });
   }
 
-  cancelar(){
+  cerrar(){
     this.modal=false;
     this.tipo='ninguno';
+    this.modalMensaje='';
   }
-
-/*
-            "id": 1,
-            "periodo": "2008-2010",
-            "lugar": "Santiago Saenz S.A.",
-            "actividades": "Actividades: Tareas de mantenimiento",
-            "src": "../../../assets/imagenes/saenz.png"
-
-*/ 
-
 
   guardar(){
     if(this.tipo=='experiencias'){
@@ -63,19 +64,95 @@ export class ModalComponent implements OnInit {
       this.contenido.actividades=(<HTMLInputElement>document.getElementById('expActividades')).value;
       this.contenido.src=(<HTMLInputElement>document.getElementById('expImagen')).value;
     }else if(this.tipo=='educaciones'){
-      document.getElementById('eduLugar');
-      document.getElementById('eduPeriodo');
-      document.getElementById('eduTitulo');
-      document.getElementById('eduImagen');
-    }else if(this.tipo=='proyecctos'){
-      document.getElementById('proTitulo');
-      document.getElementById('proImagen');
-      document.getElementById('proTitulo');
-      document.getElementById('proImagen');
+      this.contenido.lugar=(<HTMLInputElement>document.getElementById('eduLugar')).value;
+      this.contenido.periodo=(<HTMLInputElement>document.getElementById('eduPeriodo')).value;
+      this.contenido.titulo=(<HTMLInputElement>document.getElementById('eduTitulo')).value;
+      this.contenido.src=(<HTMLInputElement>document.getElementById('eduImagen')).value;
+    }else if(this.tipo=='proyectos'){
+      this.contenido.titulo=(<HTMLInputElement>document.getElementById('proTitulo')).value;
+      this.contenido.inicio=(<HTMLInputElement>document.getElementById('proInicio')).value;
+      this.contenido.fin=(<HTMLInputElement>document.getElementById('proFin')).value;
+      this.contenido.descripcion=(<HTMLInputElement>document.getElementById('proDescripcion')).value;
+      this.contenido.url=(<HTMLInputElement>document.getElementById('proReferencia')).value;
+      this.contenido.fotos=(<HTMLInputElement>document.getElementById('proImagen')).value;
+    }else if(this.tipo=='habilidades'){
+      this.contenido.habilidad=(<HTMLInputElement>document.getElementById('habHabilidad')).value;
+      this.contenido.valor=(<HTMLInputElement>document.getElementById('habValor')).value;
     }
-    this.conexion.actualizarDB().subscribe((resp)=>{
+    this.conexion.actualizarDB().subscribe((resp)=>{//Guarda los cambios en la DB
       console.log(resp);
     });
-
+    this.cerrar();
   }
+
+  crear(){
+    let pos=this.conexion.persona[this.tipo].push(this.json[this.tipo as keyof  Personas]);
+    this.contenido=(this.conexion.persona[this.tipo])[pos-1];
+    this.guardar();
+    this.cerrar();
+  }
+
+
+  json:Personas={
+    "nombre": "Nombre",
+    "apellido": "Apellido",
+    "direccion": "Direccion",
+    "telefono": "Telefono",
+    "email": "Email",
+    "edad": "Edad",
+    "src": "URL de la imagen",
+    "educaciones": 
+        {
+            "periodo": "",
+            "lugar": "",
+            "titulo": "",
+            "src": ""
+        },
+    "experiencias": 
+        {
+            "periodo": "",
+            "lugar": "",
+            "actividades": "",
+            "src": ""
+        },
+    "habilidades": 
+        {
+            "habilidad": "Agregar Habilidad",
+            "valor": 0
+        },
+    "proyectos": 
+        {
+            "titulo": "",
+            "inicio": "",
+            "fin": "Fin",
+            "descripcion": "",
+            "url": "",
+            "fotos": ""
+        }
+  }
+  /*educaciones={
+      "periodo": "",
+      "lugar": "",
+      "titulo": "",
+      "src": ""
+  };
+  experiencias={
+      "periodo": "",
+      "lugar": "",
+      "actividades": "",
+      "src": ""
+  };
+  habilidades={
+      "habilidad": "",
+      "valor": 0
+  };
+  proyectos={
+      "titulo": "",
+      "inicio": "",
+      "fin": "Fin",
+      "descripcion": "",
+      "url": "",
+      "fotos": ""
+  };*/
+
 }

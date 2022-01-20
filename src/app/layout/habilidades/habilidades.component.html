@@ -1,15 +1,14 @@
 <div class="seccion">
     <div class="tituloSeccion">
         <h1>Habilidades</h1>
-        <app-edicion></app-edicion>
     </div>
     
     <div class="habilidades">
         <ng-container *ngFor="let habilidad of habilidades">
-            <div class="hab">
-                <app-habilidad [habilidad]="habilidad"  [mostarIconos]="true"></app-habilidad>
-            </div>
+            <app-habilidad [habilidad]="habilidad"  [mostarIconos]="true"></app-habilidad>
         </ng-container>
+        <!--app-habilidad [habilidad]="{habilidad: 'Agregar Habilidad',valor: 0}"  [mostarIconos]="false"></app-habilidad-->
+        <app-agregar [tipo]="'habilidades'"></app-agregar>
     </div>
 </div>
 

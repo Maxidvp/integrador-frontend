@@ -18,6 +18,7 @@ import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
 import { EdicionComponent } from './componentes/edicion/edicion.component';
 import { ModalComponent } from './layout/modal/modal.component';
 import { EducacionesComponent } from './layout/educaciones/educaciones.component';
+import { AgregarComponent } from './componentes/agregar/agregar.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EducacionesComponent } from './layout/educaciones/educaciones.component
     ProyectoComponent,
     EdicionComponent,
     ModalComponent,
-    EducacionesComponent
+    EducacionesComponent,
+    AgregarComponent
   ],
   imports: [
     BrowserModule,

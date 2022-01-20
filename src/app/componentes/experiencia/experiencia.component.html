@@ -1,21 +1,22 @@
-<form *ngIf="accion=='editar'">
+<form *ngIf="accion=='editar' || accion=='crear'">
     <label for="lugar">Lugar:</label>
-    <input type="text" id="expLugar" name="lugar"><br><br>
+    <input type="text" id="expLugar" name="lugar" value={{experiencia.lugar}} placeholder="Lugar"><br><br>
     
     <label for="periodo">Periodo:</label>
-    <input type="text" id="expPeriodo" name="periodo"><br><br>
+    <input type="text" id="expPeriodo" name="periodo" value={{experiencia.periodo}} placeholder="Periodo"><br><br>
     
     <label for="titulo">Actividades:</label>
-    <textarea name="" id="expActividades" cols="30" rows="5"></textarea><br><br>
+    <textarea name="" id="expActividades" cols="30" rows="5" value={{experiencia.actividades}} placeholder="Actividades"></textarea><br><br>
     
     <label for="img">Imagen URL:</label>
-    <input type="text" id="expImagen" name="img"><br><br>
+    <input type="text" id="expImagen" name="img" value={{experiencia.src}} placeholder="Imagen URL"><br><br>
 </form> 
-<div class="trabajo">
-    <div class="logoTrabajo">
+
+<div class="tarjeta">
+    <div class="imgTarjeta">
         <img [src]="experiencia.src" alt="">
     </div>
-    <div class="datosTrabajo">
+    <div class="conTarjeta">
         <div class="tituloSeccion">
             <p><span>Lugar: </span> {{experiencia.lugar}}</p> 
             <app-edicion [tipo]="'experiencias'" [id]="experiencia.id" *ngIf="mostarIconos"></app-edicion>
