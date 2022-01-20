@@ -16,6 +16,80 @@
   </ng-container>
 </div>
 
-<div class="oscuro">Oscuro</div>
 
+<!--div class="contenedor">
+  <!--app-header></app-header>
+  <app-encabezado></app-encabezado>
+
+  <ng-container *ngIf="listo">
+    
+    <!--SECCION PERSONAS>
+    <app-resumen [resumen]="persona"></app-resumen>
+    <!--SECCION PERSONAS>
+
+    <div class="division"></div>
+
+    <!--SECCION EXPERIENCIAS>
+    <div class="seccion">
+      <div class="tituloSeccion">
+          <h1>Experiencias</h1>
+      </div>
+      <ng-container *ngFor="let experiencia of persona.experiencias">
+          <div>
+              <app-experiencia [experiencia]="experiencia"  [mostarIconos]="true"></app-experiencia> 
+          </div> 
+      </ng-container>
+    </div>
+    <!--SECCION EXPERIENCIAS>
+
+    <div class="division"></div>
+
+    <!--SECCION EDUCACIONES>
+    <div class="seccion">
+      <div class="tituloSeccion">
+          <h1>Educación</h1>
+      </div>
+      <ng-container *ngFor="let educacion of persona.educaciones">
+          <div>
+              <app-educacion [educacion]="educacion"  [mostarIconos]="true"></app-educacion>
+          </div>     
+      </ng-container>
+    </div>
+    <!--SECCION EDUCACIONES>
+
+    <div class="division"></div>
+
+    <!--SECCION HABILIDADES>
+    <div class="seccion">
+      <div class="tituloSeccion">
+          <h1>Habilidades</h1>
+          <app-edicion></app-edicion>
+      </div>
+      
+      <div class="habilidades">
+          <ng-container *ngFor="let habilidad of persona.habilidades">
+              <div class="hab">
+                  <app-habilidad [habilidad]="habilidad"  [mostarIconos]="true"></app-habilidad>
+              </div>
+          </ng-container>
+      </div>
+    </div>
+    <!--SECCION HABILIDADES>
+
+    <div class="division"></div>
+
+    <!--SECCION PROYECTOS>
+    <div class="seccion">
+      <div class="tituloSeccion">
+          <h1>Proyectos</h1> 
+      </div>
+      <ng-container *ngFor="let proyecto of persona.proyectos">
+          <div> 
+              <app-proyecto [proyecto]="proyecto"  [mostarIconos]="true"></app-proyecto>
+          </div>
+      </ng-container>
+    </div>
+    <!--SECCION PROYECTOS>
+  </ng-container>
+</div-->
 <router-outlet></router-outlet>

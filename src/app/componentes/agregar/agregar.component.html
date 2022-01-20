@@ -1,0 +1,16 @@
+<ng-container  *ngIf="activo">
+    <ng-container *ngIf="tipo=='habilidades' else tarjetas">
+        <div (click)="modal(tipo, 0, 'crear')">
+            <app-habilidad [habilidad]="{'habilidad': 'Agregar Habilidad','valor': 0}"  [mostarIconos]="false"></app-habilidad>
+        </div>
+    </ng-container>
+    <ng-template #tarjetas>
+        <div class="tarjeta" (click)="modal(tipo, 0, 'crear')" >
+            Agregar
+        </div> 
+    </ng-template>
+</ng-container>
+
+
+
+

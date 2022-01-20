@@ -1,21 +1,28 @@
-<form *ngIf="accion=='editar'">
-    <label for="lugar">Titulo:</label>
-    <input type="text" name="lugar"><br><br>
+<form *ngIf="accion=='editar' || accion=='crear'">
+    <label for="titulo">Titulo:</label>
+    <input type="text" id="proTitulo" name="titulo" value="{{proyecto.titulo}}" placeholder="Titulo"><br><br>
     
-    <label for="periodo">Periodo:</label>
-    <input type="text" name="periodo"><br><br>
+    <label for="inicio">Inicio:</label>
+    <input type="text" id="proInicio" name="inicio" value="{{proyecto.inicio}}" placeholder="Inicio"><br><br>
     
-    <label for="titulo">Descripcion:</label>
-    <input type="text" name="titulo"><br><br>
-    
+    <label for="fin">Fin:</label>
+    <input type="text" id="proFin" name="fin" value="{{proyecto.fin}}" placeholder="Fin"><br><br>
+
+    <label for="descripcion">Descripcion:</label>
+    <input type="text" id="proDescripcion" name="descripcion" value="{{proyecto.descripcion}}" placeholder="Descripción"><br><br>
+        
+    <label for="referencia">Proyecto referencia URL:</label>
+    <input type="text" id="proReferencia" name="referencia" value="{{proyecto.url}}" placeholder="Proyecto referencia URL"><br><br>  
+
     <label for="img">Imagen URL:</label>
-    <input type="text" name="img"><br><br>
+    <input type="text" id="proImagen" name="img" value="{{proyecto.fotos}}" placeholder="Imagen URL"><br><br>
 </form> 
-<div class="proyecto">
-    <div class="galeriaFotoMin">
+
+<div class="tarjeta">
+    <div class="imgTarjeta">
         galeria de imagenes
     </div>
-    <div class="contenido">
+    <div class="conTarjeta">
         <div class="tituloSeccion">
             <p>{{proyecto.titulo}}</p>
             <app-edicion [tipo]="'proyectos'" [id]="proyecto.id" *ngIf="mostarIconos"></app-edicion>

@@ -12,3 +12,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Versión 0.2.1
     Implementación de la funcionalidad editar contenido existente
     Agregada la funcionalidad para conmutar entre modo claro y oscuro sin ser implementada completamente
+<<<<<<< HEAD
+=======
+
+# Versión 0.2.2
+    Implementación de la funcionalidad agregar y eliminar contenidos
+    Agregada la funcionalidad de editar los porcentajes en la rueda de habilidades de forma interactiva
+>>>>>>> Practica1

@@ -18,17 +18,14 @@ export class EdicionComponent implements OnInit {
     })
   }
   
-  subscripcion!: Subscription;
   @Input() tipo:any;
   @Input() id:any;
-
+  
+  subscripcion!: Subscription;
   activo:boolean=false;
 
-  editar(tipo:string, id:number, accion:string){
+  modal(tipo:string, id:number, accion:string){
     this.puente.abrirModal(tipo,id,accion);
   }
   
-  eliminar(tipo:string, id:number, accion:string){
-    this.puente.abrirModal(tipo,id,accion);
-  }
 }

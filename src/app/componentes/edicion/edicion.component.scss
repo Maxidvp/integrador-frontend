@@ -1,11 +1,12 @@
 .edicion{
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.5);
     border: solid 1px #333;
     border-radius: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 6px;
+    width: 52px;
 }
 .icono{
     width: 20px;

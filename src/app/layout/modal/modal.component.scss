@@ -8,11 +8,15 @@
     align-items: center;
     z-index: 6;
 }
-.eliminar{
+.modalContenido{
     padding: 5%;
     background-color: aliceblue;
     border: solid 1 black;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 p{
