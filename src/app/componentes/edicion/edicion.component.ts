@@ -13,19 +13,22 @@ export class EdicionComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subscripcion = this.puente.puenteBool.subscribe(datos => {
+    this.subscripcion = this.puente.toggleEdicionObservable.subscribe(datos => {
       this.activo=this.puente.activo;
     })
   }
   
   @Input() tipo:any;
   @Input() id:any;
+  //Usado solamente en resumen
+  @Input() eliminar:boolean=true;
   
   subscripcion!: Subscription;
   activo:boolean=false;
 
+
   modal(tipo:string, id:number, accion:string){
-    this.puente.abrirModal(tipo,id,accion);
+    this.puente.abrirModalEditar(tipo,id,accion);
   }
   
 }

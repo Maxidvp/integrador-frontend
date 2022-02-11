@@ -1,0 +1,47 @@
+
+<div class="containerModalSesion" *ngIf="mostrar=='registrar'">
+    <div class="tituloSesion">Registrar</div>
+    <form (ngSubmit)="registrar()">
+        <label for="usuario">Nombre de usuario:<span id="usuarioEstado"></span>
+            <input type="text" name="usuario" id="usuario" class="input" value="" size="20" [(ngModel)]="username"/>
+        </label>
+        <label for="email">E-mail:<span id="emailEstado"></span>
+            <input type="email" name="email" id="email" class="input" value="" size="32" [(ngModel)]="email"/>
+        </label>
+        <label for="contra">Contraseña:<span id="claveEstado"></span>
+            <input type="password" name="contra" id="contra" class="input" value="" size="32" [(ngModel)]="password"/>
+        </label>
+        <!--label for="guardar_clave">Recuérdame:
+            <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
+        </label--> 
+        <input type="submit" class="btn" value="Registrar"/>           
+    </form>
+    <div class="botonesExtras">
+        <div (click)="toggleModal()">Acceder</div>                    
+        <div (click)="cerrarModal()">Cerrar</div>   
+    </div>
+                
+
+</div>
+
+<div class="containerModalSesion" *ngIf="mostrar=='acceder'">
+    <div class="tituloSesion">Acceder</div>
+    <form (ngSubmit)="loguear()">
+        <label for="usuario_email">Nombre de usuario o E-mail:<span id="usuarioEstado"></span>
+            <input type="text" name="username" id="username" class="input" value="" size="20" [(ngModel)]="username" />
+        </label>
+        <label for="password">Contraseña:<span id="claveEstado"></span>
+            <input type="password" name="password" id="password" [(ngModel)]="password" />
+        </label>
+        <!--label for="guardar_clave">Recuérdame
+            <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
+        </label-->
+        <input type="submit" class="btn" value="Acceder"/>
+    </form>
+    <div id="sesionAccederMensaje"></div>
+    <div class="botonesExtras">
+        <div (click)="toggleModal()">Registrarse</div>                    
+        <div (click)="cerrarModal()">Cerrar</div>   
+    </div>
+</div>
+

@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ModalService } from '../../servicios/modal.service';
-import { ConexionService } from '../../servicios/conexion.service';
 import { Personas } from 'src/app/Personas';
+import { ConexionService } from 'src/app/servicios/conexion.service';
+import { ModalService } from 'src/app/servicios/modal.service';
+import { SesionService } from 'src/app/servicios/sesion.service';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  selector: 'app-editor',
+  templateUrl: './editor.component.html',
+  styleUrls: ['./editor.component.scss']
 })
-export class ModalComponent implements OnInit {
-
-  constructor(private data: ModalService, private conexion: ConexionService) { }
+export class EditorComponent implements OnInit {
 
   datos={
     'tipo':'ninguno',
@@ -23,10 +22,16 @@ export class ModalComponent implements OnInit {
   tipo:string='ninguno';
   accion:any;
   contenido:any;
+  modalMensaje:string='';
+  @Output() modalEmitter = new EventEmitter<boolean>();
+
+
+
+  constructor(private data: ModalService, private conexion: ConexionService, private sesion: SesionService) { }
 
   ngOnInit(): void {
     //Se ejecuta cuando se clickea algun boton de edicion
-    this.subscripcion = this.data.puenteModal.subscribe(datos => {
+    this.subscripcion = this.data.abrirModalEditarObservable.subscribe(datos => {
       if(datos.tipo!='ninguno'){
         if(datos.accion=='editar' || datos.accion=='eliminar'){
           this.contenido=(this.conexion.persona[datos.tipo].filter((elem: { id: number; })=>elem.id==datos.id))[0];//Obtiene el contenido
@@ -36,12 +41,12 @@ export class ModalComponent implements OnInit {
         }          
         this.accion=datos.accion;//metodo a aplicar
         this.tipo=datos.tipo;//Habilita el componente correspondiente al contenido
-        this.modal=true;//Activa el modal
+
       }
     })
   }
 
-  modalMensaje:string='';
+  
   eliminar(){
     this.conexion.persona[this.tipo] = this.conexion.persona[this.tipo].filter((obj: { id: number }) => obj.id != this.contenido.id);
     this.conexion.actualizarDB().subscribe((resp)=>{
@@ -51,8 +56,11 @@ export class ModalComponent implements OnInit {
     });
   }
 
+
   cerrar(){
-    this.modal=false;
+    
+    this.modalEmitter.emit(false);
+    //this.modal=false;
     this.tipo='ninguno';
     this.modalMensaje='';
   }
@@ -80,9 +88,12 @@ export class ModalComponent implements OnInit {
       this.contenido.valor=(<HTMLInputElement>document.getElementById('habValor')).value;
     }
     this.conexion.actualizarDB().subscribe((resp)=>{//Guarda los cambios en la DB
-      console.log(resp);
+      if(resp.error_message !== undefined && resp.error_message.match('The Token has expired')){
+        this.refreshToken();
+      }else{
+        this.cerrar();
+      }
     });
-    this.cerrar();
   }
 
   crear(){
@@ -92,7 +103,16 @@ export class ModalComponent implements OnInit {
     this.cerrar();
   }
 
-
+  refreshToken(){
+    this.sesion.actualizarToken().subscribe(resp=>{
+      
+      console.log('Refresh:');
+      console.log(resp.access_token);
+      localStorage.setItem('access_token',resp.access_token);
+      this.guardar();
+    });
+  }
+  
   json:Personas={
     "nombre": "Nombre",
     "apellido": "Apellido",
@@ -130,29 +150,5 @@ export class ModalComponent implements OnInit {
             "fotos": ""
         }
   }
-  /*educaciones={
-      "periodo": "",
-      "lugar": "",
-      "titulo": "",
-      "src": ""
-  };
-  experiencias={
-      "periodo": "",
-      "lugar": "",
-      "actividades": "",
-      "src": ""
-  };
-  habilidades={
-      "habilidad": "",
-      "valor": 0
-  };
-  proyectos={
-      "titulo": "",
-      "inicio": "",
-      "fin": "Fin",
-      "descripcion": "",
-      "url": "",
-      "fotos": ""
-  };*/
 
 }

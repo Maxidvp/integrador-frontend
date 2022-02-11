@@ -15,13 +15,13 @@ export class AgregarComponent implements OnInit {
   @Input() tipo:string='ninguno';
   
   ngOnInit(): void {
-    this.puente.puenteBool.subscribe(datos => {
+    this.puente.toggleEdicionObservable.subscribe(datos => {
       this.activo=this.puente.activo;
     })
   }
 
   modal(tipo:string, id:number, accion:string){
-    this.puente.abrirModal(tipo,id,accion);
+    this.puente.abrirModalEditar(tipo,id,accion);
   }
 
 }
