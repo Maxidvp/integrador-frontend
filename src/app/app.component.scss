@@ -1,9 +1,10 @@
-.contenedor{
+#contenedor{
     width: 769px;
     margin: 0 auto;
     //background-color: rgb(85, 153, 212);  
     
     box-shadow:0 0 8px #000000;  
+    //filter: blur(5px);
 }
 /*.division{
     background-color: rgba($color: #fff, $alpha: 1);
@@ -51,9 +52,14 @@ h1{
 /*////////////////////////////////////////Version movil//////////////////////////////////////////////*/
 /*///////////////////////////////////////////////////////////////////////////////////////////////////*/
 @media (max-width: 768px) {
-
     .contenedor{
         width: 100%;
+    }
+}
+
+@media (max-width: 350px) {
+    .contenedor{
+        width: 350px;
     }
 }
 

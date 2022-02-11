@@ -1,1 +1,107 @@
+.banner{
+    min-height: 200px;
+    width: 100%;
+    background-color: rgb(136, 93, 136);
+}
+.barraEncabezado{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.logoAP{
+    width: 80px;
+    height: 64px;
+    border-radius: 10px;
+    //background-color: var(--fondo);
+    background-color: rgba(128,128,128,0.3);
+    box-shadow:0 0 4px #777; 
+    margin-right: 15px;
+    svg{
+        width: 100%;
+    }
+}
+.izq{
+  display: flex;
+}
+.usuarioEncabezado{
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  svg{
+    width: 17px;
+    margin-right: 10px;
+  }
+}
 
+.perfilFoto{
+  background-color: rgb(182, 204, 195);
+  border-radius: 5px;
+  height: 40px;
+  img{
+    width: 40px;
+  }
+}
+
+
+
+ul{
+  list-style: none;
+}
+.menu{
+  padding: 0px 8px 0px 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+  li>div{
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    min-width: 100px;
+    &:hover{
+      color: #000;
+      background-color: #eaeaea;
+    }
+  }
+
+  &>li>ul{
+    display: none;
+  }
+  &>li:hover>ul {
+    position: absolute;
+    display:block;
+  }
+}
+
+.arrow{
+  cursor: pointer;
+  path{
+    fill:none;
+    stroke:var(--frente);
+    stroke-width:2.75;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:7.3333;
+  }
+  &:hover ~.menu ul {
+    position: absolute;
+    display:block;
+  }
+}
+
+/*.menu li>div:hover{
+  color: #000;
+  background-color: #eaeaea;
+}*/
+/////Y este?
+.menu>li{
+  float: left;
+  text-align:center
+}
+/*.menu>li>ul{
+  display: none;
+}*/
+/*.menu>li:hover>ul {
+  position: absolute;
+  display:block;
+}*/

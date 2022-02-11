@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layout/header/header.component';
 import { ResumenComponent } from './layout/resumen/resumen.component';
 import { ExperienciasComponent } from './layout/experiencias/experiencias.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
@@ -16,14 +15,16 @@ import { ExperienciaComponent } from './componentes/experiencia/experiencia.comp
 import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
 import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
 import { EdicionComponent } from './componentes/edicion/edicion.component';
-import { ModalComponent } from './layout/modal/modal.component';
+import { ModalComponent } from './modal/modal/modal.component';
 import { EducacionesComponent } from './layout/educaciones/educaciones.component';
 import { AgregarComponent } from './componentes/agregar/agregar.component';
+import { SesionComponent } from './modal/sesion/sesion.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditorComponent } from './modal/editor/editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ResumenComponent,
     ExperienciasComponent,
     EducacionComponent,
@@ -37,12 +38,15 @@ import { AgregarComponent } from './componentes/agregar/agregar.component';
     EdicionComponent,
     ModalComponent,
     EducacionesComponent,
-    AgregarComponent
+    AgregarComponent,
+    SesionComponent,
+    EditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

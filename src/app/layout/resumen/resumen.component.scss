@@ -3,7 +3,8 @@
 	grid-gap: 0px;
     grid-template-columns: 15% 85%;
     grid-template-rows: auto auto;
-    background-color: rgba(255, 255, 255, 0.05);
+    //background-color: rgba(255, 255, 255, 0.05);
+    padding: 15px;
 }
 .fotoPerfil{
     grid-row: 1/span 2;
@@ -23,9 +24,9 @@
 .nombre{
     grid-row: 1;
     grid-column: 2;
-    font-size: 2em;
+    font-size: 1.6em;
     span{
-        font-size: 0.6em;
+        font-size: 0.8em;
         &:first-child {
             font-size: 1em;
             font-weight: bold;
@@ -36,9 +37,11 @@
     grid-row: 2;
     grid-column: 2;
     display: flex;
-    div{
-        width: 100px;
-        height: 100px;
-        background-color: red;
+    ul{
+        margin-left: 40px;
+        &:first-child{
+            margin-left: 14px;
+        }        
     }
+
 }
