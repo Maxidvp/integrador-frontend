@@ -1,15 +1,15 @@
-<form *ngIf="accion=='editar' || accion=='crear'">
+<form *ngIf="accion=='editar' || accion=='agregar'">
     <label for="lugar">Lugar:</label>
-    <input type="text" id="eduLugar" name="lugar" value="{{educacion.lugar}}" placeholder="Lugar"><br><br>
+    <input type="text" id="eduLugar" name="lugar" value="{{educacion.lugar}}" placeholder="Lugar"><br>
     
     <label for="periodo">Periodo:</label>
-    <input type="text" id="eduPeriodo" name="periodo" value="{{educacion.periodo}}" placeholder="Periodo"><br><br>
+    <input type="text" id="eduPeriodo" name="periodo" value="{{educacion.periodo}}" placeholder="Periodo"><br>
     
     <label for="titulo">Titulo:</label>
-    <input type="text" id="eduTitulo" name="titulo" value="{{educacion.titulo}}" placeholder="Titulo"><br><br>
+    <input type="text" id="eduTitulo" name="titulo" value="{{educacion.titulo}}" placeholder="Titulo"><br>
     
     <label for="img">Imagen URL:</label>
-    <input type="textarea" id="eduImagen" name="img" value="{{educacion.src}}" placeholder="Imagen URL"><br><br>
+    <input type="textarea" id="eduImagen" name="img" value="{{educacion.src}}" placeholder="Imagen URL"><br>
 </form> 
 
 <div class="tarjeta">

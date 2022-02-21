@@ -9,7 +9,6 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
 import { HabilidadesComponent } from './layout/habilidades/habilidades.component';
 import { ProyectosComponent } from './layout/proyectos/proyectos.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TablaComponent } from './componentes/tabla/tabla.component';
 import { EncabezadoComponent } from './layout/encabezado/encabezado.component';
 import { ExperienciaComponent } from './componentes/experiencia/experiencia.component';
 import { HabilidadComponent } from './componentes/habilidad/habilidad.component';
@@ -21,6 +20,12 @@ import { AgregarComponent } from './componentes/agregar/agregar.component';
 import { SesionComponent } from './modal/sesion/sesion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorComponent } from './modal/editor/editor.component';
+import { InstanciaComponent } from './modal/instancia/instancia.component';
+import { AutorComponent } from './routes/autor/autor.component';
+import { MiportfolioComponent } from './routes/miportfolio/miportfolio.component';
+import { LayoutComponent } from './routes/layout/layout.component';
+import { RedesComponent } from './layout/redes/redes.component';
+import { UsuarioComponent } from './componentes/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,6 @@ import { EditorComponent } from './modal/editor/editor.component';
     EducacionComponent,
     HabilidadesComponent,
     ProyectosComponent,
-    TablaComponent,
     EncabezadoComponent,
     ExperienciaComponent,
     HabilidadComponent,
@@ -40,7 +44,13 @@ import { EditorComponent } from './modal/editor/editor.component';
     EducacionesComponent,
     AgregarComponent,
     SesionComponent,
-    EditorComponent
+    EditorComponent,
+    InstanciaComponent,
+    AutorComponent,
+    MiportfolioComponent,
+    LayoutComponent,
+    RedesComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

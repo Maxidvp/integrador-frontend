@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     Se agregaron componentes como estructura inicial sujetas a cambios
 
 # Versión 0.2.0
-	Se agregaron componentes al layout para obtener la estructura del porfolio
+	Se agregaron componentes al layout para obtener la estructura del portfolio
 
 # Versión 0.2.1
     Implementación de la funcionalidad editar contenido existente
@@ -20,3 +20,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Versión 0.3.0
     Implementación del sistema de usuario y contraseña para el registro e inicio de sesión
     Implementación del sistema de seguridad por dos tokens JWT, (access token y refresh token)
+
+# Versión 0.4.0
+    Ahora los usuarios pueden tener su propio portfolio para edicion a partir de una copia del autor o uno vacio
+    Implementacion del sistema de routing para el home y /miportfolio
+    Se implemento una barra para las redes sociales
+    Dark mode completamente implementado

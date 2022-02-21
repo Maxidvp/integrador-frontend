@@ -7,13 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProyectoComponent implements OnInit {
 
-  constructor() { }
-
   @Input() proyecto:any;
   @Input() mostarIconos: any;
   @Input() accion: any;
 
-  ngOnInit(): void {
-  }
+  constructor() { }
+
+  ngOnInit(): void { }
 
 }

@@ -5,13 +5,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6px;
+    //padding: 6px;
+    //position: absolute; A implementar
 
 }
 .icono{
     width: 20px;
     height: 20px;
-    margin: 4px 6px 4px 6px;
+    padding: 10px 10px;
     fill: #555;
     &:hover{ 
         fill: rgb(0, 0, 0);

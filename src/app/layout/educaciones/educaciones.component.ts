@@ -6,12 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./educaciones.component.scss']
 })
 export class EducacionesComponent implements OnInit {
+  
+  @Input() educaciones:any;
 
   constructor() { }
-
-  @Input() educaciones:any;
   
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

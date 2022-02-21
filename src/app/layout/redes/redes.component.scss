@@ -1,0 +1,165 @@
+.redes{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.red{
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+    input{
+        margin-bottom: 0;
+    }
+}
+.url{
+    display: flex;
+    white-space: nowrap;
+    width: 100%;
+    align-items: center;
+}
+@media (max-width: 600px) {
+    .url{
+        flex-direction: column;
+        align-items: unset;
+    }
+}
+.tarjeta{
+    &:hover{
+        &::after {
+            opacity: var(--RrdesOpacidad);
+            transition: 0.2s;
+        }        
+    }
+
+}
+.icono{
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: solid 1px black;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 5px;
+    padding: 0;
+    &:hover{
+        transform: scale(1.2);
+        transition: 0.2s;
+        cursor: pointer;
+    }
+}
+svg{
+    width: 60px;
+    position: absolute;
+    z-index: 10;
+}
+//Invierte los colores para modo oscuro
+path{
+    fill:var(--frente);
+    transition: 0.3s;            
+}
+
+
+
+//Para los colores de los logos
+#Facebook{
+    &:hover{
+        path{
+            fill:#3b5998;
+            transition: 0.3s;            
+        }
+
+    }
+}
+#Instagram{
+    &:hover{
+        path{
+            fill:#c13584;
+            transition: 0.2s;            
+        }
+    }
+}
+#LinkedIn{
+    &:hover{
+        path{
+            fill:#0e76a8;
+            transition: 0.2s;            
+        }
+    }
+}
+#Email{
+    &:hover{
+        path{
+            fill:#EA4335;
+            transition: 0.2s;            
+        }
+    }
+}
+#GitHub{
+    &:hover{
+        path{
+            fill:#171515;
+            transition: 0.2s;            
+        }
+    }
+}
+#Twitter{
+    &:hover{
+        path{
+            fill:#00acee;
+            transition: 0.2s;            
+        }
+    }
+}
+#YouTube{
+    &:hover{
+        path{
+            fill:#f00;
+            transition: 0.2s;            
+        }
+    }
+}
+#Skype{
+    &:hover{
+        path{
+            fill:#00aff0;
+            transition: 0.2s;            
+        }
+    }
+} 
+#Telegram{
+    &:hover{
+        path{
+            fill:#229ED9;
+            transition: 0.2s;            
+        }
+    }
+}
+#Reddit{
+    &:hover{
+        path{
+            fill:#ff4500;
+            transition: 0.2s;            
+        }
+    }
+}
+#Whatssap{
+    &:hover{
+        path{
+            fill:#25D366;
+            transition: 0.2s;            
+        }
+    }
+}
+#Website{
+    &:hover{
+        path{
+            fill:#666;
+            transition: 0.2s;            
+        }
+    }
+}

@@ -1,0 +1,202 @@
+.tarjeta{
+  margin: 5px;
+  padding: 5px;
+  width: 70px;
+  height: 20px;
+  justify-content: center;
+  &:hover{
+      cursor: pointer;
+  }
+}
+
+.usuarioEncabezado{
+  display: flex;
+  align-items: center;
+  //flex-direction: row-reverse;
+  svg{
+    width: 17px;
+    //margin-right: 10px;
+  }
+}
+@media (max-width: 490px) {
+  .usuarioEncabezado{
+
+    flex-direction: column;
+  }
+}
+
+
+
+.contenedorMenu{
+  position: absolute;
+  overflow: hidden;
+  height:auto;
+  max-height:10px;
+  
+  right: 0;
+  opacity: 0;
+  //background-color: red;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 5px;
+  z-index: 1;
+  display: block;
+  white-space: nowrap;
+  transition: ease 0.3s;
+  div{
+    padding: 5px;
+    border-top: solid 2px rgba(128, 128, 128, 0.3);
+    &:hover{
+      background-color: var(--usuarioDesplegableHover);
+      color: var(--fondo);
+      transition: 0.3s;
+    }
+  }
+}
+
+
+nav{
+  position: relative;
+  font-size: 1.2em;
+  //margin: 20px;
+  //Muestra el menu desplegable 
+  &:hover .contenedorMenu{
+    width: 100%;
+    min-width: 200px;
+    padding: 37px 0px 0px 0px;
+    background-color: var(--fondoBody);
+    max-height:150px;
+    //display: block;
+    opacity: 1;
+    transition: 0.5s;
+   // margin-left: -50px;
+  }
+  //Gira la flecha
+  &:hover .arrow{
+    transform: rotate(180deg);
+    transition: 0.3s;
+  }
+}
+.username{
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  margin: 10px 10px 16px 10px;
+  z-index: 2;
+  font-weight: bold;
+  svg{
+    margin-left: 5px;
+  }
+  div{
+    padding: 2px;
+    max-width: 35vw;
+    overflow: hidden;
+    text-overflow:ellipsis;
+  }
+}
+
+.perfilFoto{
+  background-color: rgb(182, 204, 195);
+  border-radius: 5px;
+  height: 40px;
+  overflow: hidden;
+  img{
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+
+
+
+.arrow{
+  cursor: pointer;
+  path{
+    fill:none;
+    stroke:var(--frente);
+    stroke-width:2.75;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:7.3333;
+  }
+}
+
+
+
+/*//////////////////copia///////////////////
+
+
+ul{
+  list-style: none;
+}
+.menu{
+  padding: 0px 8px 0px 10px;
+  cursor: pointer;
+  font-size: 1.2em;
+  li>div{
+    background-color: grey;
+    color: white;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    min-width: 100px;
+    &:hover{
+      color: #000;
+      background-color: #eaeaea;
+    }
+  }
+
+  &>li>ul{
+    display: none;
+  }
+  &>li:hover>ul {
+    position: absolute;
+    display:block;
+  }
+}
+
+.arrow{
+  cursor: pointer;
+  path{
+    fill:none;
+    stroke:var(--frente);
+    stroke-width:2.75;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:7.3333;
+  }
+  &:hover ~.menu ul {
+    transform: rotate(180deg);
+    position: absolute;
+    display:block;
+  }
+  &:hover{
+    transform: rotate(180deg);
+    transition: 0.3s;
+  }
+}
+
+//////////////////copia///////////////////*/
+
+
+
+
+
+/////Y este?
+.menu>li{
+  float: left;
+  text-align:center
+}
+/*.menu>li>ul{
+  display: none;
+}*/
+/*.menu>li:hover>ul {
+  position: absolute;
+  display:block;
+}*
+//*.menu li>div:hover{
+  color: #000;
+  background-color: #eaeaea;
+}*/

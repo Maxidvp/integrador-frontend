@@ -8,20 +8,20 @@ import { ModalService } from 'src/app/servicios/modal.service';
 })
 export class AgregarComponent implements OnInit {
 
-
-  constructor(private puente: ModalService) { }
-
   activo:boolean=false;
   @Input() tipo:string='ninguno';
-  
+
+  constructor(private modalS: ModalService) { }
+
   ngOnInit(): void {
-    this.puente.toggleEdicionObservable.subscribe(datos => {
-      this.activo=this.puente.activo;
+    this.modalS.toggleEdicionObservable.subscribe(datos => {
+      this.activo=this.modalS.activo;
     })
   }
 
   modal(tipo:string, id:number, accion:string){
-    this.puente.abrirModalEditar(tipo,id,accion);
+    console.log('Estoy en abrir modal agregar');
+    this.modalS.abrirModalEditar(tipo,id,accion);
   }
 
 }

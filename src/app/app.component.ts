@@ -8,32 +8,13 @@ import { ConexionService } from './servicios/conexion.service';
 })
 export class AppComponent implements OnInit{
   
-  constructor(private conexion:ConexionService) { }
+  constructor() { }
   
   title = 'integrador';
 
-  persona:any;
-  listo:boolean=false;
-
-  ngOnInit(): void {
-    this.conexion.getPersona().subscribe((resp)=>{
-      this.conexion.persona=resp;
-      this.persona=resp;
-      //console.log(resp);
-      this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-    })
+  ngOnInit(): void {  
+    let clase=(localStorage.getItem('theme'))?localStorage.getItem('theme'):'light';
+    document.body.className=clase!;
   }
   
 }
-
-
-/*
-constructor(private conexion:ConexionService) { }
-listo:boolean=false;
-resumen:any;
-ngOnInit(): void {
-    this.conexion.getResumen().subscribe((resp)=>{
-      this.resumen=resp.resumen;
-      this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-    })
-}*/

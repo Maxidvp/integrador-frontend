@@ -7,9 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ExperienciasComponent implements OnInit {
 
+  @Input() experiencias:any;
+
   constructor() { }
 
-  @Input() experiencias:any;
-  
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 }

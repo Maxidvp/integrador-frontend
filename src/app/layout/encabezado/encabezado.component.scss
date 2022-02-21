@@ -6,14 +6,15 @@
 .barraEncabezado{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 15px;
 }
 .logoAP{
     width: 80px;
     height: 64px;
     border-radius: 10px;
-    //background-color: var(--fondo);
-    background-color: rgba(128,128,128,0.3);
+    background-color: var(--frente);
+    //background-color: rgba(128,128,128,0.3);
     box-shadow:0 0 4px #777; 
     margin-right: 15px;
     svg{

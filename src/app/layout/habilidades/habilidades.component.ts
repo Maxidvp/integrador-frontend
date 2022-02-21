@@ -8,10 +8,10 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class HabilidadesComponent implements OnInit {
 
-  constructor() { }
-
   @Input() habilidades:any;
 
+  constructor() { }
+  
   ngOnInit(): void { }
 }
 

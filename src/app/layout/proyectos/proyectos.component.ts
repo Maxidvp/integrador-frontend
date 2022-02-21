@@ -8,10 +8,10 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class ProyectosComponent implements OnInit {
 
-  constructor() { }
-
   @Input() proyectos:any;
 
+  constructor() { }
+  
   ngOnInit(): void {  }
 
 }

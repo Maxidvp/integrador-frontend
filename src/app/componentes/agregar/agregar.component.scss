@@ -2,4 +2,18 @@
     &:hover{
         cursor: pointer;
     }
+    .tituloSeccion{
+        &:nth-child(2){
+            background-color: rgba(128,128,128, 0.5);
+            height: 24px;
+            width: 40%;
+            margin-top: 8px;
+        }
+        &:nth-child(3){
+            background-color: rgba(128,128,128, 0.5);
+            height: 24px;
+            width: 80%;
+            margin-top: 8px;
+        }
+    }
 }
