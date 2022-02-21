@@ -21,7 +21,7 @@ export class ModalService {
   private behaviorSubjectBool = new BehaviorSubject(false);
   toggleEdicionObservable = this.behaviorSubjectBool.asObservable();
   toggleEdicion() {
-    this.activo=!this.activo;
+    this.activo=!this.activo;//Invierte el estado de los botones de edicion
     this.behaviorSubjectBool.next(this.activo);//Aplica el nuevo valor a todos los atributos observables
   }
 
@@ -34,4 +34,11 @@ export class ModalService {
     this.behaviorSubjectString.next(tipo);//Aplica el nuevo valor a todos los atributos observables
   }
 
+
+  //Abre el modal de instancia
+  private behaviorSubjectInstancia = new BehaviorSubject(false);//Metodos para comunicar entre componentes
+  abrirModalInstanciaObservable = this.behaviorSubjectInstancia.asObservable();//Observable a utilizar en el modal
+  abrirModalInstancia(accion:boolean) {
+    this.behaviorSubjectInstancia.next(accion);//Aplica el nuevo valor a todos los atributos observables
+  }
 }

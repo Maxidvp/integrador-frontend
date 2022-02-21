@@ -17,25 +17,24 @@ export class SesionComponent implements OnInit {
   email:string='';
   mostrar:string='iniciar';
   @Output() modalEmitter = new EventEmitter<boolean>();
-  log={};
-  constructor(private conexion:ConexionService, private modalSesion:ModalService, private usuario:SesionService) {
-  }
+
+  constructor(private modalS:ModalService, private sesionS:SesionService) {  }
 
   loguear():void{
-    this.log={'username':this.username,
+    let log={'username':this.username,
       'password':this.password
     };
     console.log('loguear:');
-    console.log(this.log);
-    this.usuario.logear(this.log).subscribe((resp)=>{
+    console.log(log);
+    this.sesionS.logear(log).subscribe((resp)=>{
       console.log(resp.body);
       localStorage.setItem('access_token',resp.body.access_token);
       localStorage.setItem('refresh_token',resp.body.refresh_token);
-      try{
+      try{//Despues del registro se loguea y no existe este elemento
         document.getElementById('sesionAccederMensaje')!.innerHTML=`Bienvenido ${resp.body.username}`;
       }catch{};
       localStorage.setItem('username',resp.body.username);
-      this.usuario.sesionCabecera();
+      this.sesionS.sesionCabecera();
       setTimeout(this.cerrarModal.bind(this),1000);
     });
   }
@@ -43,16 +42,22 @@ export class SesionComponent implements OnInit {
   registrar():void{
     let reg={'username':this.username,
               'password':this.password,
-              'name':this.email
+              'email':this.email
     };
     console.log(reg);
-    this.usuario.registrar(reg).subscribe((resp)=>{
+    this.sesionS.registrar(reg).subscribe((resp)=>{
       console.log(resp);
       if(resp.roles){
-        this.log={'username':this.username,
+        let log={'username':this.username,
           'password':this.password
         };
-        this.loguear();
+        this.sesionS.logear(log).subscribe((resp)=>{
+          localStorage.setItem('access_token',resp.body.access_token);
+          localStorage.setItem('refresh_token',resp.body.refresh_token);
+          localStorage.setItem('username',resp.body.username);
+          this.sesionS.sesionCabecera();
+          this.modalS.abrirModalInstancia(true);
+        });
       }
       /*localStorage.setItem('access_token',resp.body.access_token);
       localStorage.setItem('refresh_token',resp.body.refresh_token);
@@ -74,12 +79,13 @@ export class SesionComponent implements OnInit {
   
   subscripcion!:Subscription;
   ngOnInit(): void {
-    this.subscripcion = this.modalSesion.abrirModalSesionObservable.subscribe(data=>{
+    this.subscripcion = this.modalS.abrirModalSesionObservable.subscribe(data=>{
       //alert('estoy');
       if (data!='ninguno') {
         this.mostrar=data;
       }
     });
   }
+  
 
 }

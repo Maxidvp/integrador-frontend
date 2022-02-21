@@ -8,27 +8,26 @@ import { ModalService } from '../../servicios/modal.service';
   styleUrls: ['./edicion.component.scss']
 })
 export class EdicionComponent implements OnInit {
-
-  constructor(private puente: ModalService) { }
-
-  ngOnInit(): void {
-
-    this.subscripcion = this.puente.toggleEdicionObservable.subscribe(datos => {
-      this.activo=this.puente.activo;
-    })
-  }
-  
+    
   @Input() tipo:any;
-  @Input() id:any;
+  @Input() id:number=0;
   //Usado solamente en resumen
   @Input() eliminar:boolean=true;
   
   subscripcion!: Subscription;
   activo:boolean=false;
 
+  constructor(private modalS: ModalService) { }
+
+  ngOnInit(): void {
+
+    this.subscripcion = this.modalS.toggleEdicionObservable.subscribe(datos => {
+      this.activo=datos;
+    })
+  }
 
   modal(tipo:string, id:number, accion:string){
-    this.puente.abrirModalEditar(tipo,id,accion);
+    this.modalS.abrirModalEditar(tipo,id,accion);
   }
   
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConexionService } from 'src/app/servicios/conexion.service';
 import { ModalService } from 'src/app/servicios/modal.service';
 import { SesionService } from 'src/app/servicios/sesion.service';
@@ -11,28 +12,23 @@ import { SesionService } from 'src/app/servicios/sesion.service';
 })
 export class EncabezadoComponent implements OnInit {
 
-  constructor(private conexion:ConexionService,private modal:ModalService,private usuario:SesionService) { }
-
   //Guarda los datos a mostrar
-  encabezado:any;
+//  @Input() encabezado:any;
+  @Input() miportfolio:boolean=false;
   username:any;
+  
+  constructor(private conexion:ConexionService,private modal:ModalService,private SesionS:SesionService, private router: Router) { }
+
   ngOnInit(): void {
 
-    //CabiarObtencion de los datos por asincornismo
-    this.conexion.getEncabezado().subscribe((resp)=>this.encabezado=resp);
-    
-    //
-    this.usuario.sesionCabeceraObservable.subscribe(resp=>{
-      this.logueado=resp;
+ /*   this.SesionS.sesionCabeceraObservable.subscribe(resp=>{
+      this.mostrarUsername();
     });
-    if(localStorage.getItem('username')){
-      this.username=localStorage.getItem('username');
-      this.logueado=true;
-    }
-
+    this.mostrarUsername();
+*/
   }
 
-
+/*
   
   //Activa los botones de edicion
   activarEdicion(){
@@ -52,8 +48,11 @@ export class EncabezadoComponent implements OnInit {
 
   //Habilita los botones de logueo correspondientes
   logueado:boolean=false;
-  verUsername(){
-    return localStorage.getItem('username');
+  mostrarUsername(){
+    if(localStorage.getItem('username')){
+      this.username=localStorage.getItem('username');
+      this.logueado=true;
+    }
   }
 
   //Elimina los tokens y cambia los botones de sesion
@@ -62,6 +61,37 @@ export class EncabezadoComponent implements OnInit {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('username');
     this.logueado=false;
+    this.router.navigate(['']);
   }
 
+  instancia(){
+    this.modal.abrirModalInstancia(true);
+  }*/
+
+  /*traerPersona(id:number){
+    this.conexion.getPersona(id).subscribe(resp =>{
+      //Si no se tiene respuesta
+      if(resp===null){
+        alert('Algo salio mal');//Mostrar mensaje de error y restaurar el json
+      //Si el token expiro
+      }else if(resp.error_message !== undefined && resp.error_message.match('The Token has expired')){
+        //Subscripcion para luego de que se obtuvo el nuevo token
+        this.SesionS.refreshTokenObservable.subscribe(resp=>{
+            //Si se tiene el token nuevo se vuelve a ejecutar la funcion
+            if(resp=='encabezado'){
+              this.traerPersona(id);
+            }else{
+              //En caso de error en refresh token
+            }
+          }
+        );
+        //Ejecuto el refesh token despues de sescribirme
+        this.SesionS.refreshToken('encabezado');
+      //Si se realizo correctamente
+      }else{
+        console.log(resp);
+        this.conexion.conexionEncabezadoComponents(resp);
+      }
+    } );
+  }*/
 }

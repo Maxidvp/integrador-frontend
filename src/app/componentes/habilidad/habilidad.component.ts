@@ -6,12 +6,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./habilidad.component.scss']
 })
 export class HabilidadComponent implements OnInit {
-
-  constructor() { }
-
+  
   @Input() habilidad:any;
   @Input() mostarIconos: any;
   @Input() accion: any;
+
+  constructor() { }
 
   ngOnInit(): void {
     console.log(this.habilidad);
@@ -19,7 +19,7 @@ export class HabilidadComponent implements OnInit {
   }
 
   detectarChildSVG(){
-    if(this.accion=='editar' || this.accion=='crear'){
+    if(this.accion=='editar' || this.accion=='agregar'){
       let image1=document.getElementById('svg1')!;
       image1.addEventListener("click",fijarPorcentaje);
       let paths=image1.getElementsByTagName('path');

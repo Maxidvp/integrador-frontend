@@ -1,6 +1,6 @@
 
-<div class="containerModalSesion" *ngIf="mostrar=='registrar'">
-    <div class="tituloSesion">Registrar</div>
+<div class="containerModal" *ngIf="mostrar=='registrar'">
+    <div class="tituloModal">Registrar</div>
     <form (ngSubmit)="registrar()">
         <label for="usuario">Nombre de usuario:<span id="usuarioEstado"></span>
             <input type="text" name="usuario" id="usuario" class="input" value="" size="20" [(ngModel)]="username"/>
@@ -14,7 +14,7 @@
         <!--label for="guardar_clave">Recuérdame:
             <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
         </label--> 
-        <input type="submit" class="btn" value="Registrar"/>           
+        <button type="submit" class="tarjeta">Registrar</button>          
     </form>
     <div class="botonesExtras">
         <div (click)="toggleModal()">Acceder</div>                    
@@ -24,8 +24,8 @@
 
 </div>
 
-<div class="containerModalSesion" *ngIf="mostrar=='acceder'">
-    <div class="tituloSesion">Acceder</div>
+<div class="containerModal" *ngIf="mostrar=='acceder'">
+    <div class="tituloModal">Acceder</div>
     <form (ngSubmit)="loguear()">
         <label for="usuario_email">Nombre de usuario o E-mail:<span id="usuarioEstado"></span>
             <input type="text" name="username" id="username" class="input" value="" size="20" [(ngModel)]="username" />
@@ -36,7 +36,7 @@
         <!--label for="guardar_clave">Recuérdame
             <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
         </label-->
-        <input type="submit" class="btn" value="Acceder"/>
+        <button type="submit" class="tarjeta">Acceder</button>
     </form>
     <div id="sesionAccederMensaje"></div>
     <div class="botonesExtras">

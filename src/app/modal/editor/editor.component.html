@@ -1,36 +1,38 @@
-<div class="modalContenido">
+<div class="containerModal">
 
     <p *ngIf="accion=='eliminar'">¿Esta seguro que desea eliminar el siguiente contendio?</p>        
 
     <app-proyecto *ngIf="tipo=='proyectos'" [proyecto]="contenido"  [mostarIconos]="false"  [accion]="accion"></app-proyecto>
     <app-experiencia  *ngIf="tipo=='experiencias'" [experiencia]="contenido"  [mostarIconos]="false"  [accion]="accion"></app-experiencia>
     <app-educacion  *ngIf="tipo=='educaciones'" [educacion]="contenido"  [mostarIconos]="false"  [accion]="accion"></app-educacion>
+    <app-resumen *ngIf="tipo=='resumen'" [resumen]="contenido" [mostarIconos]="false"></app-resumen>
     <app-habilidad *ngIf="tipo=='habilidades'" [habilidad]="contenido"  [mostarIconos]="false"  [accion]="accion"></app-habilidad>
+    <app-redes *ngIf="tipo=='redes'" [redes]="contenido" [accion]="accion"></app-redes>
 
     <div>{{modalMensaje}}</div>
 
     <div class="centrar"  *ngIf="accion=='eliminar'">
-        <div class="btn" (click)="eliminar()">
+        <div class="tarjeta" (click)="eliminar()">
             Eliminar
         </div>
-        <div class="btn" (click)="cerrar()">
-            Cancelar
+        <div class="tarjeta" (click)="cerrar()">
+            Cerrar
         </div>
     </div>
     <div class="centrar"  *ngIf="accion=='editar'">
-        <div class="btn" (click)="guardar()">
+        <div class="tarjeta" (click)="guardar()">
             Guardar cambios
         </div>
-        <div class="btn" (click)="cerrar()">
-            Cancelar
+        <div class="tarjeta" (click)="cerrar()">
+            Cerrar
         </div>
     </div>
-    <div class="centrar"  *ngIf="accion=='crear'">
-        <div class="btn" (click)="crear()">
-            Crear
+    <div class="centrar"  *ngIf="accion=='agregar'">
+        <div class="tarjeta" (click)="agregar()">
+            Agregar
         </div>
-        <div class="btn" (click)="cerrar()">
-            Cancelar
+        <div class="tarjeta" (click)="cerrar()">
+            Cerrar
         </div>
     </div>
 </div>

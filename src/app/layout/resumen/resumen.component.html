@@ -1,28 +1,32 @@
 <div class="resumen">
     <div class="fotoPerfil">
-        <img [src]="resumen.src" alt="">
+        <div>
+            <img [src]="resumen.foto" alt="">     
+        </div>
     </div>
     <div class="tituloSeccion">
         <div class="nombre">
-            <span>{{resumen.apellido}}</span> {{resumen.nombre}}
-            <br>
-            <span>Full Stack Developer Jr</span>
+            <p><span>{{resumen.apellido}}</span> {{resumen.nombre}}</p>
+            Full Stack Developer Jr
         </div>
-        <app-edicion [tipo]="'resumen'" [id]="0" [eliminar]="false" *ngIf="true"></app-edicion>
+        <app-edicion [tipo]="'resumen'" [eliminar]="false"  *ngIf="mostarIconos"></app-edicion>
     </div>
     <div class="datos">
-        <ul>
-            <li>Dirección: {{resumen.direccion}}</li>
-        </ul>
-        <ul>
-            <li>Telefono: {{resumen.telefono}}</li>
-        </ul>
-        <ul>
-            <li>email: {{resumen.mail}}</li>
-        </ul>
-        <ul>
-            <li>Edad: {{resumen.edad}}</li>
-        </ul>
+        <div>
+            Dirección: {{resumen.direccion}}
+        </div>
+        <div>
+            Telefono: {{resumen.telefono}}
+        </div>
+        <div>
+            email: {{resumen.mail}}
+        </div>
+        <div>
+            Edad: {{edad}}
+        </div>
+        <div>
+            Sobre mi: {{resumen.sobremi}}
+        </div>
     </div>
 </div>
 
