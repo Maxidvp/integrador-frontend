@@ -41,7 +41,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 5px;
-  z-index: 1;
+  ///z-index: 1;
   display: block;
   white-space: nowrap;
   transition: ease 0.3s;
@@ -84,6 +84,7 @@ nav{
   flex-wrap: nowrap;
   position: relative;
   margin: 10px 10px 16px 10px;
+  //Para que se vea el user sobre la tarjeta
   z-index: 2;
   font-weight: bold;
   svg{
@@ -108,11 +109,9 @@ nav{
   }
 }
 
-
-
-
 .arrow{
   cursor: pointer;
+  transition: 0.3s;
   path{
     fill:none;
     stroke:var(--frente);

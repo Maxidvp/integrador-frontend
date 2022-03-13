@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { Personas } from '../interfaz/Personas';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ConexionService {
   getHeader(){
     console.log('Vamos a iniciar la conexion');
   }
-  backEndUrl='./assets/temporal.json';
+  backEndUrl='http://192.168.0.7:8080';
   getEncabezado(): Observable<any>{
     return this.http.get<any>(this.backEndUrl);
   }//A eliminar
@@ -23,16 +24,16 @@ export class ConexionService {
     const acces=localStorage.getItem('access_token');
     if(acces && id!=1){
       const headers = new HttpHeaders({'Authorization': `Bearer ${acces}`});
-      return this.http.get<any>(`http://192.168.0.5:8080/personas/buscar/${id}`,{headers});
+      return this.http.get<any>(`${this.backEndUrl}/personas/buscar/${id}`,{headers});
     }else{
-      return this.http.get<any>(`http://192.168.0.5:8080/personas/buscar/1`);
+      return this.http.get<any>(`${this.backEndUrl}/personas/buscar/1`);
     }
   }
   actualizarDB(): Observable<any>{
     const acces=localStorage.getItem('access_token');
     const headers = new HttpHeaders({'Authorization': `Bearer ${acces}`});
     console.log('Tratando de enviar');
-    return this.http.put<any>('http://192.168.0.5:8080/personas/editar', this.persona,{headers});//Fijate si podes crear un Persona tal que put<Persona>
+    return this.http.put<any>(`${this.backEndUrl}/personas/editar`, this.persona,{headers});//Fijate si podes crear un Persona tal que put<Persona>
   }
 
   instanciarPersona(accion:number): Observable<any>{
@@ -42,14 +43,14 @@ export class ConexionService {
 
     //let json=(accion)?this.persona:{"apellido":"Apellido","nombre":"Nombre"};//True copia | False crea vacio
     //console.log(json);
-    return this.http.get<any>(`http://192.168.0.5:8080/personas/instancia/${accion}`,{headers});//Fijate si podes crear un Persona tal que put<Persona>
+    return this.http.get<any>(`${this.backEndUrl}/personas/instancia/${accion}`,{headers});//Fijate si podes crear un Persona tal que put<Persona>
   }
 
-/*
-    //Puente entre Encabezado y Components
-    private behaviorSubjectPersona = new BehaviorSubject({});
-    conexionEncabezadoComponentsObservable = this.behaviorSubjectPersona.asObservable();
-    conexionEncabezadoComponents(persona:any): void{
-        this.behaviorSubjectPersona.next(persona);
-    }*/
+
+    //Avisa cuando se produjo un cambio en persona
+    private subjectPersona = new Subject();
+    personaCambioObservable = this.subjectPersona.asObservable();
+    personaCambio(persona:Personas): void{
+        this.subjectPersona.next(persona);
+    }
 }

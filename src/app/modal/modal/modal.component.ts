@@ -14,7 +14,7 @@ export class ModalComponent implements OnInit {
     'id':0,
     'accion':'ninguno'//'editar' 'eliminar' 'agregar'
   };
-  subscripcion!: Subscription;
+  subscripction!: Subscription;
   modal:boolean=false;
   mostrar:string='';
   
@@ -22,21 +22,26 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     //Se ejecuta cuando se clickea algun boton de edicion
-    this.subscripcion = this.modalS.abrirModalEditarObservable.subscribe(datos => {
+    this.subscripction = this.modalS.abrirModalEditarObservable.subscribe(datos => {
+    //datos->
+      //tipo:'ninguno''redes''resumen''educaciones''experiencias''habilidades''proyectos'
+      //id:number
+      //accion:'editar''agregar''eliminar'
       if(datos.tipo!='ninguno'){
+        this.datos=datos;
         this.mostrar='editor';
         this.abrir();//Activa el modal
       }
     })
     //Se ejecuta cuando se clickea algun boton de sesion
-    this.subscripcion = this.modalS.abrirModalSesionObservable.subscribe(datos=>{
+    this.subscripction = this.modalS.abrirModalSesionObservable.subscribe(datos=>{
       if(datos!='ninguno'){
         this.mostrar='sesion';
         this.abrir();//Activa el modal
       }
     });
     //Se ejecuta cuando se clickea el boton de crear Mi Porfolio
-    this.subscripcion = this.modalS.abrirModalInstanciaObservable.subscribe(datos=>{
+    this.subscripction = this.modalS.abrirModalInstanciaObservable.subscribe(datos=>{
       if(datos){
         this.mostrar='instancia';
         this.abrir();//Activa el modal

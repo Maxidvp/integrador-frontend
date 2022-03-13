@@ -14,10 +14,10 @@
 
 <div class="tarjeta">
     <div class="imgTarjeta">
-        <img [src]="educacion.src" alt="">
+        <img [src]="educacion.src || 'assets/svg/educacion.svg'" alt="">
     </div>
     <div class="conTarjeta">
-        <div class="tituloSeccion">
+        <div class="tituloTarjeta">
             <p><span>Lugar: </span> {{educacion.lugar}}</p> 
             <app-edicion [tipo]="'educaciones'" [id]="educacion.id" *ngIf="mostarIconos"></app-edicion>
         </div>

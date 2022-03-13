@@ -9,19 +9,20 @@ import { ModalService } from '../../servicios/modal.service';
 })
 export class EdicionComponent implements OnInit {
     
+  //Si el tipo puede tener varios items se debe enviar el id correspondiente
   @Input() tipo:any;
-  @Input() id:number=0;
-  //Usado solamente en resumen
+  @Input() id:any;
+  //Usado en resumen y redes
   @Input() eliminar:boolean=true;
   
-  subscripcion!: Subscription;
+  subscriptcion!: Subscription;
   activo:boolean=false;
 
   constructor(private modalS: ModalService) { }
 
   ngOnInit(): void {
-
-    this.subscripcion = this.modalS.toggleEdicionObservable.subscribe(datos => {
+    //Vuelvve visible los botones de edicion
+    this.subscriptcion = this.modalS.toggleEdicionObservable.subscribe(datos => {
       this.activo=datos;
     })
   }

@@ -11,7 +11,7 @@ import { SesionService } from 'src/app/servicios/sesion.service';
 })
 export class AutorComponent implements OnInit {
   
-  persona!:Personas;
+  persona:Personas=this.conexionS.persona;
   listo:boolean=false;
   subscription1!: Subscription;
 
@@ -49,7 +49,7 @@ export class AutorComponent implements OnInit {
       this.persona=resp;
       this.conexionS.persona=resp;
       //this.persona=resp;
-      console.log(resp);
+      console.log('autor',this.conexionS.persona);
       this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
       this.subscription1.unsubscribe();
     })

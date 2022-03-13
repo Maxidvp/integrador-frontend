@@ -25,19 +25,14 @@
         margin-top: 0;
     }
 }
-/*@media (max-width: 500px) {
-    .seccion{
-        padding: 0px;
-    }
-}*/
 .tituloSeccion{
+    font-size: 1.4em;
+    font-weight: bold; 
+}
+
+.tituloTarjeta{
     display: flex;
     justify-content: space-between;
-    /*&:first-child{
-        margin-left: 25px;
-        font-size: 1.5em;
-    }*/
-
 
 }
 .centrar{
@@ -54,8 +49,10 @@
     padding: 10px;
     display: flex;
     position: relative;
-    box-shadow:0 0 4px #000000; 
+    box-shadow:0 0 4px #292929; 
     overflow: hidden;
+    background-color: var(--fondoTarjeta);
+    z-index: 1; 
     &::after {
         content: "";
         //background-color: #F22;
@@ -72,12 +69,14 @@
 .imgTarjeta{
     width: 100px;
     height: 100px;
-    background-color: green;
-    
+    background-color: white;//var(--fondoSolido);
     flex-shrink: 0;
     img{
         width: 100px;
         height: 100px;
+    }
+    path{
+        fill: var(--frente);
     }
 }
 .conTarjeta{
@@ -102,15 +101,17 @@
 
 /////////////////Body - Modos/////////////////
 .light{
-    --fondoBody:aliceblue;
+    --fondoBody:#f4f4f8;
     background-color: var(--fondoBody);
     --fondo: aliceblue;
     --frente: #332d2d;
     transition: 0.3s;
     color: black;
-    --opacidadTarjeta:0.35;
+    --opacidadTarjeta:0.3;
     --RrdesOpacidad:0.35;
     --usuarioDesplegableHover: rgba(0, 0, 0, 0.6);
+    --fondoTarjeta: rgb(255, 255, 255);
+    --fondoSolido: white;
 }
 .dark{
     --fondoBody: #1e1d20;
@@ -122,6 +123,8 @@
     --opacidadTarjeta:0.12;
     --RrdesOpacidad:1;
     --usuarioDesplegableHover: rgba(255, 255, 255, 0.8);
+    //--fondoTarjeta: rgba(255, 255, 255, 0.5);
+    --fondoSolido: black;
 }
 /////////////////Body - Modos/////////////////
 
@@ -139,23 +142,24 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.13);
     //position: relative;
     label {
-        color: #777;
+        color: var(--frente);
         font-size: 15px;
         line-height:25px;
-        span{
+        /*span{
             color: #F22;
-        }
+        }*/
     }
     input,textarea{
-        background: #fbfbfb;
-        font-size: 1.1em;
+        background: var(--fondoBody);
+        color: var(--frente);
+        //font-size: 1.1em;
         line-height: 1;
         width: 100%;
         box-sizing: border-box;
-        padding: 3px;
-        margin-bottom: 12px;
+        padding: 5px;
+        margin-bottom: 8px;
         outline: none;
-        border: 1px solid #bbb;
+        border: 1px solid #888;
     }
     /*input[type=checkbox]{
 
@@ -163,15 +167,6 @@
     input:focus {
         border: 1px solid #f58220;
         box-shadow: 0 0 3px 0 rgba(245,130,32,0.75);
-    }
-    //para que se pueda visualizar la textura
-    .tarjeta{
-        div{
-            z-index: 8; 
-        }
-        &::after {
-            z-index: 7;   
-        }
     }
 
     form{
@@ -243,8 +238,8 @@
 
 ////////////////Layout////////////////
 .division { 
-    margin-top: 30px;
-    overflow:hidden; height:30px; 
+    margin-top: 20px;
+    overflow:hidden; height:20px; 
     &:after { 
         content:''; 
         width:100%; 
@@ -273,5 +268,8 @@ h1{
 ////////////////Layout////////////////
 
 ////////////////Miscelaneos////////////////
-
+.alerta{
+    color: #F22;
+    margin-bottom: 10px;
+}
 ////////////////Miscelaneos////////////////

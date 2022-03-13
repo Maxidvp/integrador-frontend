@@ -1,13 +1,16 @@
 <ng-container *ngIf="logueado; else noLog"><!--Si esta logueado-->
     <div class="usuarioEncabezado">
         <div class="perfilFoto">
-            <a href="http://192.168.0.5:4200/miportfolio">
+            <a href="http://192.168.0.7:4200/miportfolio">
                 <img src={{foto}} alt=""><!--img [src]="resumen.src" alt=""-->
             </a>
         </div>
         <nav>
             <div class="tarjeta contenedorMenu">
-                <div *ngIf="miportfolio" (click)="activarEdicion()">
+                <div *ngIf="!miportfolio" (click)="miPorfolio()">
+                    Mi portfolio
+                </div>    
+                <div id="ususarioActivarEd" *ngIf="miportfolio" (click)="activarEdicion()">
                     Activar edición
                 </div>                            
                 <div (click)="instancia()">
@@ -64,7 +67,7 @@
         </ul>
 
         <div class="perfilFoto">
-            <a href="http://192.168.0.5:4200/miportfolio">
+            <a href="http://192.168.0.7:4200/miportfolio">
                 <img src="assets/imagenes/profile_picture.png" alt=""><!--img [src]="resumen.src" alt=""->
             </a>
         </div>

@@ -1,7 +1,7 @@
 <!--POner el nav-->
 <div class="barraEncabezado">
     <div class="izq">
-        <a href="http://192.168.0.5:4200">
+        <a href="http://192.168.0.7:4200">
             <div class="logoAP">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 100 80" style="enable-background:new 0 0 100 80;" xml:space="preserve">
@@ -59,7 +59,7 @@
             </ul>
 
             <div class="perfilFoto">
-                <a href="http://192.168.0.5:4200/miportfolio">
+                <a href="http://192.168.0.7:4200/miportfolio">
                     <img src="assets/imagenes/profile_picture.png" alt=""><!--img [src]="resumen.src" alt=""->
                 </a>
             </div>
@@ -82,7 +82,9 @@
     </ng-template-->
 
 </div>
-<div class="banner">
-
+<app-edicion [tipo]="'banner'"></app-edicion>
+<br>
+<div class="banner"><!-- *ngIf="encabezado.banner || activo"-->
+    <img [src]="encabezado.banner || 'assets/svg/banner.svg'" alt="">
 </div>
 
