@@ -12,8 +12,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
     Implementacion del sistema de routing para el home y /miportfolio
     Se implemento una barra para las redes sociales
     Dark mode completamente implementado
-<<<<<<< HEAD
-=======
 
 ### Versión 0.3.0
     Implementación del sistema de usuario y contraseña para el registro e inicio de sesión
@@ -33,4 +31,3 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Versión 0.1.0
 	Implementados los métodos CRUD usando HttpClient en el frontend para obtener el servicio con la estructura correcta para comunicarse con el backend
     Se agregaron componentes como estructura inicial sujetas a cambios
->>>>>>> Practica1
