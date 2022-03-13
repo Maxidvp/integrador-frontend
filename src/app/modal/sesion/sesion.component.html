@@ -3,18 +3,31 @@
     <div class="tituloModal">Registrar</div>
     <form (ngSubmit)="registrar()">
         <label for="usuario">Nombre de usuario:<span id="usuarioEstado"></span>
-            <input type="text" name="usuario" id="usuario" class="input" value="" size="20" [(ngModel)]="username"/>
+            <input type="text" name="usuario" id="sesionUsuario" class="input" value="" size="20" [(ngModel)]="regisForm.username.val"  #usernameng="ngModel"/>
         </label>
+        <div class="alerta" *ngIf="!regisForm.username.esValido() && usernameng.touched">
+            {{regisForm.username.error}}
+        </div>
         <label for="email">E-mail:<span id="emailEstado"></span>
-            <input type="email" name="email" id="email" class="input" value="" size="32" [(ngModel)]="email"/>
+            <input type="email" name="email" id="sesionEmail" class="input" value="" size="32" [(ngModel)]="regisForm.email.val" #emailng="ngModel"/>
         </label>
+        <div class="alerta" *ngIf="!regisForm.email.esValido() && emailng.touched">
+            {{regisForm.email.error}}
+        </div>
         <label for="contra">Contraseña:<span id="claveEstado"></span>
-            <input type="password" name="contra" id="contra" class="input" value="" size="32" [(ngModel)]="password"/>
+            <input type="password" name="contra" id="sesionContra" class="input" value="" required minlength="4" [(ngModel)]="regisForm.password.val" #passwordng="ngModel"/>
         </label>
+        <div class="alerta" *ngIf="!regisForm.password.esValido() && passwordng.touched">
+            {{regisForm.password.error}}
+        </div>
         <!--label for="guardar_clave">Recuérdame:
             <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
         </label--> 
-        <button type="submit" class="tarjeta">Registrar</button>          
+        
+        <button type="submit" class="tarjeta" 
+        [disabled]="!(this.regisForm.username.valido && this.regisForm.email.valido && this.regisForm.password.valido)">
+            Registrar
+        </button>          
     </form>
     <div class="botonesExtras">
         <div (click)="toggleModal()">Acceder</div>                    
@@ -28,15 +41,24 @@
     <div class="tituloModal">Acceder</div>
     <form (ngSubmit)="loguear()">
         <label for="usuario_email">Nombre de usuario o E-mail:<span id="usuarioEstado"></span>
-            <input type="text" name="username" id="username" class="input" value="" size="20" [(ngModel)]="username" />
+            <input type="text" name="username" id="username" class="input" value="" size="20" [(ngModel)]="accederForm.usermail.val" #usermail="ngModel"/>
         </label>
+        <div class="alerta" *ngIf="!accederForm.usermail.esValido() && usermail.touched">
+            {{accederForm.usermail.error}}
+        </div>
         <label for="password">Contraseña:<span id="claveEstado"></span>
-            <input type="password" name="password" id="password" [(ngModel)]="password" />
+            <input type="password" name="password" id="password" [(ngModel)]="accederForm.password.val" #password="ngModel"/>
         </label>
+        <div class="alerta" *ngIf="!accederForm.password.esValido() && password.touched">
+            {{accederForm.password.error}}
+        </div>
         <!--label for="guardar_clave">Recuérdame
             <input type="checkbox" name="guardar_clave" id="guardar_clave" value="si"/>
         </label-->
-        <button type="submit" class="tarjeta">Acceder</button>
+        <button type="submit" class="tarjeta" 
+        [disabled]="!(this.accederForm.usermail.esValido() && this.accederForm.password.esValido())">
+            Acceder
+        </button>
     </form>
     <div id="sesionAccederMensaje"></div>
     <div class="botonesExtras">

@@ -43,6 +43,12 @@ export class UsuarioComponent implements OnInit {
   //Activa los botones de edicion
   activarEdicion(){
     this.modal.toggleEdicion();
+    let texto=document.getElementById('ususarioActivarEd');
+    if(this.modal.activo){
+      texto!.innerHTML='Deshabilitar edición';
+    }else{
+      texto!.innerHTML='Habilitar edición';
+    }
   }
 
   //Cambia de modo claro a modo oscuro
@@ -91,5 +97,8 @@ export class UsuarioComponent implements OnInit {
       }
       this.subscription1.unsubscribe();
     })
+  }
+  miPorfolio(){
+    this.router.navigate(['miportfolio']);
   }
 }

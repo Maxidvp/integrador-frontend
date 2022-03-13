@@ -1,5 +1,5 @@
 <div class="modal" *ngIf="modal">
-    <app-editor *ngIf="mostrar=='editor'" (modalEmitter)="cerrar()"></app-editor>
+    <app-editor *ngIf="mostrar=='editor'" (modalEmitter)="cerrar()" [datos]="datos"></app-editor>
     <app-sesion *ngIf="mostrar=='sesion'" (modalEmitter)="cerrar()"></app-sesion>
     <app-instancia *ngIf="mostrar=='instancia'" (modalEmitter)="cerrar()"></app-instancia>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Personas } from 'src/app/interfaz/Personas';
 import { ConexionService } from 'src/app/servicios/conexion.service';
 import { ModalService } from 'src/app/servicios/modal.service';
 import { SesionService } from 'src/app/servicios/sesion.service';
@@ -12,20 +13,18 @@ import { SesionService } from 'src/app/servicios/sesion.service';
 })
 export class EncabezadoComponent implements OnInit {
 
-  //Guarda los datos a mostrar
-//  @Input() encabezado:any;
+  @Input() encabezado:any;
   @Input() miportfolio:boolean=false;
+
   username:any;
-  
-  constructor(private conexion:ConexionService,private modal:ModalService,private SesionS:SesionService, private router: Router) { }
+  activo:boolean=false;
+  constructor(private modalS:ModalService) { }
 
   ngOnInit(): void {
-
- /*   this.SesionS.sesionCabeceraObservable.subscribe(resp=>{
-      this.mostrarUsername();
-    });
-    this.mostrarUsername();
-*/
+    //Si se pide que se muestren los elementos de edicion
+    this.modalS.toggleEdicionObservable.subscribe(datos => {
+      this.activo=datos;
+    })
   }
 
 /*
@@ -75,7 +74,7 @@ export class EncabezadoComponent implements OnInit {
         alert('Algo salio mal');//Mostrar mensaje de error y restaurar el json
       //Si el token expiro
       }else if(resp.error_message !== undefined && resp.error_message.match('The Token has expired')){
-        //Subscripcion para luego de que se obtuvo el nuevo token
+        //Subscripction para luego de que se obtuvo el nuevo token
         this.SesionS.refreshTokenObservable.subscribe(resp=>{
             //Si se tiene el token nuevo se vuelve a ejecutar la funcion
             if(resp=='encabezado'){

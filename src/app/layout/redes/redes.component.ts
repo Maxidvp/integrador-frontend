@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Red, Redes } from 'src/app/interfaz/Redes';
+import { Red, Redjson } from 'src/app/interfaz/Redes';
 
 @Component({
   selector: 'app-redes',
@@ -9,16 +9,17 @@ import { Red, Redes } from 'src/app/interfaz/Redes';
 export class RedesComponent implements OnInit {
 
   @Input() accion:string='ninguno';
-  @Input() redes!:Array<Redes>;
+  @Input() redes:any;
   aux:Array<any>=[];
 
   constructor() { }
 
   ngOnInit(): void { 
+    //alert('hola mira ya entre');
     //creo un vector auxiliar para poner los usernames
     if(this.accion=='editar'){
       this.aux=this.json.map((red,index)=>{
-        let aux2=this.redes.filter(red=>red.red_id==index);
+        let aux2=this.redes.filter((red: {red_id:number})=>red.red_id==index);
         if(aux2[0]){
           return aux2[0].username;
         }else{
@@ -81,7 +82,7 @@ export class RedesComponent implements OnInit {
     }
   ]*/
 
-  json:Array<Red>=[
+  json:Array<Redjson>=[
     {//0
       sitio:"Email",
       url:"mailto:",

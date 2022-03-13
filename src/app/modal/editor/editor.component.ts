@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Personas } from 'src/app/interfaz/Personas';
-import { Redes } from 'src/app/interfaz/Redes';
+import { Red } from 'src/app/interfaz/Redes';
 import { ConexionService } from 'src/app/servicios/conexion.service';
 import { ModalService } from 'src/app/servicios/modal.service';
 import { SesionService } from 'src/app/servicios/sesion.service';
@@ -13,12 +13,12 @@ import { SesionService } from 'src/app/servicios/sesion.service';
 })
 export class EditorComponent implements OnInit {
 
-  datos={
+  @Input() datos:any;/*={
     'tipo':'ninguno',
     'id':0,
     'accion':'ninguno'//'editar' 'eliminar' 'agregar'
-  };
-  subscripcion!: Subscription;
+  };*/
+  subscripction!: Subscription;
   modal:boolean=false;
   tipo:string='ninguno';
   accion:any;
@@ -32,26 +32,36 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     //Se ejecuta cuando se clickea algun boton de edicion
-    this.subscripcion = this.modalS.abrirModalEditarObservable.subscribe(datos => {
-
-      if(datos.tipo!='ninguno'){
-        if (datos.tipo=='redes') {
+    //this.subscripction = this.modalS.abrirModalEditarObservable.subscribe(datos => {
+    //datos->
+      //tipo:'ninguno''redes''resumen''educaciones''experiencias''habilidades''proyectos'
+      //id:number
+      //accion:'editar''agregar''eliminar'
+      console.log(this.datos)
+      if(this.datos.tipo!='ninguno'){
+        if (this.datos.tipo=='redes') {
           this.contenido=this.conexionS.persona.redes;
-        }else if(datos.tipo=='resumen') {
+        }else if(this.datos.tipo=='resumen') {
           this.contenido=this.conexionS.persona;
-        }else if(datos.accion=='editar' || datos.accion=='eliminar'){
-          this.contenido=(this.conexionS.persona[datos.tipo].filter((elem: { id: number; })=>elem.id==datos.id))[0];//Obtiene el contenido
-        }else if(datos.accion=='agregar'){
+        }else if(this.datos.accion=='editar' || this.datos.accion=='eliminar'){
+          console.log('datos',this.datos);
+          this.contenido=(this.conexionS.persona[this.datos.tipo].filter((elem: { id: number; })=>elem.id==this.datos.id))[0];//Obtiene el contenido
+        }else if(this.datos.accion=='agregar'){
           console.log('estoy en agregar');
           //alert(datos.tipo);
-          this.contenido=this.json[datos.tipo as keyof  Personas];//se usa un contendio base para editar this.tipo as keyof  Personas
+          this.contenido=this.json[this.datos.tipo as keyof  Personas];//se usa un contendio base para editar this.tipo as keyof  Personas
+          //Por la estructura de personas hay que seleccionar el primer elemento de json
+          //if(this.contenido instanceof Array){
+            this.contenido=this.contenido[0];
+          //}
+          console.log('this.contenido');
           console.log(this.contenido);
         }          
-        this.accion=datos.accion;//metodo a aplicar
-        this.tipo=datos.tipo;//Habilita el componente correspondiente al contenido
+        this.accion=this.datos.accion;//metodo a aplicar
+        this.tipo=this.datos.tipo;//Habilita el componente correspondiente al contenido
 
       }
-    })
+    //})
   }
 
   
@@ -74,7 +84,17 @@ export class EditorComponent implements OnInit {
   }
 
   guardar(){
-    if(this.tipo=='experiencias'){
+    if(this.tipo=='resumen'){
+      this.contenido.foto=(<HTMLInputElement>document.getElementById('resFoto')).value;
+      this.contenido.nombre=(<HTMLInputElement>document.getElementById('resNombre')).value;
+      this.contenido.apellido=(<HTMLInputElement>document.getElementById('resApellido')).value;
+      this.contenido.titulo=(<HTMLInputElement>document.getElementById('resTitulo')).value;
+      this.contenido.nacimiento=(<HTMLInputElement>document.getElementById('resNacimiento')).value;
+      this.contenido.direccion=(<HTMLInputElement>document.getElementById('resDireccion')).value;
+      this.contenido.telefono=(<HTMLInputElement>document.getElementById('resTelefono')).value;
+      this.contenido.email=(<HTMLInputElement>document.getElementById('resEmail')).value;
+      this.contenido.sobremi=(<HTMLInputElement>document.getElementById('resSobremi')).value;
+    }else if(this.tipo=='experiencias'){
       this.contenido.lugar=(<HTMLInputElement>document.getElementById('expLugar')).value;
       this.contenido.periodo=(<HTMLInputElement>document.getElementById('expPeriodo')).value;
       this.contenido.actividades=(<HTMLInputElement>document.getElementById('expActividades')).value;
@@ -94,10 +114,13 @@ export class EditorComponent implements OnInit {
       this.contenido.habilidad=(<HTMLInputElement>document.getElementById('habHabilidad')).value;
       this.contenido.valor=(<HTMLInputElement>document.getElementById('habValor')).value;
     }else if(this.tipo=='redes'){
+
+      //Warn: anda una sola vez despues pasan cosas raras
+
       //Obtengo una node list de los elementos con node list
       //Usar id mejot
       let redes=document.getElementsByClassName('red');
-      let temp:Array<Redes>=[];
+      let temp:Array<Red>=[];
 
       for (let i = 0; i < redes.length; i++) {
         //para cada elemnto de la nodelist obtengo el valor del imput
@@ -109,14 +132,6 @@ export class EditorComponent implements OnInit {
           console.log(id);
 
           //Agrego un elemento de tipo Redes, si el id no existe no se agrega
-          /*if(id[0]){
-            temp.push({ id: id[0].id,
-                        red_id: i,
-                        username: valor})
-          }else{
-            temp.push({ red_id: i,
-                        username: valor})
-          }*/
           temp.push({ id: (id[0])? id[0].id:null,
                       red_id: i,
                       username: valor});
@@ -130,53 +145,47 @@ export class EditorComponent implements OnInit {
       this.subscription2=this.conexionS.actualizarDB().subscribe(res=>{
         console.log('respuesta del actualizar');
         console.log(res);
-        //Es necesario guardar personas con los nuevos id si es que ecsiten
-        this.conexionS.persona=res;
-        this.cerrar();        
+        //Es necesario guardar personas con los nuevos id si es que existen
+        this.conexionS.persona=res;   
         this.subscription1.unsubscribe();
         this.subscription2.unsubscribe();
+        this.conexionS.personaCambio(res);
+        this.cerrar();     
       });      
     });
     this.sesionS.verificarToken('editorGuardar');
-
-
-    //this.sesionS.verificarToken('editor');
-/*
-    this.conexionS.actualizarDB().subscribe((resp)=>{//Guarda los cambios en la DB
-      //null cuando no tiene los permisos para la accion
-      if(resp===null){
-        alert('No se como hiciste pero te voy a encontrar y te voy a doxear');//Mostrar mensaje de error y restaurar el json
-      }else if(resp.error_message !== undefined && resp.error_message.match('The Token has expired')){
-        this.sesionS.refreshTokenObservable.subscribe(resp=>{
-            if(resp=='editor'){
-              this.guardar();
-            }else{
-              //En caso de error en refresh token
-            }
-          }
-        );
-        this.sesionS.refreshToken('editor');
-      }else{
-        this.cerrar();
-      }
-    });*/
   }
 
   agregar(){
-    let pos=this.conexionS.persona[this.tipo].push(this.json[this.tipo as keyof  Personas]);
+    console.log('En agregar');
+    let temp:any;
+    //Agregar solo funciona para el contenido con tipo array por lo que no hace falta comprobacion
+    //Se agrega un elemento vacio a personas
+    temp=(this.json[this.tipo as keyof  Personas]);
+    temp=temp[0];
+    let pos=this.conexionS.persona[this.tipo].push(temp);
+    //let pos=this.conexionS.persona[this.tipo].push(this.json[this.tipo as keyof  Personas]);
+    console.log('En mostrar persona');
+    console.log(this.conexionS.persona);
+    //Warn:Se puede implementar una tecnica similar para vizualizar los cambios
+    //Se cambia el contexto del contenido al nuevo elemento vacio agregado para que guardar lo reescriba
     this.contenido=(this.conexionS.persona[this.tipo])[pos-1];
     this.guardar();
     this.cerrar();
   }
   
+  //json con informacion para los placeholders de los formularios o para la estructura de un nuevo elemento
   json:Personas={
     "nombre": "Nombre",
     "apellido": "Apellido",
+    "titulo": "Titulo",
     "direccion": "Direccion",
     "telefono": "Telefono",
     "email": "Email",
-    "edad": "Edad",
-    "src": "URL de la imagen",
+    "nacimiento": "Nacimiento",
+    "foto": "URL de la imagen",
+    "banner": "URL del banner",
+    "sobremi":"",
     "educaciones": 
         [
           {
@@ -198,8 +207,8 @@ export class EditorComponent implements OnInit {
     "habilidades": 
         [
           {
-            "habilidad": "Agregar Habilidad",
-            "valor": 0
+            "habilidad": "",
+            "valor": 100
           }
         ],
     "proyectos": 

@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 export class SesionService {
 
   constructor(private http: HttpClient) { }
-
+  backEndUrl="http://192.168.0.7:8080";
 
   //headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
   logear(user:any):Observable<any>{
@@ -16,19 +16,19 @@ export class SesionService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
  
     user=`username=${user.username}&password=${user.password}`;
-    return this.http.post<any>('http://192.168.0.5:8080/api/login',user,{ headers, observe: 'response' });//
+    return this.http.post<any>(`${this.backEndUrl}/api/login`,user,{ headers, observe: 'response' });//
   }
 
   registrar(user:any):Observable<any>{
     console.log(user);
-    return this.http.post<any>('http://192.168.0.5:8080/api/user/save',user);//
+    return this.http.post<any>(`${this.backEndUrl}/api/user/save`,user);//
   }
 
   //Puente para la variable de estado de sesion
-  private behaviorSubjectsesionCabecera = new BehaviorSubject(false);
-  sesionCabeceraObservable = this.behaviorSubjectsesionCabecera.asObservable();
+  private subjectsesionCabecera = new Subject();
+  sesionCabeceraObservable = this.subjectsesionCabecera.asObservable();
   sesionCabecera():void{
-    this.behaviorSubjectsesionCabecera.next(true);
+    this.subjectsesionCabecera.next(true);
   }
 
   
@@ -83,7 +83,7 @@ export class SesionService {
     const refresh = localStorage.getItem('refresh_token');
     //alert(`Bearer ${refresh}`);
     const headers = new HttpHeaders({'Authorization': `Bearer ${refresh}`});
-    return this.http.get<any>('http://192.168.0.5:8080/api/token/refresh',{headers});
+    return this.http.get<any>(`${this.backEndUrl}/api/token/refresh`,{headers});
   }
 
   traerFotoPerfil(): Observable<any>{
@@ -91,6 +91,15 @@ export class SesionService {
     const refresh = localStorage.getItem('access_token');
     const headers = new HttpHeaders({'Authorization': `Bearer ${refresh}`});
     //headers.set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get('http://192.168.0.5:8080/api/foto',{headers, responseType: 'text' as const,});
+    return this.http.get(`${this.backEndUrl}/api/foto`,{headers, responseType: 'text' as const,});
+  }
+
+  usernameLibre(username:String):Observable<String>{
+    console.log('En usernameLibre');
+    return this.http.get(`${this.backEndUrl}/api/usernamelibre/${username}`,{ responseType: 'text' as const,});
+  }
+  emailLibre(email:String):Observable<String>{
+    console.log('En emailLibre');
+    return this.http.get(`${this.backEndUrl}/api/emaillibre/${email}`,{ responseType: 'text' as const,});
   }
 }

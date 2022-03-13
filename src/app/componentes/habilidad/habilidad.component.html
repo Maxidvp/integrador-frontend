@@ -1,15 +1,32 @@
 <form *ngIf="accion=='editar' || accion=='agregar'">
     <label for="habilidad">Habilidad:</label>
-    <input type="text" id="habHabilidad" name="habilidad" value={{habilidad.habilidad}} placeholder="Habilidad"><br>
-    <input type="hidden" id="habValor"><br>
+    <input type="text" id="habHabilidad" name="habilidad" value={{habilidad.habilidad}} placeholder="Habilidad">
+    <input type="hidden" id="habValor" value="100">
 </form> 
 
 <div class="hab">
     <div id="margenExtra" *ngIf="habilidad.valor==0"></div>
     <app-edicion [tipo]="'habilidades'" [id]="habilidad.id" *ngIf="mostarIconos"></app-edicion>
     <div class="tarjeta habilidad">
+        <div id="habilidadPorcent" *ngIf="habilidad.valor==0 && accion!='agregar' else valorPorcentual">
+            <svg version="1.1" class="addSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                <g>
+                    <g>
+                        <path d="M45.4,20.4H29.6V4.6C29.6,2.1,27.5,0,25,0s-4.6,2.1-4.6,4.6v15.8H4.6C2.1,20.4,0,22.5,0,25
+                        c0,2.5,2.1,4.6,4.6,4.6h15.8v15.8c0,2.5,2.1,4.6,4.6,4.6c2.5,0,4.6-2.1,4.6-4.6V29.6h15.8c2.5,0,4.6-2.1,4.6-4.6
+                        C50,22.5,47.9,20.4,45.4,20.4z"/>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <ng-template #valorPorcentual>
+            <div id="habilidadPorcent">
+                {{habilidad.valor}}%
+            </div>
+        </ng-template>
         
-
+        
         
         <svg id="svg1" [class]="'st'+(habilidad.valor/10)" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
@@ -45,25 +62,6 @@
                 c-0.03-0.59-0.64-1.18-1.3-1.12c-8.95,0.76-16.58,3.34-24.53,8.64c-0.71,0.47-0.64,1.34-0.33,1.78c0.68,0.93,5.1,7.03,5.86,8.05
                 C27.8,19.37,28.75,19.08,29.03,18.89z"/>
         </svg>  
-
-        <div id="habilidadPorcent" *ngIf="habilidad.valor==0 && accion!='agregar' else valorPorcentual">
-            <svg version="1.1" class="addSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-                <g>
-                    <g>
-                        <path d="M45.4,20.4H29.6V4.6C29.6,2.1,27.5,0,25,0s-4.6,2.1-4.6,4.6v15.8H4.6C2.1,20.4,0,22.5,0,25
-                        c0,2.5,2.1,4.6,4.6,4.6h15.8v15.8c0,2.5,2.1,4.6,4.6,4.6c2.5,0,4.6-2.1,4.6-4.6V29.6h15.8c2.5,0,4.6-2.1,4.6-4.6
-                        C50,22.5,47.9,20.4,45.4,20.4z"/>
-                    </g>
-                </g>
-            </svg>
-        </div>
-        <ng-template #valorPorcentual>
-            <div id="habilidadPorcent">
-                {{habilidad.valor}}%
-            </div>
-        </ng-template>
-
         <div class="habNombre">{{habilidad.habilidad}}</div>
     </div>
 </div>

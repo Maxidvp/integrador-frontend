@@ -1,28 +1,31 @@
-import { Redes } from "./Redes";
+import { Red } from "./Redes";
 
 export interface Personas{
     id?: number
     nombre: string
     apellido: string
-    edad: string
+    titulo: string
+    nacimiento: string
     direccion: string
     telefono: string
     email: string
-    src: string
-    educaciones: Array<Educaciones>
-    proyectos: Array<Proyectos>
-    habilidades: Array<Habilidades>
-    experiencias: Array<Experiencias>
-    redes: Array<Redes>
+    foto: string
+    banner: string
+    sobremi: string
+    educaciones: Array<Educacion>
+    proyectos: Array<Proyecto>
+    habilidades: Array<Habilidad>
+    experiencias: Array<Experiencia>
+    redes: Array<Red>
 }
-export interface Educaciones{
+export interface Educacion{
     id?: number
     periodo: string
     lugar: string
     titulo: string
     src: string
 }
-export interface Proyectos{
+export interface Proyecto{
     id?: number
     titulo: string
     periodo: string
@@ -30,13 +33,13 @@ export interface Proyectos{
     url: string
     fotos: string
 }
-export interface Habilidades{
+export interface Habilidad{
     id?: number
     habilidad: string
     valor: number
 }
 
-export interface Experiencias{
+export interface Experiencia{
     id?: number
     periodo: string
     lugar: string
