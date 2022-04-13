@@ -1,8 +1,3 @@
-.banner{
-    min-height: 20px;
-    width: 100%;
-    background-color: white;
-}
 .barraEncabezado{
     display: flex;
     justify-content: space-between;
@@ -13,16 +8,13 @@
     width: 80px;
     height: 64px;
     border-radius: 10px;
-    background-color: var(--frente);
+    background-color: var(--colorOpuesto);
     //background-color: rgba(128,128,128,0.3);
     box-shadow:0 0 4px #777; 
     margin-right: 15px;
     svg{
         width: 100%;
     }
-}
-.izq{
-  display: flex;
 }
 .usuarioEncabezado{
   display: flex;
@@ -78,7 +70,7 @@ ul{
   cursor: pointer;
   path{
     fill:none;
-    stroke:var(--frente);
+    stroke:var(--colorOpuesto);
     stroke-width:2.75;
     stroke-linecap:round;
     stroke-linejoin:round;
@@ -90,19 +82,14 @@ ul{
   }
 }
 
-/*.menu li>div:hover{
-  color: #000;
-  background-color: #eaeaea;
-}*/
+
 /////Y este?
 .menu>li{
   float: left;
   text-align:center
 }
-/*.menu>li>ul{
-  display: none;
-}*/
-/*.menu>li:hover>ul {
-  position: absolute;
-  display:block;
-}*/
+
+
+
+
+

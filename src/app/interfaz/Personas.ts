@@ -12,6 +12,7 @@ export interface Personas{
     foto: string
     banner: string
     sobremi: string
+	publico: boolean
     educaciones: Array<Educacion>
     proyectos: Array<Proyecto>
     habilidades: Array<Habilidad>

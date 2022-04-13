@@ -1,28 +1,33 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Habilidad } from 'src/app/interfaz/Personas';
+import { ModalService } from 'src/app/servicios/modal.service';
 
 @Component({
   selector: 'app-habilidad',
   templateUrl: './habilidad.component.html',
   styleUrls: ['./habilidad.component.scss']
 })
+
 export class HabilidadComponent implements OnInit {
   
   @Input() habilidad!:Habilidad;
   @Input() mostarIconos: boolean=false;
   @Input() accion: string='ninguno';//'editar''agregar''eliminar'
 
-  constructor() { }
+  constructor(public modalS:ModalService) { }
 
   ngOnInit(): void {
-    //console.log(this.habilidad,this.habilidad.id);
-    //Activa la rueda interactiva
+    //Activa la rueda interactiva y setea los valores iniciiales del formulario
     if(this.accion=='agregar' || this.accion=='editar'){
+      this.modalS.personaModal.habilidades[0].habilidad=this.habilidad.habilidad;
       this.detectarChildSVG();
     }
+    //Permite la animacion en el hover al cargar nuevos componentes
+    porcentSet=false;
   }
 
   detectarChildSVG(){
+    
     //Fija el valor con un click
     let image1=document.getElementById('svg1')!;
     image1.addEventListener("click",fijarPorcentaje);
@@ -32,16 +37,13 @@ export class HabilidadComponent implements OnInit {
     for(let i=0; i<paths.length; i++){
       paths[i].addEventListener("mouseenter", pathsVerdes ,false);
     }
+    document.getElementById('svg1')!.addEventListener("mouseleave", restaurar ,false);
+    valorOriginal=this.habilidad.valor;
   }
 }
-/**function(){
-        setPorcentaje(i);
-        for(let j=0; j<paths.length; j++){
-          paths[j].style.fill=(j<=i)?'green':'grey';
-        }
-      }
- * 
- */
+//porcentSet limita su ejecucion durante los llamados del hover de los paths
+let porcentSet:boolean=false;
+let valorOriginal:Number;
 
 function pathsVerdes(evt:any) {
   let origin = evt.target.closest("path");
@@ -51,7 +53,7 @@ function pathsVerdes(evt:any) {
     paths[i].style.fill=(!encontrado)?'green':'grey';
     if (paths[i]==origin) {
       //Seteo el pocentaje
-      setPorcentaje(i);
+      mostrarPorcentaje(i);
       encontrado=true;
     }
   }
@@ -70,20 +72,35 @@ function fijarPorcentaje(evt:any){
     paths[i].removeEventListener("mouseenter", pathsVerdes);
     if (paths[i]==origin) {
       //Seteo el pocentaje
-      setPorcentaje(i);
+      mostrarPorcentaje(i);
+      (<HTMLInputElement>document.getElementById('habValor')).value=((i*10)+10).toString();
     }
   }
   porcentSet=true;
 }
 
-//porcentSet limita su ejecucion durante los llamados del hover de los paths
-let porcentSet:boolean=false;
-function setPorcentaje(porcentaje:number){
+
+function mostrarPorcentaje(porcentaje:number){
   if (!porcentSet) {
     let tex=document.getElementById('habilidadPorcent')!;
     let temp:number=((porcentaje*10)+10);
-    tex.innerHTML=temp+' %';
-    (<HTMLInputElement>document.getElementById('habValor')).value=temp.toString();
+    tex.innerHTML=temp+'%';
+    //(<HTMLInputElement>document.getElementById('habValor')).value=temp.toString();
+  }
+}
+
+function restaurar() {
+  if (!porcentSet) {
+    //Restaura el valor
+    document.getElementById('habilidadPorcent')!.innerHTML=valorOriginal+'%';
+    //Restauro los segmentos
+    let origin=document.getElementById('svg1')!;
+    let paths=origin.getElementsByTagName('path');
+    for(let i=0; i<paths.length; i++){
+      paths[i].style.fill=( i<( Number(valorOriginal)/10) )?'green':'grey';
+    }
+    //Como se usa un input hidden para guardar el valor se debe sobre escribir el valor default
+    (<HTMLInputElement>document.getElementById('habValor')).value=valorOriginal+'';
   }
 }
 

@@ -1,28 +1,33 @@
 <ng-container *ngIf="listo">
+  <app-encabezado [miportfolio]="miportfolio" [encabezado]="persona"></app-encabezado>
+  <app-banner [banner]="persona.banner"></app-banner>
+  <app-redes [redes]="persona.redes"></app-redes>
+  <app-resumen [resumen]="persona"></app-resumen>
 
-    <app-encabezado [encabezado]="persona" [miportfolio]="miportfolio"></app-encabezado>
-    <app-redes [redes]="persona.redes"></app-redes>
-    <app-resumen [resumen]="persona"></app-resumen>
-
-    <!--Solo muestra las secciones que tienen contenido, en modo edicion aparece siempre-->
-    <ng-container *ngIf="persona.experiencias[0] != undefined || activo">
-      <div class="division"></div>
-      <app-experiencias [experiencias]="persona.experiencias"></app-experiencias>
-    </ng-container>
-
-    <ng-container *ngIf="persona.educaciones[0] != undefined || activo">
-      <div class="division"></div>
-      <app-educaciones [educaciones]="persona.educaciones"></app-educaciones>
-    </ng-container>
-
-    <ng-container *ngIf="persona.habilidades[0] != undefined || activo">
-      <div class="division"></div>
-      <app-habilidades [habilidades]="persona.habilidades"></app-habilidades>
-    </ng-container>
-
-    <ng-container *ngIf="persona.proyectos[0] != undefined || activo">  
-      <div class="division"></div>
-      <app-proyectos  [proyectos]="persona.proyectos"></app-proyectos>
-    </ng-container>
-
+  <!--Solo muestra las secciones que tienen contenido, en modo edicion aparece siempre-->
+  <ng-container *ngIf="persona.experiencias[0] != undefined || activo">
+    <div class="division"></div>
+    <app-experiencias [experiencias]="persona.experiencias"></app-experiencias>
   </ng-container>
+
+  <ng-container *ngIf="persona.educaciones[0] != undefined || activo">
+    <div class="division"></div>
+    <app-educaciones [educaciones]="persona.educaciones"></app-educaciones>
+  </ng-container>
+
+  <ng-container *ngIf="persona.habilidades[0] != undefined || activo">
+    <div class="division"></div>
+    <app-habilidades [habilidades]="persona.habilidades"></app-habilidades>
+  </ng-container>
+
+  <ng-container *ngIf="persona.proyectos[0] != undefined || activo">  
+    <div class="division"></div>
+    <app-proyectos  [proyectos]="persona.proyectos"></app-proyectos>
+  </ng-container>
+</ng-container>
+
+
+
+<ng-container *ngIf="!listo">
+  <app-cargando></app-cargando>
+</ng-container>

@@ -1,0 +1,66 @@
+.toggleContainer {
+    width: 100%;
+    display: inline-block;
+}
+
+.toggleSubcontainer{
+    width: fit-content;
+    float: right;
+    margin: 15px;
+}
+
+.mensajeTogle{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    margin-bottom: 8px;
+}
+
+#switchPublico {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 26px;
+    margin-left: 15px;
+    border-radius: 26px;
+    background-color: var(--colorOpuesto);
+    cursor: pointer;
+}
+
+.slider {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--fondoBody);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+    border: solid 1px rgba($color: #888, $alpha: 0.5);
+    box-sizing: border-box;
+}
+
+.on{
+    div{
+        transform: translateX(34px);
+        transition: .4s;
+        background-color: rgb(119, 206, 119);
+    }
+}
+
+.toggleON{
+    overflow: hidden;
+    transition: linear .4s;
+    max-height: 20px;
+
+}
+.toggleOFF{
+    overflow: hidden;
+    transition: linear .4s;
+    max-height: 0px;
+}
+
+  
+  

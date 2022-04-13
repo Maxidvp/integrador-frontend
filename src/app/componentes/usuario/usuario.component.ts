@@ -32,11 +32,11 @@ export class UsuarioComponent implements OnInit {
       this.mostrarUsername();
     });
     this.mostrarUsername();
-    setTimeout(()=>{
+    /*setTimeout(()=>{
       if(this.logueado){
         document.getElementById('botonModo')!.innerHTML=(document.body.className=='light')?'Modo oscuro':'Modo claro';
       }
-    },100)
+    },100)*/
   }
 
   
@@ -50,14 +50,14 @@ export class UsuarioComponent implements OnInit {
       texto!.innerHTML='Habilitar edición';
     }
   }
-
+/*
   //Cambia de modo claro a modo oscuro
   togleModo(){
     let clase=(document.body.className=='light')? 'dark':'light';
     document.body.className=clase;
     localStorage.setItem('theme',clase);
     document.getElementById('botonModo')!.innerHTML=(document.body.className=='light')?'Modo oscuro':'Modo claro';
-  }
+  }*/
   
   //Habilita la ventana de iniciar sesion o registra segun el parametro
   sesion(tipo:string){
@@ -98,7 +98,7 @@ export class UsuarioComponent implements OnInit {
       this.subscription1.unsubscribe();
     })
   }
-  miPorfolio(){
+  miPortfolio(){
     this.router.navigate(['miportfolio']);
   }
 }

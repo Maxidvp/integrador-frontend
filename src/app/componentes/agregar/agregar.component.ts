@@ -20,7 +20,6 @@ export class AgregarComponent implements OnInit {
   }
 
   modal(tipo:string, id:number, accion:string){
-    console.log('Estoy en abrir modal agregar');
     this.modalS.abrirModalEditar(tipo,id,accion);
   }
 
