@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Personas } from 'src/app/interfaz/Personas';
 import { ConexionService } from 'src/app/servicios/conexion.service';
@@ -15,7 +16,7 @@ export class AutorComponent implements OnInit {
   listo:boolean=false;
   subscription1!: Subscription;
 
-  constructor(private conexionS:ConexionService, private sesionS:SesionService) { }
+  constructor(private conexionS:ConexionService, private sesionS:SesionService, private router: Router) { }
 
   ngOnInit(): void {
     /*this.conexion.getPersona(1).subscribe((resp)=>{
@@ -25,7 +26,6 @@ export class AutorComponent implements OnInit {
       console.log(resp);
       this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
     })*/
-
 
 
     //Si esta logeado
@@ -45,14 +45,19 @@ export class AutorComponent implements OnInit {
   }
 
   traerAutor(){
-    this.subscription1=this.conexionS.getPersona(1).subscribe((resp)=>{
-      this.persona=resp;
-      this.conexionS.persona=resp;
-      //this.persona=resp;
-      console.log('autor',this.conexionS.persona);
-      this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-      this.subscription1.unsubscribe();
-    })
+    this.subscription1=this.conexionS.getPersona(1).subscribe(
+      (resp)=>{
+        this.persona=resp;
+        this.conexionS.persona=resp;
+        //this.persona=resp;
+        console.log('autor',this.conexionS.persona);
+        this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
+        this.subscription1.unsubscribe();
+      },
+      (error) => {  
+        this.router.navigate(['error']);
+      }
+    )
   }
 
 }

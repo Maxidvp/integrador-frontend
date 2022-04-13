@@ -1,0 +1,15 @@
+<ng-container *ngIf="listo">
+    <ng-container *ngIf="publico">
+        <app-layout [persona]="persona" [listo]="listo"></app-layout>
+    </ng-container>
+    <ng-container *ngIf="!publico">
+        <app-encabezado></app-encabezado>
+        <div class="publico">
+            No se encontro el perfil solicitado
+        </div>
+    </ng-container>
+</ng-container>
+<ng-container *ngIf="!listo">
+    <app-cargando></app-cargando>
+</ng-container>
+

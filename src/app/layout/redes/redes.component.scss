@@ -64,10 +64,15 @@ svg{
 }
 //Invierte los colores para modo oscuro
 path{
-    fill:var(--frente);
+    fill:var(--colorOpuesto);
     transition: 0.3s;            
 }
-
+.redEditar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
 
 
 //Para los colores de los logos

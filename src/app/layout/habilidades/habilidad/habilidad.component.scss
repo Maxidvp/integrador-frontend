@@ -9,11 +9,13 @@
     min-height: 125px;
     width: 125px;
     padding: 5px;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 #habilidadPorcent{
     position: absolute;
-    color:black;//var(--frente);
+    color: var(--colorOpuesto);
     width: 125px;
     height: 125px;
     display: flex;
@@ -54,13 +56,13 @@
     width: 40px;
     height: 40px;
     path{
-        fill: var(--frente);
+        fill: var(--colorOpuesto);
     }
 }
 
 
 #margenExtra{
-    height: 34px;
+    height: 42px;
 }
 
 svg{

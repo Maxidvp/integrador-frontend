@@ -39,15 +39,17 @@ export class EditorComponent implements OnInit {
       //accion:'editar''agregar''eliminar'
       console.log(this.datos)
       if(this.datos.tipo!='ninguno'){
+        //redes y resumen no poseen la misma estructura que los demas componentes por lo que no son procesados
         if (this.datos.tipo=='redes') {
           this.contenido=this.conexionS.persona.redes;
         }else if(this.datos.tipo=='resumen') {
           this.contenido=this.conexionS.persona;
+        }else if(this.datos.tipo=='banner') {
+            this.contenido=this.conexionS.persona.banner;
         }else if(this.datos.accion=='editar' || this.datos.accion=='eliminar'){
           console.log('datos',this.datos);
           this.contenido=(this.conexionS.persona[this.datos.tipo].filter((elem: { id: number; })=>elem.id==this.datos.id))[0];//Obtiene el contenido
         }else if(this.datos.accion=='agregar'){
-          console.log('estoy en agregar');
           //alert(datos.tipo);
           this.contenido=this.json[this.datos.tipo as keyof  Personas];//se usa un contendio base para editar this.tipo as keyof  Personas
           //Por la estructura de personas hay que seleccionar el primer elemento de json
@@ -84,53 +86,54 @@ export class EditorComponent implements OnInit {
   }
 
   guardar(){
-    if(this.tipo=='resumen'){
-      this.contenido.foto=(<HTMLInputElement>document.getElementById('resFoto')).value;
-      this.contenido.nombre=(<HTMLInputElement>document.getElementById('resNombre')).value;
-      this.contenido.apellido=(<HTMLInputElement>document.getElementById('resApellido')).value;
-      this.contenido.titulo=(<HTMLInputElement>document.getElementById('resTitulo')).value;
-      this.contenido.nacimiento=(<HTMLInputElement>document.getElementById('resNacimiento')).value;
-      this.contenido.direccion=(<HTMLInputElement>document.getElementById('resDireccion')).value;
-      this.contenido.telefono=(<HTMLInputElement>document.getElementById('resTelefono')).value;
-      this.contenido.email=(<HTMLInputElement>document.getElementById('resEmail')).value;
-      this.contenido.sobremi=(<HTMLInputElement>document.getElementById('resSobremi')).value;
+    if(this.tipo=='banner'){
+      this.conexionS.persona.banner=this.modalS.personaModal.banner;
+    }else if(this.tipo=='resumen'){
+      this.contenido.foto=this.modalS.personaModal.foto;
+      this.contenido.nombre=this.modalS.personaModal.nombre;
+      this.contenido.apellido=this.modalS.personaModal.apellido;
+      this.contenido.titulo=this.modalS.personaModal.titulo;
+      this.contenido.nacimiento=this.modalS.personaModal.nacimiento;
+      this.contenido.direccion=this.modalS.personaModal.direccion;
+      this.contenido.telefono=this.modalS.personaModal.telefono;
+      this.contenido.email=this.modalS.personaModal.email;
+      this.contenido.sobremi=this.modalS.personaModal.sobremi;
     }else if(this.tipo=='experiencias'){
-      this.contenido.lugar=(<HTMLInputElement>document.getElementById('expLugar')).value;
-      this.contenido.periodo=(<HTMLInputElement>document.getElementById('expPeriodo')).value;
-      this.contenido.actividades=(<HTMLInputElement>document.getElementById('expActividades')).value;
-      this.contenido.src=(<HTMLInputElement>document.getElementById('expImagen')).value;
+      /*this.contenido=this.modalS.personaModal.experiencias[0];*/
+      this.contenido.lugar=this.modalS.personaModal.experiencias[0].lugar;
+      this.contenido.periodo=this.modalS.personaModal.experiencias[0].periodo;
+      this.contenido.actividades=this.modalS.personaModal.experiencias[0].actividades;
+      this.contenido.src=this.modalS.personaModal.experiencias[0].src;
     }else if(this.tipo=='educaciones'){
-      this.contenido.lugar=(<HTMLInputElement>document.getElementById('eduLugar')).value;
-      this.contenido.periodo=(<HTMLInputElement>document.getElementById('eduPeriodo')).value;
-      this.contenido.titulo=(<HTMLInputElement>document.getElementById('eduTitulo')).value;
-      this.contenido.src=(<HTMLInputElement>document.getElementById('eduImagen')).value;
+     /* this.contenido=this.modalS.personaModal.educaciones[0];*/
+      this.contenido.lugar=this.modalS.personaModal.educaciones[0].lugar;
+      this.contenido.periodo=this.modalS.personaModal.educaciones[0].periodo;
+      this.contenido.titulo=this.modalS.personaModal.educaciones[0].titulo;
+      this.contenido.src=this.modalS.personaModal.educaciones[0].src;
     }else if(this.tipo=='proyectos'){
-      this.contenido.titulo=(<HTMLInputElement>document.getElementById('proTitulo')).value;
-      this.contenido.periodo=(<HTMLInputElement>document.getElementById('proPeriodo')).value;
-      this.contenido.descripcion=(<HTMLInputElement>document.getElementById('proDescripcion')).value;
-      this.contenido.url=(<HTMLInputElement>document.getElementById('proReferencia')).value;
-      this.contenido.fotos=(<HTMLInputElement>document.getElementById('proImagen')).value;
+      /*this.contenido=this.modalS.personaModal.proyectos[0];*/
+      this.contenido.titulo=this.modalS.personaModal.proyectos[0].titulo;
+      this.contenido.periodo=this.modalS.personaModal.proyectos[0].periodo;
+      this.contenido.descripcion=this.modalS.personaModal.proyectos[0].descripcion;
+      this.contenido.url=this.modalS.personaModal.proyectos[0].url;
+      this.contenido.fotos=this.modalS.personaModal.proyectos[0].fotos;
     }else if(this.tipo=='habilidades'){
-      this.contenido.habilidad=(<HTMLInputElement>document.getElementById('habHabilidad')).value;
+      this.contenido.habilidad=this.modalS.personaModal.habilidades[0].habilidad;
       this.contenido.valor=(<HTMLInputElement>document.getElementById('habValor')).value;
     }else if(this.tipo=='redes'){
-
-      //Warn: anda una sola vez despues pasan cosas raras
-
       //Obtengo una node list de los elementos con node list
-      //Usar id mejot
+      //Usar id mejor
       let redes=document.getElementsByClassName('red');
       let temp:Array<Red>=[];
 
       for (let i = 0; i < redes.length; i++) {
-        //para cada elemnto de la nodelist obtengo el valor del imput
+        //para cada elemento de la nodelist obtengo el valor del imput
         let valor=(<HTMLInputElement>(<HTMLCollection>redes[i].getElementsByTagName('input'))[0]).value;
         //si esta definido lo agrego al vector temp
         if(valor){
           //filtro los objetos de personas.redes en busca del id que tiene la red en la DB
           let id=this.conexionS.persona.redes.filter((red:{red_id: number}) => {return red.red_id==i});
           console.log(id);
-
           //Agrego un elemento de tipo Redes, si el id no existe no se agrega
           temp.push({ id: (id[0])? id[0].id:null,
                       red_id: i,
@@ -140,6 +143,7 @@ export class EditorComponent implements OnInit {
       console.log(temp);
       this.conexionS.persona.redes=temp;
     }
+    console.log('Antes de enviar: ',this.conexionS.persona );
 
     this.subscription1=this.sesionS.verificarTokenObservable.subscribe(resp=>{
       this.subscription2=this.conexionS.actualizarDB().subscribe(res=>{
@@ -149,6 +153,7 @@ export class EditorComponent implements OnInit {
         this.conexionS.persona=res;   
         this.subscription1.unsubscribe();
         this.subscription2.unsubscribe();
+        //Aviso y envio al componente padre el nuevo contenido
         this.conexionS.personaCambio(res);
         this.cerrar();     
       });      
@@ -186,6 +191,7 @@ export class EditorComponent implements OnInit {
     "foto": "URL de la imagen",
     "banner": "URL del banner",
     "sobremi":"",
+    "publico":false,
     "educaciones": 
         [
           {
@@ -215,7 +221,7 @@ export class EditorComponent implements OnInit {
         [
           {
             "titulo": "",
-            "periodo": "Periodo",
+            "periodo": "",
             "descripcion": "",
             "url": "",
             "fotos": ""

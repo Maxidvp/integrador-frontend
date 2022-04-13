@@ -40,7 +40,7 @@ export class ModalComponent implements OnInit {
         this.abrir();//Activa el modal
       }
     });
-    //Se ejecuta cuando se clickea el boton de crear Mi Porfolio
+    //Se ejecuta cuando se clickea el boton de crear Mi Portfolio
     this.subscripction = this.modalS.abrirModalInstanciaObservable.subscribe(datos=>{
       if(datos){
         this.mostrar='instancia';

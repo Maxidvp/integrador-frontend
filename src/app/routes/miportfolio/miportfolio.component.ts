@@ -25,12 +25,14 @@ export class MiportfolioComponent implements OnInit {
       this.subscription1=this.sesionS.verificarTokenObservable.subscribe(resp=>{
         if(resp=='miportfolio'){
           this.subscription2=this.conexionS.getPersona(0).subscribe((resp)=>{
-            this.conexionS.persona=resp;
+            this.conexionS.persona=resp.body;
             this.persona=this.conexionS.persona;
-            console.log('miportfolio',resp);
+            console.log('miportfolio',resp.body);
             this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
             this.subscription1.unsubscribe();
             this.subscription2.unsubscribe();
+          },(error) => {  
+            this.router.navigate(['error']);
           })
         }
       });

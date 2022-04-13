@@ -2,18 +2,11 @@
 *{
 	margin: 0;
 	padding: 0;
+    font-family: Verdana, Arial, 'Times New Roman' ;
 }
-
-/*.btn{
-    background-color: orange;
-    text-align: center;
-    border: 1px solid;
-    padding: 4px;
-    border-radius: 4px;
-    &:hover{ 
-        cursor: pointer;
-    }
-}*/
+a{
+    color: inherit;
+}
 
 /////////////////Layout - secciones/////////////////
 .seccion{
@@ -76,7 +69,7 @@
         height: 100px;
     }
     path{
-        fill: var(--frente);
+        fill: var(--colorOpuesto);
     }
 }
 .conTarjeta{
@@ -104,7 +97,7 @@
     --fondoBody:#f4f4f8;
     background-color: var(--fondoBody);
     --fondo: aliceblue;
-    --frente: #332d2d;
+    --colorOpuesto: #332d2d;
     transition: 0.3s;
     color: black;
     --opacidadTarjeta:0.3;
@@ -112,12 +105,13 @@
     --usuarioDesplegableHover: rgba(0, 0, 0, 0.6);
     --fondoTarjeta: rgb(255, 255, 255);
     --fondoSolido: white;
+    --opacidadTextoModo:0.2;
 }
 .dark{
     --fondoBody: #1e1d20;
     background-color: var(--fondoBody);
     --fondo: #332d2d;
-    --frente: aliceblue;
+    --colorOpuesto: aliceblue;
     transition: 0.3s;
     color: white;
     --opacidadTarjeta:0.12;
@@ -125,6 +119,7 @@
     --usuarioDesplegableHover: rgba(255, 255, 255, 0.8);
     //--fondoTarjeta: rgba(255, 255, 255, 0.5);
     --fondoSolido: black;
+    --opacidadTextoModo:-0.2;
 }
 /////////////////Body - Modos/////////////////
 
@@ -142,7 +137,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.13);
     //position: relative;
     label {
-        color: var(--frente);
+        color: var(--colorOpuesto);
         font-size: 15px;
         line-height:25px;
         /*span{
@@ -151,7 +146,7 @@
     }
     input,textarea{
         background: var(--fondoBody);
-        color: var(--frente);
+        color: var(--colorOpuesto);
         //font-size: 1.1em;
         line-height: 1;
         width: 100%;
@@ -160,6 +155,8 @@
         margin-bottom: 8px;
         outline: none;
         border: 1px solid #888;
+        font-family: inherit;
+        font-size: inherit;
     }
     /*input[type=checkbox]{
 
@@ -194,31 +191,6 @@
 }
 
 
-/*.boton{
-    background: #fbfbfb;
-    font-size: 1.2em;
-    line-height: 1;
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 12px;
-    outline: none;
-    border: 1px solid #bbb;
-    text-align: center;
-    &:hover{
-        cursor: pointer;
-    }
-}*/
-
-
-.error {
-    margin: 40px auto 0;
-    border: 1px solid #777;
-    padding: 3px;
-    color: #fff;
-    text-align: center;
-    width: 650px;
-    background: #f58220;
-}
 
 /*= containerModalSesionS
 --------------------------------------------------------*/
@@ -271,5 +243,15 @@ h1{
 .alerta{
     color: #F22;
     margin-bottom: 10px;
+}
+.edicionContainer{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 ////////////////Miscelaneos////////////////

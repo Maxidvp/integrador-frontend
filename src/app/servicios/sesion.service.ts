@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
+import { ConexionService } from './conexion.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SesionService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   backEndUrl="http://192.168.0.7:8080";
 
   //headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -53,14 +55,19 @@ export class SesionService {
     //Si el token expiro pide uno nuevo
     if(tiempoActual+10 > vencimiento){
       console.log('En sesion service verificarToken vencido');
-        this.subscription1 = this.actualizarToken().subscribe(resp=>{
-        //Luego de obtener el nuevo token avisa que puede continuar
-        localStorage.setItem('access_token',resp.access_token);
-        console.log('En sesion service verificarToken refrezcado');
-        this.subscription1.unsubscribe();
-        this.behaviorSubjectVerificarToken.next(origen);
-        //this.behaviorSubjectVerificarToken.next('ninguno');
-      });
+      this.subscription1 = this.actualizarToken().subscribe(
+        resp=>{
+          //Luego de obtener el nuevo token avisa que puede continuar
+          localStorage.setItem('access_token',resp.body.access_token);
+          console.log('En sesion service verificarToken refrezcado');
+          this.subscription1.unsubscribe();
+          this.behaviorSubjectVerificarToken.next(origen);
+          //this.behaviorSubjectVerificarToken.next('ninguno');
+        },
+        err=>{
+          this.router.navigate(['error']);
+        }
+      );
     //Si el token NO expiro avisa que puede continuar
     }else{
       console.log('En sesion service verificarToken no vencido');
@@ -69,21 +76,13 @@ export class SesionService {
     }
   }
 
-  //Realiza el refresh token y devuelve true si lo logre
-  /*refreshToken(origen:string): void{
-    this.actualizarToken().subscribe(resp=>{
-      localStorage.setItem('access_token',resp.access_token);
-      this.behaviorSubjectsesionRefresh.next(origen);
-    });
-  }*/
-
   //Realiza el pedido del nuevo token a la api
   actualizarToken(): Observable<any>{
     console.log('En sesion service actualixarToken');
     const refresh = localStorage.getItem('refresh_token');
     //alert(`Bearer ${refresh}`);
     const headers = new HttpHeaders({'Authorization': `Bearer ${refresh}`});
-    return this.http.get<any>(`${this.backEndUrl}/api/token/refresh`,{headers});
+    return this.http.get<any>(`${this.backEndUrl}/api/token/refresh`,{ headers, observe: 'response' });
   }
 
   traerFotoPerfil(): Observable<any>{

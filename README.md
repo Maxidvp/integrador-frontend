@@ -2,14 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
+### Versión 1.0.0 Primer deploy
+    Implementación de routing para portfolios públicos
+    Correcciones de estilos, código y sistema de archivos
+
 ### Versión 0.5.0
     Ahora se admite el acceso con email
     Se implemento la validacion de los formularios, en registro se indica la disponibilidad de username y email
-    Seccion de resumen completamente implementada
 
 ### Versión 0.4.0
     Ahora los usuarios pueden tener su propio portfolio para edicion a partir de una copia del autor o uno vacio
     Implementacion del sistema de routing para el home y /miportfolio
+    Se implemento una barra de navegación desplegable
     Se implemento una barra para las redes sociales
     Dark mode completamente implementado
 

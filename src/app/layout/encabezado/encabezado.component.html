@@ -1,7 +1,7 @@
 <!--POner el nav-->
 <div class="barraEncabezado">
-    <div class="izq">
-        <a href="http://192.168.0.7:4200">
+    <div class="flex">
+        <a href="./">
             <div class="logoAP">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 100 80" style="enable-background:new 0 0 100 80;" xml:space="preserve">
@@ -23,68 +23,9 @@
             <p>#YoProgramo</p>
         </div>
     </div>
-
+    <div class="contenedorUsuario"></div>
     <app-usuario [miportfolio]="miportfolio"></app-usuario>
-    <!--ng-container *ngIf="logueado; else noLog"><!--Si esta logueado->
-        <div class="usuarioEncabezado">
-            <svg version="1.1" class="arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
-                <path  d="M2.7,6.3l7.3,7.4l7.3-7.3"/>
-            </svg>
-            <ul class="menu">
-                <li>{{username}}
-                    <ul>
-                        <li *ngIf="miportfolio">
-                            <div class="btn" (click)="activarEdicion()">
-                                activar edición
-                            </div>                            
-                        </li>
-                        <li>
-                            <div class="btn" (click)="instancia()">
-                                Crear Mi Porfolio
-                            </div>                            
-                        </li>
-                        <li>
-                            <div id="botonModo"  class="btn" (click)="togleModo()">
-                                Modo oscuro
-                            </div>                              
-                        </li>
-                        <li>
-                            <div class="btn" (click)="desloguear()">
-                                Cerrar sesion
-                            </div>                            
-                        </li>
-                    </ul>  
-                </li>
-            </ul>
-
-            <div class="perfilFoto">
-                <a href="http://192.168.0.7:4200/miportfolio">
-                    <img src="assets/imagenes/profile_picture.png" alt=""><!--img [src]="resumen.src" alt=""->
-                </a>
-            </div>
-        </div>
-    </ng-container>
-
-
-
-
-    <ng-template #noLog><!--Si NO esta logueado->
-        <div class="usuarioEncabezado">
-            <div class="btn" (click)="sesion('acceder')">
-                Iniciar sesion
-            </div>
-            <div class="btn" (click)="sesion('registrar')">
-                Registrar
-            </div>  
-        </div>
-  
-    </ng-template-->
-
 </div>
-<app-edicion [tipo]="'banner'"></app-edicion>
-<br>
-<div class="banner"><!-- *ngIf="encabezado.banner || activo"-->
-    <img [src]="encabezado.banner || 'assets/svg/banner.svg'" alt="">
-</div>
+
+<app-toggle [encabezado]="encabezado" *ngIf="miportfolio"></app-toggle>
 

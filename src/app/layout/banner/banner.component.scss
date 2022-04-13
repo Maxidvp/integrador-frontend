@@ -1,0 +1,13 @@
+.banner{
+    grid-row: 1;
+    grid-column: 1/span 2;
+    position: relative;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    img{
+        width:100%;
+    }
+}

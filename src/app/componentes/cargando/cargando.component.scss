@@ -1,0 +1,149 @@
+div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    div{
+        font-size: 1.4em;
+    }
+}
+
+#container {
+    width: 350px;
+    height: 350px;
+}
+
+svg{
+    circle{
+        fill:transparent;
+        stroke-width: 6px;
+        stroke-linecap: round;
+        transform-origin: center;
+        animation-name: animation1;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+}
+
+///// Circle 1 /////
+@keyframes animation1 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -141.4;
+    }
+    100% {
+        stroke-dashoffset: -282.7;
+    }
+}
+#spinner1 {
+    transform: translate(50px,50px);
+    stroke-dasharray: 40 30.7;
+    animation-name: animation1;
+    animation-duration: 1.5s;
+    stroke:#F9B233;
+}
+
+///// Circle 2 /////
+@keyframes animation2 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -169.6;
+    }
+    100% {
+        stroke-dashoffset: -339.3;
+    }
+}
+#spinner2 {
+    transform: translate(40px,40px);
+    stroke-dasharray: 48 36.8;
+    animation-name: animation2;
+    animation-duration: 1.8s;
+    stroke: var(--colorOpuesto);
+}
+
+///// Circle 3 /////
+@keyframes animation3 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -197.9;
+    }
+    100% {
+        stroke-dashoffset: -395.8;
+    }
+}
+#spinner3 {
+    transform: translate(30px,30px);
+    stroke-dasharray: 56 43;
+    animation-name: animation3;
+    animation-duration: 2.1s;
+    stroke: #F9B233;
+}
+
+///// Circle 4 /////
+@keyframes animation4 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -226.2;
+    }
+    100% {
+        stroke-dashoffset: -452.4;
+    }
+}
+#spinner4 {
+    transform: translate(20px,20px);
+    stroke-dasharray: 64 49.1;
+    animation-name: animation4;
+    animation-duration: 2.4s;
+    stroke: var(--colorOpuesto);
+}
+
+///// Circle 5 /////
+@keyframes animation5 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -254.5;
+    }
+    100% {
+        stroke-dashoffset: -508.9;
+    }
+}
+#spinner5 {
+    transform: translate(10px,10px);
+    stroke-dasharray: 72 55.2;
+    animation-name: animation5;
+    animation-duration: 2.7s;
+    stroke: #F9B233;
+}
+
+///// Circle 6 /////
+@keyframes animation6 {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -282.7;
+    }
+    100% {
+        stroke-dashoffset: -565.5;
+    }
+}
+#spinner6 {
+    stroke-dasharray: 80 61.4;
+    animation-name: animation6;
+    animation-duration: 3s;
+    stroke: var(--colorOpuesto);
+}
+
+
+

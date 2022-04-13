@@ -63,7 +63,6 @@ export class SesionComponent implements OnInit {
         error:'El username no es valido, debe poseer almenos 4 caracteres alfanumericos o guiones',
         valido:false,
         esValido(){
-         
           //Se hace un seguimiento del valor para ingresar solamente cuando cambia y evitar multiples consultas 
           if(this.val!=this.valold){
             //Se evalua el username como almenos 4 caracteres alfanamuericos y guiones
@@ -203,7 +202,6 @@ export class SesionComponent implements OnInit {
         }else{
           //Error de conexion
         }
-  
         //throw error;   //You can also throw the error to a global error handler
       });
   }
