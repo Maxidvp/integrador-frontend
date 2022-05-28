@@ -32,6 +32,8 @@ import { CargandoComponent } from './componentes/cargando/cargando.component';
 import { ErrorComponent } from './routes/error/error.component';
 import { BannerComponent } from './layout/banner/banner.component';
 import { ModosComponent } from './componentes/modos/modos.component';
+import { GaleriaComponent } from './modal/galeria/galeria.component';
+import { GaleriaPrevComponent } from './componentes/galeria-prev/galeria-prev.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { ModosComponent } from './componentes/modos/modos.component';
     CargandoComponent,
     ErrorComponent,
     BannerComponent,
-    ModosComponent
+    ModosComponent,
+    GaleriaComponent,
+    GaleriaPrevComponent
   ],
   imports: [
     BrowserModule,

@@ -9,8 +9,8 @@ import { ModalService } from '../../servicios/modal.service';
 })
 export class EdicionComponent implements OnInit {
     
-  //Si el tipo puede tener varios items se debe enviar el id correspondiente
-  @Input() tipo:any;
+  //Si el seccion puede tener varios items se debe enviar el id correspondiente
+  @Input() seccion:any;
   @Input() id:any;
   //Usado en resumen y redes
   @Input() eliminar:boolean=true;
@@ -27,8 +27,8 @@ export class EdicionComponent implements OnInit {
     })
   }
 
-  modal(tipo:string, id:number, accion:string){
-    this.modalS.abrirModalEditar(tipo,id,accion);
+  modal(seccion:string, id:number, accion:string){
+    this.modalS.abrirModal('editar',{seccion,id,accion});
   }
   
 }

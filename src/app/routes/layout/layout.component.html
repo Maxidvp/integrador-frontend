@@ -1,8 +1,8 @@
 <ng-container *ngIf="listo">
   <app-encabezado [miportfolio]="miportfolio" [encabezado]="persona"></app-encabezado>
-  <app-banner [banner]="persona.banner"></app-banner>
+  <app-banner [banner]="persona.resumen.banner"></app-banner>
   <app-redes [redes]="persona.redes"></app-redes>
-  <app-resumen [resumen]="persona"></app-resumen>
+  <app-resumen [resumen]="persona.resumen"></app-resumen>
 
   <!--Solo muestra las secciones que tienen contenido, en modo edicion aparece siempre-->
   <ng-container *ngIf="persona.experiencias[0] != undefined || activo">

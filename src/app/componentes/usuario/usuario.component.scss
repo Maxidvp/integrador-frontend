@@ -99,7 +99,7 @@ nav{
   display: flex;
   flex-wrap: nowrap;
   position: relative;
-  margin: 10px 10px 16px 10px;
+  margin: 10px; //10px 10px 16px 10px;
   //Para que se vea el user sobre la tarjeta
   z-index: 3;
   font-weight: bold;
@@ -138,9 +138,3 @@ nav{
   }
 }
 
-
-/////Y este?
-.menu>li{
-  float: left;
-  text-align:center
-}

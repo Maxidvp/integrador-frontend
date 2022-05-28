@@ -10,13 +10,14 @@ import { ModalService } from 'src/app/servicios/modal.service';
 export class RedesComponent implements OnInit {
 
   @Input() accion:string='ninguno';
-  @Input() redes:any;
+  @Input() redes:Array<Red>=[];
   activo:boolean=false;
   aux:Array<any>=[];
 
   constructor(private modalS:ModalService) { }
 
   ngOnInit(): void { 
+    ///-//////-///console.log('on init', this.redes)
     this.modalS.toggleEdicionObservable.subscribe(datos => {
       this.activo=datos;
     })
@@ -34,7 +35,7 @@ export class RedesComponent implements OnInit {
         }
       });
     }
-    console.log(this.aux);
+    ///-//////-///console.log(this.aux);
   }
 
   json:Array<Redjson>=[

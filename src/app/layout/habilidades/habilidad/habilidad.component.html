@@ -6,7 +6,7 @@
 
 <div class="hab">
     <div id="margenExtra" *ngIf="habilidad.valor==0"></div>
-    <app-edicion [tipo]="'habilidades'" [id]="habilidad.id" *ngIf="mostarIconos"></app-edicion>
+    <app-edicion [seccion]="'habilidades'" [id]="habilidad.id" *ngIf="mostarIconos"></app-edicion>
     <div class="tarjeta habilidad">
         <div id="habilidadPorcent" *ngIf="habilidad.valor==0 && accion!='agregar' else valorPorcentual"><!--SVG + para agregar habilidad-->
             <svg version="1.1" class="addSVG" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

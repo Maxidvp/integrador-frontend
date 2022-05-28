@@ -15,10 +15,9 @@ export class ExperienciaComponent implements OnInit {
   constructor(public modalS:ModalService) { }
 
   ngOnInit(): void {
-    this.modalS.personaModal.experiencias[0].lugar=this.experiencia.lugar;
-    this.modalS.personaModal.experiencias[0].actividades=this.experiencia.actividades;
-    this.modalS.personaModal.experiencias[0].periodo=this.experiencia.periodo;
-    this.modalS.personaModal.experiencias[0].src=this.experiencia.src;
+    if(this.accion=='agregar' || this.accion=='editar'){
+      this.modalS.personaModal.experiencias[0]={...this.experiencia};
+    }
   }
   
 }

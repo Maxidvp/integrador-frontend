@@ -1,9 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscriber, Subscription, timeout } from 'rxjs';
-import { ConexionService } from 'src/app/servicios/conexion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
 import { ModalService } from 'src/app/servicios/modal.service';
-import { SesionService } from 'src/app/servicios/sesion.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-sesion',
@@ -15,7 +15,7 @@ export class SesionComponent implements OnInit {
   password:string='';
   username:string='';
   email:string='';
-  mostrar:string='ninguno';//acceder || registrar || ninguno
+  mostrar:any;//acceder || registrar || ninguno
   @Output() modalEmitter = new EventEmitter<boolean>();
   subscripction! : Subscription;
   subscripction2! : Subscription;
@@ -55,7 +55,7 @@ export class SesionComponent implements OnInit {
     }
   };
 
-  constructor(private modalS:ModalService, private sesionS:SesionService) {
+  constructor(private modalS:ModalService, private usuarioS:UsuarioService) {
     this.regisForm={
       username:{
         val:'',
@@ -66,19 +66,19 @@ export class SesionComponent implements OnInit {
           //Se hace un seguimiento del valor para ingresar solamente cuando cambia y evitar multiples consultas 
           if(this.val!=this.valold){
             //Se evalua el username como almenos 4 caracteres alfanamuericos y guiones
-            const patter=/^[a-zA-Z0-9_-]{4,}$/;
+            const patter=/^[a-zA-Z0-9_-]{4,20}$/;
             this.valold=this.val;
             this.valido=patter.test(this.val);
 
             //Si es valido se consulta en la DB si esta disponible
             let subscription1! : Subscription;
             if(this.valido){
-              subscription1=sesionS.usernameLibre(this.val).subscribe(resp=>{
-                console.log(resp);
+              subscription1=usuarioS.usernameLibre(this.val).subscribe(resp=>{
+                ///-//////-///console.log(resp);
                 //En caso de que se encuentre un username se responde con un "1" por lo que se comparan strings 
                 //de existir el username se ivalida
                 if(resp!='0'){
-                  console.log('El username ya existe');
+                  ///-//////-///console.log('El username ya existe');
                   this.error=`El username ${this.val} no esta disponible`;
                   this.valido=false;
                 }
@@ -107,12 +107,12 @@ export class SesionComponent implements OnInit {
             //Si es valido se consulta en la DB si esta disponible
             let subscription1! : Subscription;
             if(this.valido){
-              subscription1=sesionS.emailLibre(this.val).subscribe(resp=>{
-                console.log(resp);
+              subscription1=usuarioS.emailLibre(this.val).subscribe(resp=>{
+                ///-//////-///console.log(resp);
                 //En caso de que se encuentre un email se responde con un "1" por lo que se comparan strings 
                 //de existir el mail se ivalida
                 if(resp!='0'){
-                  console.log('El username ya existe');
+                  ///-//////-///console.log('El username ya existe');
                   this.error=`El email ${this.val} no esta disponible`;
                   this.valido=false;
                 }
@@ -134,7 +134,11 @@ export class SesionComponent implements OnInit {
         error:'La contraseña debe terner almenos 4 caracteres',
         valido:false,
         esValido(){
-          this.valido=this.val.length>3;
+          const patter=/^[a-zA-Z0-9_\-!@#$%^&*]{4,128}$/;
+          this.valido=patter.test(this.val);
+          if (!this.valido) {
+            this.error='La contraseña debe poseer almenos 4 caracteres alfanumericos o los simbolos _-!@#$%^&*';
+          }
           return this.valido;
         }
       }
@@ -157,18 +161,10 @@ export class SesionComponent implements OnInit {
     }
   }
 
-
-
-  /*function upperCase(){
-    alert('Se detecto que dejaste el campo de contraseña');
-  }*/
-
   ngOnInit(): void {
 
-    this.subscripction = this.modalS.abrirModalSesionObservable.subscribe(data=>{
-      if (data!='ninguno') {
-        this.mostrar=data;
-      }
+    this.subscripction = this.modalS.abrirModalObservable.subscribe(data=>{
+      this.mostrar=data.datos;
     });
   }
 
@@ -176,12 +172,12 @@ export class SesionComponent implements OnInit {
     let log={'username':this.accederForm.usermail.val,
       'password':this.accederForm.password.val
     };
-    console.log('loguear:');
-    console.log(log);
-    this.sesionS.logear(log).subscribe(
-      (resp)=>{
-        console.log('resp.status');
-        console.log(resp);
+    ///-//////-///console.log('loguear:');
+    ///-//////-///console.log(log);
+    this.usuarioS.logear(log).subscribe({
+      next:(resp)=>{
+        ///-//////-///console.log('resp.status');
+        ///-//////-///console.log(resp);
         localStorage.setItem('access_token',resp.body.access_token);
         localStorage.setItem('refresh_token',resp.body.refresh_token);
         try{//Despues del registro se loguea y no existe este elemento
@@ -190,10 +186,10 @@ export class SesionComponent implements OnInit {
           mensaje.innerHTML=`Bienvenido ${resp.body.username}`;
         }catch{};
         localStorage.setItem('username',resp.body.username);
-        this.sesionS.sesionCabecera();
+        this.usuarioS.sesionCabecera();
         setTimeout(this.cerrarModal.bind(this),1000);
       },
-      (error) => {         
+      error:(error) => {         
         if(error.statusText=='OK'){
           let mensaje=document.getElementById('sesionAccederMensaje')!;
           mensaje.innerHTML=`Usuario o contraseña incorrecto`;
@@ -203,7 +199,8 @@ export class SesionComponent implements OnInit {
           //Error de conexion
         }
         //throw error;   //You can also throw the error to a global error handler
-      });
+      }
+    });
   }
 
   registrar():void{
@@ -211,28 +208,22 @@ export class SesionComponent implements OnInit {
               'email':this.regisForm.email.val,
               'password':this.regisForm.password.val
     };
-    console.log(reg);
-    this.sesionS.registrar(reg).subscribe((resp)=>{
-      console.log(resp);
+    ///-//////-///console.log(reg);
+    this.usuarioS.registrar(reg).subscribe((resp)=>{
+      ///-//////-///console.log(resp);
       if(resp.roles){
         //De implementar el mantener la sesion iniciada hay que cambiar aca
         let log={'username':this.regisForm.username.val,
           'password':this.regisForm.password.val
         };
-        this.sesionS.logear(log).subscribe((resp)=>{
+        this.usuarioS.logear(log).subscribe((resp)=>{
           localStorage.setItem('access_token',resp.body.access_token);
           localStorage.setItem('refresh_token',resp.body.refresh_token);
           localStorage.setItem('username',resp.body.username);
-          this.sesionS.sesionCabecera();
-          this.modalS.abrirModalInstancia(true);
+          this.usuarioS.sesionCabecera();
+          this.modalS.abrirModal('instancia',true);
         });
       }
-      /*localStorage.setItem('access_token',resp.body.access_token);
-      localStorage.setItem('refresh_token',resp.body.refresh_token);
-      document.getElementById('sesionAccederMensaje')!.innerHTML=`Bienvenido ${resp.body.username}`;
-      localStorage.setItem('username',resp.body.username);
-      this.usuario.sesionCabecera();
-      setTimeout(this.cerrarModal.bind(this),1000);*/
     });
   }
 
@@ -242,7 +233,7 @@ export class SesionComponent implements OnInit {
 
   toggleModal():void{
     this.mostrar=(this.mostrar==='acceder')? 'registrar':'acceder';
-    console.log(this.mostrar);
+    ///-//////-///console.log(this.mostrar);
   }
 }
 

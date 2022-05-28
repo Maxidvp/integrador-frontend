@@ -11,13 +11,14 @@ export class ModalService {
 
   activo:boolean=false;
   
-  //Habilita y envia los datos al modal de edicion
-  private behaviorSubject = new BehaviorSubject({'tipo':'ninguno','id':0,'accion':'ninguno'});//Metodos para comunicar entre componentes
-  abrirModalEditarObservable = this.behaviorSubject.asObservable();//Observable a utilizar en el modal
-  abrirModalEditar(tipo: string, id:number, accion: string) {
-    this.behaviorSubject.next({tipo,id,accion});//Aplica el nuevo valor a todos los atributos observables
+
+  //Habilita y envia los datos al modal
+  private behaviorSubject = new BehaviorSubject({seccion:'',datos:[]});//Metodos para comunicar entre componentes
+  abrirModalObservable = this.behaviorSubject.asObservable();//Observable a utilizar en el modal
+  abrirModal(seccion: string, datos: any) {
+    this.behaviorSubject.next({seccion,datos});//Aplica el nuevo valor a todos los atributos observables
   }
-  
+
   //habilita/deshabilita los botones de editar eliminar
   private behaviorSubjectBool = new BehaviorSubject(false);
   toggleEdicionObservable = this.behaviorSubjectBool.asObservable();
@@ -26,69 +27,70 @@ export class ModalService {
     this.behaviorSubjectBool.next(this.activo);//Aplica el nuevo valor a todos los atributos observables
   }
 
-  //Abre el modal de acceder/registrar
-  private behaviorSubjectString = new BehaviorSubject('ninguno');//Metodos para comunicar entre componentes
-  abrirModalSesionObservable = this.behaviorSubjectString.asObservable();//Observable a utilizar en el modal
-  abrirModalSesion(tipo:string) {
-    /*alert('estoy');
-    alert(tipo);*/
-    this.behaviorSubjectString.next(tipo);//Aplica el nuevo valor a todos los atributos observables
+  public filtrarUrls(fotos:string){
+    let vectorFotos=fotos.split(/[;,\n]/);
+    let sinEspacios=vectorFotos.map(foto=> foto.trim());
+    let filtrado=sinEspacios.filter(foto=> /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(foto));
+    ///-//////-///console.log('filtrado',filtrado)
+    return filtrado;
   }
 
-  //Abre el modal de instancia
-  private behaviorSubjectInstancia = new BehaviorSubject(false);//Metodos para comunicar entre componentes
-  abrirModalInstanciaObservable = this.behaviorSubjectInstancia.asObservable();//Observable a utilizar en el modal
-  abrirModalInstancia(accion:boolean) {
-    this.behaviorSubjectInstancia.next(accion);//Aplica el nuevo valor a todos los atributos observables
+  public filtrarUrl(foto:string){
+    return foto?
+      (/\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(foto.trim())) ? foto.trim() : ''
+      :
+      '';
   }
 
   personaModal:Personas={
-    "nombre": "Nombre",
-    "apellido": "Apellido",
-    "titulo": "Titulo",
-    "direccion": "Direccion",
-    "telefono": "Telefono",
-    "email": "Email",
-    "nacimiento": "Nacimiento",
-    "foto": "URL de la imagen",
-    "banner": "URL del banner",
-    "sobremi":"",
-    "publico":false,
-    "educaciones": 
+    publico:false,
+    resumen: {
+      nombre: "",
+      apellido: "",
+      titulo: "",
+      direccion: "",
+      telefono: "",
+      email: "",
+      nacimiento: "",
+      foto: "",
+      banner: "",
+      sobremi: "",
+    },
+    educaciones: 
         [
           {
-            "periodo": "",
-            "lugar": "",
-            "titulo": "",
-            "src": ""
+            periodo: "",
+            lugar: "",
+            titulo: "",
+            imagen: ""
           }
         ],
-    "experiencias": 
+    experiencias: 
         [
           {
-            "periodo": "",
-            "lugar": "",
-            "actividades": "",
-            "src": ""
+            periodo: "",
+            lugar: "",
+            actividades: "",
+            imagen: ""
           }
         ],
-    "habilidades": 
+    habilidades: 
         [
           {
-            "habilidad": "",
-            "valor": 100
+            habilidad: "",
+            valor: 100
           }
         ],
-    "proyectos": 
+    proyectos: 
         [
           {
-            "titulo": "",
-            "periodo": "",
-            "descripcion": "",
-            "url": "",
-            "fotos": ""
+            titulo: "",
+            periodo: "",
+            descripcion: "",
+            url: "",
+            fotos: []
           }
         ],
-    "redes":[]
+    redes:[]
   }
 }

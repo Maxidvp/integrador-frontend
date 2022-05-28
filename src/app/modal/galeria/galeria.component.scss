@@ -1,0 +1,120 @@
+.anterior{
+    background-color: green;
+    left: 0;
+}
+.siguiente{
+    background-color: pink;
+    right: 0;
+}
+.anterior,.siguiente{
+    position: fixed;
+    background-color: rgba(128, 128, 128, 0.5);
+    top: 0;
+    height: 100%;
+    width: 15vw;
+    z-index: 11;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    svg{
+        cursor: pointer;
+        max-height: 20vh;
+        width: 100%;
+        fill: #000d;
+    }
+}
+.galeria{
+    position: fixed;
+    width: 90%;
+    height: 90%;
+    top: 5%;
+    left: 5%;
+    //background-color: blue;
+    z-index: 10;
+    .imgContainer{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        img{
+            max-width: 100%;
+            max-height: 100%;
+            position: relative;
+        }
+    }
+
+}
+.cerrar{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 6vmax;
+    height: 6vmax;
+    padding: 1vmax;
+    background-color: #0003;//var(--fondo);
+    border-radius: 1vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 12;
+    svg{
+        width: 6vmax;
+        height: 6vmax;
+        //margin-top: 10vw;
+        fill: #f58220;
+        user-select: none;
+    }
+}
+.galeriaCirculosContainer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    #galeriaCirculos{
+        display: flex;
+        flex-direction: row;
+        //background-color: #f005;
+        justify-content: center;
+        .circulo{
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: solid 3px #f58220;
+            background-color: var(--fondo);
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .relleno{
+                width: 0px;
+                height: 0px;
+                border-radius: 50%;
+                background-color: #f58220;
+                transition: 500ms;
+                //border: solid 3px #f58220;
+            }
+            .rellenoON{
+                width: 16px;
+                height: 16px;
+                transition: 500ms;
+            }
+        }
+
+    }
+}
+
+.mostrar{
+    opacity: 1;
+    transition: all 300ms linear;
+}
+.ocultar{
+    opacity: 0;
+    transition: all 300ms linear;
+}
+#fadeContainer{
+    z-index: 16;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Personas } from 'src/app/interfaz/Personas';
-import { ConexionService } from 'src/app/servicios/conexion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
 
 @Component({
   selector: 'app-publico',
@@ -10,23 +10,26 @@ import { ConexionService } from 'src/app/servicios/conexion.service';
 })
 export class PublicoComponent implements OnInit {
 
-  persona:Personas=this.conexionS.persona;
+  persona:Personas=this.personaS.persona;
   listo:boolean=false;
   publico:boolean=false;
 
-  constructor(private conexionS:ConexionService, private route:ActivatedRoute, private router: Router) { 
+  constructor(private personaS:PersonaService, private route:ActivatedRoute, private router: Router) { 
     this.route.params.subscribe(res=>{
-      console.log();
-      this.conexionS.getPublico(res['usuario']).subscribe(res2=>{
-        console.log('res2');
-        console.log(res2);
-        if(res2){
-          this.persona=res2;
-          this.publico=true;
+      ///-//////-///console.log();
+      this.personaS.getPublico(res['usuario']).subscribe({
+        next:res2=>{
+          ///-//////-///console.log('res2');
+          ///-//////-///console.log(res2);
+          if(res2){
+            this.persona=res2;
+            this.publico=true;
+          }
+          this.listo=true;
+        },
+        error:error => {  
+          this.router.navigate(['error']);
         }
-        this.listo=true;
-      },(error) => {  
-        this.router.navigate(['error']);
       })
     });
   }

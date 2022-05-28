@@ -3,9 +3,21 @@
 
     <div>
       <div class="mensajeTogle">
+          <div id="ususarioActivarEd">Activar edición</div>
+          <div id="switchEdicion" class="switch" (click)="activarEdicion()">
+            <div class="slider"></div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="toggleSubcontainer">
+
+    <div>
+      <div class="mensajeTogle">
           <div *ngIf="!encabezado.publico">El portfolio es privado</div>
           <div *ngIf="encabezado.publico">El portfolio es publico</div>
-          <div id="switchPublico" (click)="alerta()">
+          <div id="switchPublico" class="switch" (click)="alerta()">
             <div class="slider"></div>
           </div>
       </div>

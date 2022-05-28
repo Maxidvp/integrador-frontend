@@ -1,17 +1,17 @@
 <ng-container  *ngIf="activo">
-    <ng-container *ngIf="tipo=='habilidades' else tarjetas">
-        <div (click)="modal(tipo, 0, 'agregar')">
+    <ng-container *ngIf="seccion=='habilidades' else tarjetas">
+        <div (click)="modal(seccion, 0, 'agregar')">
             <app-habilidad [habilidad]="{'habilidad': 'Agregar Habilidad','valor': 0}"  [mostarIconos]="false"></app-habilidad>
         </div>
     </ng-container>
     <ng-template #tarjetas>
-        <div class="tarjeta" (click)="modal(tipo, 0, 'agregar')" >
+        <div class="tarjeta" (click)="modal(seccion, 0, 'agregar')" >
             <div class="imgTarjeta">
                 <img src="assets/svg/mas.svg" alt="">
             </div>
             <div class="conTarjeta">
                 <div class="tituloTarjeta">
-                   <p> Agregar {{tipo}}</p>
+                   <p>Agregar {{singular[seccion]}}</p>
                 </div>
                 <div class="tituloTarjeta">
                  </div>

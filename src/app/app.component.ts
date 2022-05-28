@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConexionService } from './servicios/conexion.service';
+import { PersonaService } from './servicios/persona.service';
 
 @Component({
   selector: 'app-root',

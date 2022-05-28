@@ -15,13 +15,9 @@ export class EducacionComponent implements OnInit {
   constructor(public modalS:ModalService) { }
 
   ngOnInit(): void {
-    this.modalS.personaModal.educaciones[0].titulo=this.educacion.titulo;
-    this.modalS.personaModal.educaciones[0].lugar=this.educacion.lugar;
-    this.modalS.personaModal.educaciones[0].periodo=this.educacion.periodo;
-    this.modalS.personaModal.educaciones[0].src=this.educacion.src;
+    if(this.accion=='agregar' || this.accion=='editar'){
+      this.modalS.personaModal.educaciones[0]={...this.educacion};
+    }
   }
   
 }
-
-
-//elemText.setAttribute('contenteditable', true);

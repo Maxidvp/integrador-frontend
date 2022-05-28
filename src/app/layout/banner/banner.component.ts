@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ConexionService } from 'src/app/servicios/conexion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
 import { ModalService } from 'src/app/servicios/modal.service';
 
 @Component({
@@ -10,17 +10,19 @@ import { ModalService } from 'src/app/servicios/modal.service';
 export class BannerComponent implements OnInit {
 
   activo:boolean=false;
-  @Input() banner:any;
+  @Input() banner:string='';
   @Input() mostarIconos: boolean=true;
   @Input() accion: string='ninguno';//'editar''agregar''eliminar'
 
   constructor(public modalS:ModalService) { }
 
   ngOnInit(): void {
-    this.modalS.personaModal.banner=this.banner;
     this.modalS.toggleEdicionObservable.subscribe(datos => {
       this.activo=datos;
     })
+    if(this.accion=='editar'){
+      this.modalS.personaModal.resumen.banner=this.banner;
+    }
   }
 
 }

@@ -9,9 +9,21 @@ import { ModalService } from 'src/app/servicios/modal.service';
 export class AgregarComponent implements OnInit {
 
   activo:boolean=false;
-  @Input() tipo:string='ninguno';
+  @Input() seccion:string='ninguno';
 
-  constructor(private modalS: ModalService) { }
+  singular:{
+    [experiencias:string]:String,
+    educaciones:String,
+    proyectos:String
+  }
+
+  constructor(private modalS: ModalService) { 
+    this.singular={
+      experiencias:'experiencia',
+      educaciones:'educación',
+      proyectos:'proyecto'
+    }
+  }
 
   ngOnInit(): void {
     this.modalS.toggleEdicionObservable.subscribe(datos => {
@@ -19,8 +31,19 @@ export class AgregarComponent implements OnInit {
     })
   }
 
-  modal(tipo:string, id:number, accion:string){
-    this.modalS.abrirModalEditar(tipo,id,accion);
+  modal(seccion:string, id:number, accion:string){
+    this.modalS.abrirModal('editar',{seccion,id,accion});
   }
 
+  /*interface singular {
+    name: string,
+    country: string
+  }*/
+
+
+  /*singular={
+    experiencias:'experiencia',
+    educaciones:'educación',
+    proyectos:'proyecto'
+  }*/
 }

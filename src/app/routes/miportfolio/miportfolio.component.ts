@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscriber, Subscription } from 'rxjs';
 import { Personas } from 'src/app/interfaz/Personas';
-import { ConexionService } from 'src/app/servicios/conexion.service';
-import { SesionService } from 'src/app/servicios/sesion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-miportfolio',
@@ -12,39 +12,45 @@ import { SesionService } from 'src/app/servicios/sesion.service';
 })
 export class MiportfolioComponent implements OnInit {
 
-  persona:Personas=this.conexionS.persona;
+  persona:Personas=this.personaS.persona;
   listo:boolean=false;
   subscription1!:Subscription;
   subscription2!:Subscription;
 
-  constructor(private conexionS:ConexionService, private sesionS:SesionService, private router: Router) { }
+  constructor(private personaS:PersonaService, private usuarioS:UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
     //Si esta logeado
     if(localStorage.getItem('refresh_token')){
-      this.subscription1=this.sesionS.verificarTokenObservable.subscribe(resp=>{
+      this.subscription1=this.usuarioS.verificarTokenObservable.subscribe(resp=>{
         if(resp=='miportfolio'){
-          this.subscription2=this.conexionS.getPersona(0).subscribe((resp)=>{
-            this.conexionS.persona=resp.body;
-            this.persona=this.conexionS.persona;
-            console.log('miportfolio',resp.body);
-            this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
-            this.subscription1.unsubscribe();
-            this.subscription2.unsubscribe();
-          },(error) => {  
-            this.router.navigate(['error']);
+          this.subscription2=this.personaS.getPersona(0).subscribe({
+            next:v=>{
+              this.personaS.persona=v.body;
+              this.persona=this.personaS.persona;
+              ///-//////-///console.log('miportfolio',v.body);
+              this.listo=true;//Para evitar error al tratar de cargar los componentes que aun no llegaron
+              this.subscription1.unsubscribe();
+              this.subscription2.unsubscribe();
+            },
+            error:e=>{  
+              this.router.navigate(['error']);
+            }
           })
         }
       });
-      this.sesionS.verificarToken('miportfolio');  
+      this.usuarioS.verificarToken('miportfolio');  
     //Si NO esta logueado
     }else{    
       this.router.navigate(['']);
     }
 
     //Por algun motivo no actualiza los cambios asi que lo fuerzo con esto
-    this.conexionS.personaCambioObservable.subscribe(resp=>{
-      this.persona=this.conexionS.persona;
+    this.personaS.personaCambioObservable.subscribe(resp=>{
+      ///-//////-///console.log('personaCambioObservable');
+      ///-//////-///console.log(resp);
+      this.personaS.persona=resp; 
+      this.persona=this.personaS.persona;
     });
 
   }

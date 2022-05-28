@@ -1,7 +1,8 @@
 <div class="modal" *ngIf="modal">
     <div class="contenidoModal">
-        <app-editor *ngIf="mostrar=='editor'" (modalEmitter)="cerrar()" [datos]="datos"></app-editor>
+        <app-editor *ngIf="mostrar=='editar'" (modalEmitter)="cerrar()" [datos]="datos"></app-editor>
         <app-sesion *ngIf="mostrar=='sesion'" (modalEmitter)="cerrar()"></app-sesion>
         <app-instancia *ngIf="mostrar=='instancia'" (modalEmitter)="cerrar()"></app-instancia>
+        <app-galeria *ngIf="mostrar=='galeria'" (modalEmitter)="cerrar()" [galeria]="datos"></app-galeria>
     </div>
 </div>

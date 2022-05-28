@@ -9,7 +9,7 @@ a{
 }
 
 /////////////////Layout - secciones/////////////////
-.seccion{
+section{
     padding: 3%;
     .tarjeta{
         margin-top: 25px;
@@ -84,9 +84,8 @@ a{
             font-size: 1.2em;
             font-weight: bold;
         }
-        &:nth-child(2) {
-            margin-bottom: 0.5em;
-        }
+        position: relative;
+        margin-bottom: 0.3em;
     }
 }
 /////////////////Componentes - tarjetas/////////////////
@@ -165,6 +164,10 @@ a{
         border: 1px solid #f58220;
         box-shadow: 0 0 3px 0 rgba(245,130,32,0.75);
     }
+    textarea:focus {
+        border: 1px solid #f58220;
+        box-shadow: 0 0 3px 0 rgba(245,130,32,0.75);
+    }
 
     form{
         padding: 2% 6%;
@@ -192,7 +195,7 @@ a{
 
 
 
-/*= containerModalSesionS
+/*= containerModalusuarioS
 --------------------------------------------------------*/
 
 #welcome {

@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
 
+### Versión 1.1.0
+    CRUD refactorizado
+    Se implemento una galería de fotos para la sección Proyectos
+
 ### Versión 1.0.0 Primer deploy
     Implementación de routing para portfolios públicos
     Correcciones de estilos, código y sistema de archivos
@@ -33,5 +37,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 	Se agregaron componentes al layout para obtener la estructura del portfolio
 
 ### Versión 0.1.0
-	Implementados los métodos CRUD usando HttpClient en el frontend para obtener el servicio con la estructura correcta para comunicarse con el backend
+	Implementados los métodos CRUD usando HttpClient para obtener el servicio con la estructura adecuada para comunicarse con el backend
     Se agregaron componentes como estructura inicial sujetas a cambios

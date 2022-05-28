@@ -9,25 +9,25 @@
     <textarea name="titulo" id="expActividades" cols="30" rows="5" value={{experiencia.actividades}} placeholder="Actividades"  [(ngModel)]="modalS.personaModal.experiencias[0].actividades"></textarea><br>
     
     <label for="img">Imagen URL:</label>
-    <input type="text" id="expImagen" name="img" value={{experiencia.src}} placeholder="Imagen URL"  [(ngModel)]="modalS.personaModal.experiencias[0].src"><br>
+    <input type="text" id="expImagen" name="img" value={{experiencia.imagen}} placeholder="Imagen URL"  [(ngModel)]="modalS.personaModal.experiencias[0].imagen"><br>
 </form> 
 
 <div class="tarjeta">
     <div class="imgTarjeta">
         <img [src]=" 
         (accion=='editar'||accion=='agregar') ? 
-            modalS.personaModal.experiencias[0].src || 'assets/svg/experiencia.svg'
+        modalS.filtrarUrl(modalS.personaModal.experiencias[0].imagen) || 'assets/svg/experiencia.svg'
             :
-            (experiencia.src || 'assets/svg/experiencia.svg')" alt="">
+            (experiencia.imagen || 'assets/svg/experiencia.svg')" alt="">
     </div>
     <div class="conTarjeta">
         <div class="tituloTarjeta">
-            <p><span>Lugar: </span> {{(accion=='editar' || accion=='agregar')?modalS.personaModal.experiencias[0].lugar:experiencia.lugar}}</p> 
+            <p>{{(accion=='editar' || accion=='agregar')?modalS.personaModal.experiencias[0].lugar:experiencia.lugar}}</p> 
         </div>
         <p>Periodo: {{(accion=='editar' || accion=='agregar')?modalS.personaModal.experiencias[0].periodo:experiencia.periodo}}</p>
         {{(accion=='editar' || accion=='agregar')?modalS.personaModal.experiencias[0].actividades:experiencia.actividades}}
     </div>
     <div class="edicionContainer">
-        <app-edicion [tipo]="'experiencias'" [id]="experiencia.id" *ngIf="mostarIconos"></app-edicion>
+        <app-edicion [seccion]="'experiencias'" [id]="experiencia.id" *ngIf="mostarIconos"></app-edicion>
     </div>
 </div>

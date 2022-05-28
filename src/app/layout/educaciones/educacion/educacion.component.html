@@ -9,26 +9,26 @@
     <input type="text" id="eduTitulo" name="titulo" value="{{educacion.titulo}}" placeholder="Titulo"  [(ngModel)]="modalS.personaModal.educaciones[0].titulo"><br>
     
     <label for="img">Imagen URL:</label>
-    <input type="textarea" id="eduImagen" name="img" value="{{educacion.src}}" placeholder="Imagen URL"  [(ngModel)]="modalS.personaModal.educaciones[0].src"><br>
+    <input type="textarea" id="eduImagen" name="img" value="{{educacion.imagen}}" placeholder="Imagen URL"  [(ngModel)]="modalS.personaModal.educaciones[0].imagen"><br>
 </form> 
 
 <div class="tarjeta">
     <div class="imgTarjeta">
         <img [src]=" 
         (accion=='editar'||accion=='agregar') ? 
-            modalS.personaModal.educaciones[0].src || 'assets/svg/educacion.svg'
+            modalS.filtrarUrl(modalS.personaModal.educaciones[0].imagen) || 'assets/svg/educacion.svg'
             :
-            (educacion.src || 'assets/svg/educacion.svg')" alt="">
+            (educacion.imagen || 'assets/svg/educacion.svg')" alt="">
     </div>
     <div class="conTarjeta">
         <div class="tituloTarjeta">
-            <p><span>Lugar: </span> {{(accion=='editar' || accion=='agregar')?modalS.personaModal.educaciones[0].lugar:educacion.lugar}}</p> 
+            <p><span></span> {{(accion=='editar' || accion=='agregar')?modalS.personaModal.educaciones[0].lugar:educacion.lugar}}</p> 
 
         </div>
         <p>Periodo: {{(accion=='editar' || accion=='agregar')?modalS.personaModal.educaciones[0].periodo:educacion.periodo}}</p>
         {{(accion=='editar' || accion=='agregar')?modalS.personaModal.educaciones[0].titulo:educacion.titulo}}
     </div>            
     <div class="edicionContainer">
-        <app-edicion [tipo]="'educaciones'" [id]="educacion.id" *ngIf="mostarIconos"></app-edicion>
+        <app-edicion [seccion]="'educaciones'" [id]="educacion.id" *ngIf="mostarIconos"></app-edicion>
     </div>
 </div>

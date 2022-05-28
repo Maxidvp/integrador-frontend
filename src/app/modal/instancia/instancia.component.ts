@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ConexionService } from 'src/app/servicios/conexion.service';
-import { SesionService } from 'src/app/servicios/sesion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-instancia',
@@ -15,41 +15,34 @@ export class InstanciaComponent implements OnInit {
   private subscription2! : Subscription;
   @Output() modalEmitter = new EventEmitter<boolean>();
   
-  constructor(private conexionS: ConexionService, private sesionS: SesionService, private router: Router) { }
+  constructor(private personaS: PersonaService, private usuarioS: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
   }
-  /*ngOnDestroy() {
-    this.subscription1.unsubscribe();
-    this.subscription2.unsubscribe();
-  }*/
 
   cerrarModal():void{
     this.modalEmitter.emit(false);
   }
 
   //False crea vacio | True copia
-  instanciar(tipo:number):void{
-    this.subscription1=this.sesionS.verificarTokenObservable.subscribe(resp=>{
-    console.log('resp1 Sin efecto');
-    console.log(resp);
-      if(resp=='instancia'){
-        this.subscription2=this.conexionS.instanciarPersona(tipo).subscribe(resp=>{
-          console.log('resp2');
-          console.log(resp);
-          //this.conexionS.persona=resp;
-          //this.conexionS.getPersona(0).subscribe();
+  instanciar(seccion:number):void{
+    this.subscription1=this.usuarioS.verificarTokenObservable.subscribe(res=>{
+    ///-//////-///console.log('resp1 Sin efecto');
+    ///-//////-///console.log(res);
+      if(res=='instancia'){
+        this.subscription2=this.personaS.instanciarPersona(seccion).subscribe(resp=>{
+          ///-//////-///console.log('resp2');
+          ///-//////-///console.log(resp);
           this.subscription1.unsubscribe();
           this.subscription2.unsubscribe();
-          this.router.navigate(['']);
-          setTimeout(() => {
-            this.router.navigate(['miportfolio']);
-          }, 10);
+          //this.router.navigate(['']);
+          this.personaS.personaCambio(resp);
+          this.router.navigate(['miportfolio']);
           this.cerrarModal();
         });
       }
     });
-    this.sesionS.verificarToken('instancia');
+    this.usuarioS.verificarToken('instancia');
   }
 }
 

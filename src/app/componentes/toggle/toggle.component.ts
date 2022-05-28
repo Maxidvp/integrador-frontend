@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ConexionService } from 'src/app/servicios/conexion.service';
-import { SesionService } from 'src/app/servicios/sesion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
+import { ModalService } from 'src/app/servicios/modal.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-toggle',
@@ -18,7 +19,7 @@ export class ToggleComponent implements OnInit,AfterViewInit {
   private subscription2! : Subscription;
 
   
-  constructor(private sesionS:SesionService, private conexionS:ConexionService) { }
+  constructor(private usuarioS:UsuarioService, private personaS:PersonaService, private modal:ModalService) { }
   ngAfterViewInit(): void {
     if(this.encabezado.publico){
       document.getElementById('switchPublico')!.classList.add("on");
@@ -28,15 +29,23 @@ export class ToggleComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.username=(localStorage.getItem('username')!).toLowerCase();
+    this.username=(localStorage.getItem('username')!);
   }
 
+  activarEdicion(){
+    this.modal.toggleEdicion();
+    let texto=document.getElementById('ususarioActivarEd');
+    if(this.modal.activo){
+      texto!.innerHTML='Deshabilitar edición';
+      document.getElementById('switchEdicion')!.classList.add("on");
+    }else{
+      texto!.innerHTML='Habilitar edición';
+      document.getElementById('switchEdicion')!.classList.remove("on");
+    }
+  }
   //Cambia de modo claro a modo oscuro
   alerta(){
-    /*let clase=(document.body.className=='light')? 'dark':'light';
-    document.body.className=clase;
-    localStorage.setItem('theme',clase);
-    document.getElementById('botonModo')!.innerHTML=(document.body.className=='light')?'Modo oscuro':'Modo claro';*/
+
     let aux:boolean=!(this.encabezado.publico);
     if(aux){
       document.getElementById('switchPublico')!.classList.add("on");
@@ -50,14 +59,14 @@ export class ToggleComponent implements OnInit,AfterViewInit {
       }, 400);
     }
 
-    this.subscription1=this.sesionS.verificarTokenObservable.subscribe(resp=>{
-      this.subscription2=this.conexionS.togglePublico(aux).subscribe(res=>{
-        console.log('toggle');
-        console.log(res);
+    this.subscription1=this.usuarioS.verificarTokenObservable.subscribe(resp=>{
+      this.subscription2=this.personaS.togglePublico(aux).subscribe(res=>{
+        ///-//////-///console.log('toggle');
+        ///-//////-///console.log(res);
         this.subscription1.unsubscribe();
         this.subscription2.unsubscribe();
       });      
     });
-    this.sesionS.verificarToken('toggle');
+    this.usuarioS.verificarToken('toggle');
   }
 }

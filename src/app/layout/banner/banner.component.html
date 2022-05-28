@@ -1,11 +1,11 @@
 <form *ngIf="accion=='editar'">
-    <label for="banner">Banner:</label>
-    <input type="text" id="banner" name="banner" value={{banner}} placeholder="Banner" [(ngModel)]="modalS.personaModal.banner">
+    <label for="banner">Banner URL:</label>
+    <input type="text" id="banner" name="banner" value="{{banner}}" placeholder="Banner URL" [(ngModel)]="modalS.personaModal.resumen.banner">
 </form> 
 
 <div class="banner" *ngIf="banner || activo"><!-- *ngIf="banner || accion=='editar'|| accion=='agregar'"-->
     <div class="edicionContainer">
-        <app-edicion [tipo]="'banner'" *ngIf="mostarIconos" [eliminar]="false"></app-edicion>
+        <app-edicion [seccion]="'banner'" *ngIf="mostarIconos" [eliminar]="false"></app-edicion>
     </div>
-    <img [src]="(accion=='editar')?modalS.personaModal.banner || 'assets/svg/banner.svg':banner || 'assets/svg/banner.svg'" alt="">
+    <img [src]="(accion=='editar')? modalS.filtrarUrl(modalS.personaModal.resumen.banner) || 'assets/svg/banner.svg':banner || 'assets/svg/banner.svg'" alt="">
 </div>

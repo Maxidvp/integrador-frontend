@@ -2,28 +2,37 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
-import { ConexionService } from './conexion.service';
+import { PersonaService } from './persona.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SesionService {
+export class UsuarioService {
 
-  constructor(private http: HttpClient, private router: Router) { }
-  backEndUrl="http://192.168.0.7:8080";
+  constructor(private http: HttpClient, private router: Router, private personaS:PersonaService) { }
+  urlUsuario=this.personaS.backEndUrl+'/usuario';
 
-  //headers = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
   logear(user:any):Observable<any>{
-    console.log(user);
+    ///-//////-///console.log(user);
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
  
     user=`username=${user.username}&password=${user.password}`;
-    return this.http.post<any>(`${this.backEndUrl}/api/login`,user,{ headers, observe: 'response' });//
+    return this.http.post<any>(`${this.urlUsuario}/login`,user,{ headers, observe: 'response' });//
+  }
+
+  desloguear():void{
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('theme');
+    this.router.navigate(['']);
+    //Para que cargue el light mode
+    location.reload();
   }
 
   registrar(user:any):Observable<any>{
-    console.log(user);
-    return this.http.post<any>(`${this.backEndUrl}/api/user/save`,user);//
+    ///-//////-///console.log(user);
+    return this.http.post<any>(`${this.urlUsuario}/user/save`,user);//
   }
 
   //Puente para la variable de estado de sesion
@@ -39,10 +48,13 @@ export class SesionService {
   private behaviorSubjectVerificarToken= new Subject();
   verificarTokenObservable = this.behaviorSubjectVerificarToken.asObservable();
   verificarToken(origen:string){
-    console.log('En sesion service verificarToken');
-    console.log(origen);
+    ///-//////-///console.log('sercicios>verificarToken:');
     //Decodificacion del token
-    let token = localStorage.getItem('access_token')!;
+    let token:String=localStorage.getItem('access_token')?localStorage.getItem('access_token')!:'';
+    if(token=='undefined'){
+      ///-//////-///console.log('Se detecto un toquen indefinido');
+      this.desloguear();
+    }
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
@@ -54,23 +66,24 @@ export class SesionService {
 
     //Si el token expiro pide uno nuevo
     if(tiempoActual+10 > vencimiento){
-      console.log('En sesion service verificarToken vencido');
-      this.subscription1 = this.actualizarToken().subscribe(
-        resp=>{
+      ///-//////-///console.log('En sesion service verificarToken vencido');
+      this.subscription1 = this.actualizarToken().subscribe({
+        next:v=>{
+          ///-//////-///console.log('v',v);
           //Luego de obtener el nuevo token avisa que puede continuar
-          localStorage.setItem('access_token',resp.body.access_token);
-          console.log('En sesion service verificarToken refrezcado');
+          localStorage.setItem('access_token',v.body.access_token);
+          ///-//////-///console.log('En sesion service verificarToken refrezcado');
           this.subscription1.unsubscribe();
           this.behaviorSubjectVerificarToken.next(origen);
           //this.behaviorSubjectVerificarToken.next('ninguno');
         },
-        err=>{
+        error:e=>{
           this.router.navigate(['error']);
         }
-      );
+      });
     //Si el token NO expiro avisa que puede continuar
     }else{
-      console.log('En sesion service verificarToken no vencido');
+      ///-//////-///console.log('En sesion service verificarToken no vencido');
       this.behaviorSubjectVerificarToken.next(origen);
       //this.behaviorSubjectVerificarToken.next('ninguno');
     }
@@ -78,27 +91,27 @@ export class SesionService {
 
   //Realiza el pedido del nuevo token a la api
   actualizarToken(): Observable<any>{
-    console.log('En sesion service actualixarToken');
+    ///-//////-///console.log('En sesion service actualixarToken');
     const refresh = localStorage.getItem('refresh_token');
     //alert(`Bearer ${refresh}`);
     const headers = new HttpHeaders({'Authorization': `Bearer ${refresh}`});
-    return this.http.get<any>(`${this.backEndUrl}/api/token/refresh`,{ headers, observe: 'response' });
+    return this.http.get<any>(`${this.urlUsuario}/token/refresh`,{ headers, observe: 'response' });
   }
 
   traerFotoPerfil(): Observable<any>{
-    console.log('En traer Foto Perfil');
+    ///-//////-///console.log('En traer Foto Perfil');
     const refresh = localStorage.getItem('access_token');
     const headers = new HttpHeaders({'Authorization': `Bearer ${refresh}`});
     //headers.set('Content-Type', 'text/plain; charset=utf-8');
-    return this.http.get(`${this.backEndUrl}/api/foto`,{headers, responseType: 'text' as const,});
+    return this.http.get(`${this.urlUsuario}/foto`,{headers, responseType: 'text' as const,});
   }
 
   usernameLibre(username:String):Observable<String>{
-    console.log('En usernameLibre');
-    return this.http.get(`${this.backEndUrl}/api/usernamelibre/${username}`,{ responseType: 'text' as const,});
+    ///-//////-///console.log('En usernameLibre');
+    return this.http.get(`${this.urlUsuario}/usernamelibre/${username}`,{ responseType: 'text' as const,});
   }
   emailLibre(email:String):Observable<String>{
-    console.log('En emailLibre');
-    return this.http.get(`${this.backEndUrl}/api/emaillibre/${email}`,{ responseType: 'text' as const,});
+    ///-//////-///console.log('En emailLibre');
+    return this.http.get(`${this.urlUsuario}/emaillibre/${email}`,{ responseType: 'text' as const,});
   }
 }

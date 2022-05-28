@@ -23,8 +23,9 @@
             <p>#YoProgramo</p>
         </div>
     </div>
-    <div class="contenedorUsuario"></div>
-    <app-usuario [miportfolio]="miportfolio"></app-usuario>
+    <div class="contenedorUsuario">
+        <app-usuario [miportfolio]="miportfolio"></app-usuario>
+    </div>
 </div>
 
 <app-toggle [encabezado]="encabezado" *ngIf="miportfolio"></app-toggle>

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Personas } from 'src/app/interfaz/Personas';
-import { ConexionService } from 'src/app/servicios/conexion.service';
+import { PersonaService } from 'src/app/servicios/persona.service';
 import { ModalService } from 'src/app/servicios/modal.service';
-import { SesionService } from 'src/app/servicios/sesion.service';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 
 @Component({
@@ -18,18 +18,8 @@ export class EncabezadoComponent implements OnInit {
   
 
   username:String='';
-  //activo:boolean=false;
   constructor(private modalS:ModalService) { }
 
-  ngOnInit(): void {
-    /*//Si se pide que se muestren los elementos de edicion
-    this.modalS.toggleEdicionObservable.subscribe(datos => {
-      this.activo=datos;
-    })*/
-  }
+  ngOnInit(): void { }
 
-  publico(){
-    alert('cambio')
-  }
-  
 }

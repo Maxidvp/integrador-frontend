@@ -1,0 +1,24 @@
+<ng-container *ngIf="listo">
+    <div class="foto0" *ngIf="fotos.length==0">
+        <img [src]="'assets/svg/proyecto.svg'" alt="">
+    </div>
+    <div class="foto1" (click)="abrirGaleria()" *ngIf="fotos.length==1">
+        <img [src]="fotos[0]" alt="">
+    </div>
+    <div class="foto2" (click)="abrirGaleria()" *ngIf="fotos.length==2">
+        <div><img [src]="fotos[0]" alt=""></div>
+        <div><img [src]="fotos[1]" alt=""></div>
+    </div>
+    <div class="foto3" (click)="abrirGaleria()" *ngIf="fotos.length>2">
+        <div><img [src]="fotos[0]" alt=""></div>
+        <div><img [src]="fotos[1]" alt=""></div>
+        <div><img [src]="fotos[2]" alt=""></div>
+        <div class="flex" *ngIf="fotos.length>3">+{{fotos.length-2}}</div>
+    </div>
+</ng-container>
+
+<div class="auxGaleria" *ngIf="mostrarGaleria">
+    <div class="cerrarFalso" (click)="cerrarGaleria()"></div>
+    <app-galeria [galeria]="fotos"></app-galeria>
+</div>
+

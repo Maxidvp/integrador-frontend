@@ -5,6 +5,7 @@
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     padding: 15px;
+    position: relative;
 }
 
 .fotoPerfil{
@@ -60,6 +61,7 @@
 .datosItems{
     display: flex;
     flex-wrap: wrap;
+    padding-right: 10px;
     div{
         display: flex;
         align-items: center;
@@ -68,8 +70,7 @@
     }
 }
 .sobremi{
-    padding-left: 24px;
-    padding-top: 15px;
+    padding: 15px 10px 0 24px;
     display:inline-block;
     strong{
         white-space: nowrap;
